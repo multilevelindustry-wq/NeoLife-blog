@@ -54,16 +54,23 @@ if(!currentUser || !loggedIn){
  
 
 // ============================
-// LOGIN PROTECTION
+// LOGIN CHECK ONLY ON CHECKOUT
 // ============================
 
+let checkoutBtn = document.getElementById("checkoutBtn");
 
-  if(!localStorage.getItem("loggedIn")){
-   document.getElementById("checkoutBtn").onclick = function(){
-       alert("Login required to checkout.");
+checkoutBtn.addEventListener("click", function(e){
+
+   let loggedIn = localStorage.getItem("loggedIn");
+   let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+   if(!currentUser || !loggedIn){
+       e.preventDefault(); // stop link from going to checkout
+       alert("You must login before proceeding to payment.");
        window.location.href = "login.html";
-   };
-  }
+   }
+
+});
 
 // ============================
 // CART DATA
