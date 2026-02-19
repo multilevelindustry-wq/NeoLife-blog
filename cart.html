@@ -44,6 +44,14 @@
 </footer>
 
 <script>
+let loggedIn = localStorage.getItem("loggedIn");
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if(!currentUser || !loggedIn){
+   alert("You must login before checking out.");
+   window.location.href = "login.html";
+}
+ 
 
 // ============================
 // LOGIN PROTECTION
