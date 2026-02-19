@@ -125,3 +125,74 @@ input, textarea, select {
   border: none;
   box-sizing: border-box;
   }
+
+/* ===============================
+   FLIP CARD SYSTEM
+================================ */
+
+.card-wrapper {
+  perspective: 1000px;
+  position: relative;
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.card-wrapper.flip .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+  border-radius: 18px;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  padding: 20px;
+  text-align: center;
+}
+
+/* AD DESIGNS */
+.ad-style-1 {
+  background: linear-gradient(45deg, #ff512f, #dd2476);
+}
+
+.ad-style-2 {
+  background: linear-gradient(45deg, #1e3c72, #2a5298);
+}
+
+.ad-style-3 {
+  background: linear-gradient(45deg, #11998e, #38ef7d);
+}
+
+.ad-style-4 {
+  background: linear-gradient(45deg, #f7971e, #ffd200);
+}
+
+.ad-cta {
+  margin-top: 15px;
+  background: #fff;
+  color: #111;
+  padding: 10px 15px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ad-cta:hover {
+  transform: scale(1.1);
+}
