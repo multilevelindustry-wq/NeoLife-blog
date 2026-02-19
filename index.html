@@ -3,8 +3,33 @@
 <head>
   <title>Premium Web Services</title>
   <link rel="stylesheet" href="style.css">
+</head>
+<body>
 
-  <style>
+<header>
+  <h2>Web Services Store</h2>
+  <nav>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    <a href="login.html">Login</a>
+  </nav>
+</header>
+
+<div style="text-align:center; margin:20px 0;">
+  <input type="text" id="searchBox" placeholder="Search for products..." 
+         style="width:50%; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px;">
+</div>
+
+<div class="container" id="services"></div>
+  
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interstitial Ads Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
         }
         .ad-container {
             position: fixed;
@@ -34,26 +59,11 @@
             border-radius: 5px;
             cursor: pointer;
         }
-  </style>
+    </style>
 </head>
 <body>
 
-<header>
-  <h2>Web Services Store</h2>
-  <nav>
-    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-    <a href="login.html">Login</a>
-  </nav>
-</header>
-
-<div style="text-align:center; margin:20px 0;">
-  <input type="text" id="searchBox" placeholder="Search for products..." 
-         style="width:50%; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px;">
-</div>
-
-<div class="container" id="services"></div>
-  
-  <div id="ad1" class="ad-container">
+<div id="ad1" class="ad-container">
     <div class="ad-content">
         <h2></h2>
         <img src="IMG-20250924-WA0007.jpg" alt="Ad 1" width="300">
@@ -75,10 +85,39 @@
            <a href="https://myoffice.neolife.com/silentlogin?token=KkoJBH5_mDBCPYEOxCklSVaeITsFa_cvuSS_rzNmHUnwO4RbDVnILAGKJ3Amu9_m6--ssWmtOGIEhxIoNnNWAUbkvkVd42SQo1sJzjXJHyU!" ><img src="IMG-20250924-WA0007.jpg" alt="Ad 3" width="300"></a>
         <button class="close-btn" onclick="closeAd('ad3')">Close</button>
     </div>
-  </div>
-  
-<script src="script.js">
+</div>
+
+<script>
+    let currentAd = 0;
+    const ads = ['ad1', 'ad2', 'ad3'];
+
+    function showAd(adId) {
+        const adElement = document.getElementById(adId);
+        adElement.style.display = 'flex';
+        setTimeout(() => {
+            const closeButton = adElement.querySelector('.close-btn');
+            closeButton.style.display = 'block';
+        }, 3000);
+    }
+
+    function closeAd(adId) {
+        const adElement = document.getElementById(adId);
+        adElement.style.display = 'none';
+        currentAd++;
+        if (currentAd < ads.length) {
+            setTimeout(() => showAd(ads[currentAd]), 15000);
+        }
+    }
+
+    window.onload = () => {
+        showAd(ads[currentAd]);
+    };
 </script>
+
+</body>
+</html>
+  
+<script src="script.js"></script>
 <script>
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 let loggedIn = localStorage.getItem("loggedIn");
