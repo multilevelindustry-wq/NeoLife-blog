@@ -5,88 +5,84 @@ function generateAffiliateID(){
   return "AFF" + Date.now() + Math.floor(Math.random() * 1000);
 }
 
-// ===============================
-// SERVICES LIST
-// ===============================
+// Generate 70 services
 const services = [
-  {id: 1, title: "E-commerce Store", description: "Get A Professional E-commerce Store Personally Designed For You and Your Business At A starting Price", price: 59.99},
-  {id: 2, title: "Business Website", description: "Professional website", price: 69.99},
-  {id: 3, title: "Blog Website", description: "Share your content online", price: 39.99},
-  {id: 4, title: "Landing Page", description: "Capture leads effectively", price: 59.99},
-  {id: 5, title: "SEO Service - 1 Month", description: "Optimize for Google 1 Month", price: 39.99},
-  {id: 6, title: "SEO Service - 5 Months", description: "Optimize for Google 5 Months", price: 199.99},
-  {id: 7, title: "SEO Service - 1 Year", description: "Optimize for Google 1 Year", price: 499.99},
-  {id: 8, title: "Professional Graphic Design (5)", description: "Create 5 stunning graphics", price: 29.99},
-  {id: 9, title: "Professional Graphic Design (12)", description: "Create 12 stunning graphics", price: 99.99},
-  {id: 10, title: "Logo Design", description: "Custom logos", price: 22.99},
-  {id: 11, title: "Social Media Management", description: "Grow your followers", price: 150},
-  {id: 12, title: "Email Marketing", description: "Boost engagement 40%", price: 69.99},
-  {id: 13, title: "App Development", description: "Mobile & Web apps", price: 499.99},
-  {id: 14, title: "UI/UX Design", description: "Improve user experience", price: 99.99},
-  {id: 15, title: "WordPress Website", description: "Easy-to-manage website", price: 59.99},
-  {id: 16, title: "Video Editing", description: "Professional video content", price: 39.99},
-  {id: 17, title: "Content Writing", description: "Engaging articles", price: 80},
-  {id: 18, title: "Translation Service", description: "Multi-language translation", price: 70},
-  {id: 19, title: "Digital Marketing", description: "Promote your brand", price: 200},
-  {id: 20, title: "PPC Advertising", description: "Google/Facebook Ads", price: 180}
+  {id: 1, title: "E-commerce Store 0212", description: "Create an Online E-commerce Store Today For Your Business ", price: 80},
+  {id: 2, title: "Business Website 3154", description: "Professional website", price: 120},
+  {id: 3, title: "Blog Website", description: "Share your content online", price: 100},
+  {id: 4, title: "Portfolio Website", description: "Showcase your work", price: 80},
+  {id: 5, title: "Landing Page", description: "Capture leads effectively", price: 50},
+  {id: 6, title: "SEO Service", description: "Optimize for Google", price: 200},
+  {id: 7, title: "Graphic Design", description: "Create stunning graphics", price: 70},
+  {id: 8, title: "Logo Design", description: "Custom logos", price: 40},
+  {id: 9, title: "Social Media Management", description: "Grow your followers", price: 150},
+  {id: 10, title: "Email Marketing", description: "Boost engagement", price: 100},
+  {id: 11, title: "App Development", description: "Mobile & Web apps", price: 500},
+  {id: 12, title: "UI/UX Design", description: "Improve user experience", price: 150},
+  {id: 13, title: "WordPress Website", description: "Easy-to-manage website", price: 120},
+  {id: 14, title: "E-learning Platform", description: "Create online courses", price: 400},
+  {id: 15, title: "Membership Site", description: "Secure member area", price: 250},
+  {id: 16, title: "Custom API Integration", description: "Connect your apps", price: 200},
+  {id: 17, title: "CRM Setup", description: "Manage customers effectively", price: 180},
+  {id: 18, title: "Chatbot Development", description: "Automate messaging", price: 150},
+  {id: 19, title: "Video Editing", description: "Professional video content", price: 120},
+  {id: 20, title: "Photography Service", description: "High-quality images", price: 100},
+  {id: 21, title: "Content Writing", description: "Engaging articles & blogs", price: 80},
+  {id: 22, title: "Translation Service", description: "Multi-language translation", price: 70},
+  {id: 23, title: "Animation Service", description: "2D/3D animations", price: 200},
+  {id: 24, title: "Podcast Editing", description: "Clear audio production", price: 90},
+  {id: 25, title: "Voiceover Service", description: "Professional voice recording", price: 60},
+  {id: 26, title: "Infographic Design", description: "Visual data graphics", price: 50},
+  {id: 27, title: "Resume/CV Design", description: "Stand out to employers", price: 40},
+  {id: 28, title: "Presentation Design", description: "Engaging slides", price: 70},
+  {id: 29, title: "E-book Creation", description: "Professional e-books", price: 80},
+  {id: 30, title: "Online Course Content", description: "Educational materials", price: 150},
+  {id: 31, title: "Digital Marketing", description: "Promote your brand online", price: 200},
+  {id: 32, title: "PPC Advertising", description: "Google/Facebook Ads", price: 180},
+  {id: 33, title: "Social Media Ads", description: "Targeted ads campaigns", price: 150},
+  {id: 34, title: "Brand Strategy", description: "Build your brand identity", price: 250},
+  {id: 35, title: "Market Research", description: "Analyze your market", price: 200},
+  {id: 36, title: "Business Consulting", description: "Expert business advice", price: 300},
+  {id: 37, title: "Financial Planning", description: "Manage your finances", price: 250},
+  {id: 38, title: "Legal Consulting", description: "Expert legal advice", price: 200},
+  {id: 39, title: "HR Consulting", description: "Human resources strategy", price: 150},
+  {id: 40, title: "IT Support", description: "Tech support for business", price: 100},
+  {id: 41, title: "Cybersecurity Service", description: "Protect your business", price: 200},
+  {id: 42, title: "Website Maintenance", description: "Keep your site running", price: 80},
+  {id: 43, title: "Backup & Recovery", description: "Protect data securely", price: 100},
+  {id: 44, title: "Cloud Storage Setup", description: "Store your files safely", price: 120},
+  {id: 45, title: "IT Training", description: "Staff technical training", price: 150},
+  {id: 46, title: "SEO Audit", description: "Optimize your website", price: 100},
+  {id: 47, title: "Competitor Analysis", description: "Analyze your competitors", price: 120},
+  {id: 48, title: "Backlink Strategy", description: "Boost search rankings", price: 90},
+  {id: 49, title: "Email Newsletter", description: "Create engaging emails", price: 60},
+  {id: 50, title: "Lead Generation", description: "Find potential clients", price: 150},
+  {id: 51, title: "Event Management", description: "Organize events effectively", price: 200},
+  {id: 52, title: "Public Relations", description: "Improve your public image", price: 180},
+  {id: 53, title: "Affiliate Marketing", description: "Earn with referrals", price: 120},
+  {id: 54, title: "Podcast Hosting", description: "Publish your podcasts", price: 80},
+  {id: 55, title: "Video Marketing", description: "Promote with video", price: 150},
+  {id: 56, title: "App Store Optimization", description: "Get more downloads", price: 120},
+  {id: 57, title: "UX Audit", description: "Improve user experience", price: 100},
+  {id: 58, title: "Customer Support Setup", description: "Support system for clients", price: 150},
+  {id: 59, title: "Data Analytics", description: "Insights from your data", price: 200},
+  {id: 60, title: "Software Testing", description: "Bug-free software", price: 180},
+  {id: 61, title: "Product Photography", description: "High-quality product images", price: 100},
+  {id: 62, title: "3D Modeling", description: "3D product designs", price: 250},
+  {id: 63, title: "Animation Video", description: "Promotional animation", price: 200},
+  {id: 64, title: "Script Writing", description: "Content for video/audio", price: 70},
+  {id: 65, title: "Voice-over Recording", description: "Professional voice work", price: 60},
+  {id: 66, title: "Translation & Localization", description: "Reach global audience", price: 100},
+  {id: 67, title: "Infographic Videos", description: "Visual content marketing", price: 150},
+  {id: 68, title: "Newsletter Design", description: "Email newsletter templates", price: 50},
+  {id: 69, title: "Copywriting Service", description: "Persuasive marketing content", price: 80},
+  {id: 70, title: "Custom Web Tools", description: "Unique web functionalities", price: 300}
 ];
-
-// ===============================
-// RENDER SERVICES
-// ===============================
 
 
 
 // Generate unique IDs for services (no duplicates)
 services.forEach((s, i) => s.id = i + 1);
-
-// Render services
-function renderServices(serviceList){
-  const container = document.getElementById("services");
-  container.innerHTML = "";
-
-  serviceList.forEach(service => {
-    container.innerHTML += `
-      <div class="card">
-        <h3>${service.title}</h3>
-        <p>${service.description}</p>
-        <h4>$${service.price}</h4>
-        <button onclick="addToCart(${service.id})">Add to Cart</button>
-      </div>
-    `;
-  });
-}
-
-// Call once
-renderServices(services);
-
-// Cart function
-function addToCart(id){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const product = services.find(s => s.id === id);
-  let existing = cart.find(item => item.id === id);
-
-  if(existing){
-    existing.quantity += 1;
-  } else {
-    product.quantity = 1;
-    cart.push(product);
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
-  alert("Added to cart!");
-}
-
-function updateCartCount(){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const count = document.getElementById("cart-count");
-  if(count) count.innerText = cart.reduce((acc, item) => acc + item.quantity, 0);
-}
-
-updateCartCount();
-
-
 
 function renderServices(serviceList){
   const container = document.getElementById("services");
@@ -150,7 +146,33 @@ if(document.getElementById("services")){
 }
 
 
+// Cart System
+function addToCart(id){
 
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const product = services.find(s => s.id === id);
+
+  let existing = cart.find(item => item.id === id);
+
+  if(existing){
+    existing.quantity += 1;
+  } else {
+    product.quantity = 1;
+    cart.push(product);
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  alert("Added to cart!");
+}
+
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const count = document.getElementById("cart-count");
+  if(count) count.innerText = cart.length;
+}
+
+updateCartCount();
 
 
 function submitReview(serviceID){
@@ -318,9 +340,8 @@ function editReview(index, serviceID){
   localStorage.setItem("reviews", JSON.stringify(reviews));
 
   displayReviews(serviceID);
-}
-
-function deleteReview(index, serviceID){
+   }
+   function deleteReview(index, serviceID){
   if(!confirm("Delete this review?")) return;
 
   let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
@@ -328,8 +349,25 @@ function deleteReview(index, serviceID){
   localStorage.setItem("reviews", JSON.stringify(reviews));
 
   displayReviews(serviceID);
-  }
-   function openReviewModal(serviceID){
+}
+
+const searchBox = document.getElementById("searchBox");
+
+searchBox.addEventListener("input", function(){
+
+  let query = this.value.toLowerCase();
+
+  let filtered = services.filter(s => 
+    s.title.toLowerCase().includes(query) || 
+    s.description.toLowerCase().includes(query)
+  );
+
+  renderServices(filtered);
+});
+
+
+
+function openReviewModal(serviceID){
 
   let allReviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
@@ -376,134 +414,4 @@ function deleteReview(index, serviceID){
 
 function closeReviewModal(){
   document.getElementById("reviewModal").style.display = "none";
-}
-
-
-
-
-
-
-// ===============================
-// CART SYSTEM
-// ===============================
-function addToCart(id){
-
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const product = services.find(s => s.id === id);
-
-  let existing = cart.find(item => item.id === id);
-
-  if(existing){
-    existing.quantity += 1;
-  } else {
-    cart.push({...product, quantity:1});
-  }
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-  updateCartCount();
-  alert("Added to cart!");
-}
-
-function updateCartCount(){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const count = document.getElementById("cart-count");
-  if(count) count.innerText = cart.length;
-}
-updateCartCount();
-
-// ===============================
-// REVIEW SYSTEM
-// ===============================
-function submitReview(serviceID){
-
-  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  if(!currentUser){
-    alert("Please login first.");
-    return;
-  }
-
-  let rating = document.getElementById("rating-" + serviceID).value;
-  let text = document.getElementById("reviewText-" + serviceID).value;
-
-  if(!text){
-    alert("Write a review first.");
-    return;
-  }
-
-  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-  reviews.push({
-    serviceID: serviceID,
-    userName: currentUser.name || "User",
-    userEmail: currentUser.email || "",
-    rating: parseInt(rating),
-    text: text,
-    date: new Date().getTime()
-  });
-
-  localStorage.setItem("reviews", JSON.stringify(reviews));
-
-  document.getElementById("reviewText-" + serviceID).value = "";
-
-  renderServices(services);
-}
-
-// ===============================
-// REVIEW MODAL
-// ===============================
-function openReviewModal(serviceID){
-
-  let allReviews = JSON.parse(localStorage.getItem("reviews")) || [];
-  let modal = document.getElementById("reviewModal");
-  let modalContent = document.getElementById("modalReviews");
-
-  modalContent.innerHTML = "";
-
-  let serviceReviews = allReviews.filter(r => 
-    String(r.serviceID) == String(serviceID)
-  );
-
-  if(serviceReviews.length === 0){
-    modalContent.innerHTML = "<p>No reviews yet.</p>";
-  } else {
-
-    serviceReviews.forEach(r => {
-
-      let stars = "⭐".repeat(parseInt(r.rating) || 0);
-
-      modalContent.innerHTML += `
-        <div style="border-bottom:1px solid #ddd; padding:10px 0;">
-          <strong>${r.userName}</strong>
-          (${r.userEmail})<br>
-          ${stars}<br>
-          ${r.text}
-        </div>
-      `;
-    });
-  }
-
-  modal.style.display = "flex";
-}
-
-function closeReviewModal(){
-  document.getElementById("reviewModal").style.display = "none";
-}
-
-// ===============================
-// SEARCH SYSTEM
-// ===============================
-const searchBox = document.getElementById("searchBox");
-
-if(searchBox){
-  searchBox.addEventListener("input", function(){
-
-    let query = this.value.toLowerCase();
-
-    let filtered = services.filter(s => 
-      s.title.toLowerCase().includes(query) || 
-      s.description.toLowerCase().includes(query)
-    );
-
-    renderServices(filtered);
-  });
-}
+   }
