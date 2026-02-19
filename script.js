@@ -81,69 +81,6 @@ const services = [
 
 
 
-// Generate unique IDs for services (no duplicates)
-services.forEach((s, i) => s.id = i + 1);
-
-function renderServices(serviceList){
-  const container = document.getElementById("services");
-  container.innerHTML = "";
-
-  serviceList.forEach(service => {
-
-    container.innerHTML += `
-      <div class="card">
-        <h3>${service.title}</h3>
-        <p>${service.description}</p>
-        <h4>$${service.price}</h4>
-        <button onclick="addToCart(${service.id})">Add to Cart</button>
-
-        <hr>
-        <div id="reviews-${service.id}"></div>
-
-        <select id="rating-${service.id}">
-          <option value="5">⭐⭐⭐⭐⭐</option>
-          <option value="4">⭐⭐⭐⭐</option>
-          <option value="3">⭐⭐⭐</option>
-          <option value="2">⭐⭐</option>
-          <option value="1">⭐</option>
-        </select>
-
-        <input type="text" id="reviewText-${service.id}" placeholder="Write review">
-        <button onclick="submitReview(${service.id})">Submit Review</button>
-      </div>
-    `;
-
-    displayReviews(service.id);
-  });
-}
-
-if(document.getElementById("services")){
-  const container = document.getElementById("services");
-  services.forEach(service => {
-    container.innerHTML += `
-  <div class="card">
-    <h3>${service.title}</h3>
-    <p>${service.description}</p>
-    <h4>$${service.price}</h4>
-    <button onclick="addToCart(${service.id})">Add to Cart</button>
-
-    <hr>
-    <div id="reviews-${service.id}"></div>
-
-    <select id="rating-${service.id}">
-      <option value="5">⭐⭐⭐⭐⭐</option>
-      <option value="4">⭐⭐⭐⭐</option>
-      <option value="3">⭐⭐⭐</option>
-      <option value="2">⭐⭐</option>
-      <option value="1">⭐</option>
-    </select>
-
-    <input type="text" id="reviewText-${service.id}" placeholder="Write review">
-    <button onclick="submitReview(${service.id})">Submit Review</button>
-  </div>
-`;
-  });
-}
 
 
 // Cart System
@@ -187,7 +124,78 @@ function submitReview(serviceID){
   let text = document.getElementById("reviewText-" + serviceID).value;
 
   if(!text){
-    alert("Write a review first.");
+    a// Generate unique IDs for services (no duplicates)
+services.forEach((s, i) => s.id = i + 1);
+
+
+// ===============================
+// RENDER SERVICES (FLIP VERSION)
+// ===============================
+function renderServices(serviceList){
+
+  const container = document.getElementById("services");
+  container.innerHTML = "";
+
+  serviceList.forEach(service => {
+
+    container.innerHTML += `
+      <div class="card-wrapper">
+        <div class="card-inner">
+
+          <!-- FRONT SIDE (PRODUCT) -->
+          <div class="card card-front">
+            <h3>${service.title}</h3>
+            <p>${service.description}</p>
+            <h4>$${service.price}</h4>
+            <button onclick="addToCart(${service.id})">Add to Cart</button>
+
+            <hr>
+            <div id="reviews-${service.id}"></div>
+
+            <select id="rating-${service.id}">
+              <option value="5">⭐⭐⭐⭐⭐</option>
+              <option value="4">⭐⭐⭐⭐</option>
+              <option value="3">⭐⭐⭐</option>
+              <option value="2">⭐⭐</option>
+              <option value="1">⭐</option>
+            </select>
+
+            <input type="text" id="reviewText-${service.id}" placeholder="Write review">
+            <button onclick="submitReview(${service.id})">Submit Review</button>
+          </div>
+
+          <!-- BACK SIDE (ADVERTISEMENT) -->
+          <div class="card card-back" id="ad-${service.id}">
+            <div style="padding:15px; text-align:center;">
+              <h3 style="color:#ff7300;">💰 Earn Up To 70%</h3>
+              <p>Join our Affiliate Business Today and start earning massive commissions selling our services!</p>
+              <button onclick="window.location.href='register.html'" 
+                style="background:#ff7300; padding:10px; border:none; border-radius:6px; color:white;">
+                Join Now
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+
+  });
+
+  // Re-display review counts
+  serviceList.forEach(service => {
+    displayReviews(service.id);
+  });
+
+}
+
+
+// ===============================
+// INITIAL LOAD
+// ===============================
+if(document.getElementById("services")){
+  renderServices(services);
+    }lert("Write a review first.");
     return;
   }
 
@@ -441,3 +449,78 @@ let currentAd = 0;
     window.onload = () => {
         showAd(ads[currentAd]);
     };
+
+    /* ===============================
+   RANDOM FLIP ADS SYSTEM
+================================ */
+
+const registrationLink = "https://your-official-registration-link.com";
+
+const adDesigns = [
+  {
+    class: "ad-style-1",
+    title: "🔥 Earn Up To 70% Commission!",
+    text: "Join our business today and start selling digital services worldwide.",
+    button: "Start Earning Now"
+  },
+  {
+    class: "ad-style-2",
+    title: "💎 Build Wealth Online",
+    text: "Promote our services and earn massive weekly income.",
+    button: "Join The Network"
+  },
+  {
+    class: "ad-style-3",
+    title: "🚀 Become A Digital Partner",
+    text: "Turn your phone into a money machine today.",
+    button: "Register Free"
+  },
+  {
+    class: "ad-style-4",
+    title: "💰 70% Commission System",
+    text: "No experience needed. We provide everything.",
+    button: "Join Now"
+  }
+];
+
+function insertRandomAd(wrapper){
+
+  const adBox = wrapper.querySelector(".card-back");
+  const randomAd = adDesigns[Math.floor(Math.random() * adDesigns.length)];
+
+  adBox.className = "card card-back " + randomAd.class;
+
+  adBox.innerHTML = `
+    <h3>${randomAd.title}</h3>
+    <p>${randomAd.text}</p>
+    <div class="ad-cta" onclick="window.location.href='${registrationLink}'">
+      ${randomAd.button}
+    </div>
+  `;
+}
+
+function observeCards(){
+
+  const wrappers = document.querySelectorAll(".card-wrapper");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+
+        if(Math.random() < 0.3){ // 30% chance to flip
+          entry.target.classList.add("flip");
+          insertRandomAd(entry.target);
+        }
+
+      } else {
+        entry.target.classList.remove("flip");
+      }
+
+    });
+  }, { threshold: 0.6 });
+
+  wrappers.forEach(wrapper => observer.observe(wrapper));
+}
+
+window.addEventListener("load", observeCards);
