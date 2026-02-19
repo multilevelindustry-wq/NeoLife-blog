@@ -9,7 +9,29 @@ function generateAffiliateID(){
 /* ===============================
    SERVICES LIST
 ================================ */
-const services = [ /* KEEP YOUR 70 SERVICES HERE EXACTLY AS YOU SENT */ ];
+const services = [
+  {id: 1, title: "E-commerce Store", description: "Get A Professional E-commerce Store Personally Designed For You and Your Business At A starting Price", price: 59.99},
+  {id: 2, title: "Business Website", description: "Professional website", price: 69.99},
+  {id: 3, title: "Blog Website", description: "Share your content online", price: 39.99},
+  {id: 4, title: "Landing Page", description: "Capture leads effectively", price: 59.99},
+  {id: 5, title: "SEO Service - 1 Month", description: "Optimize for Google 1 Month", price: 39.99},
+  {id: 6, title: "SEO Service - 5 Months", description: "Optimize for Google 5 Months", price: 199.99},
+  {id: 7, title: "SEO Service - 1 Year", description: "Optimize for Google 1 Year", price: 499.99},
+  {id: 8, title: "Professional Graphic Design (5)", description: "Create 5 stunning graphics", price: 29.99},
+  {id: 9, title: "Professional Graphic Design (12)", description: "Create 12 stunning graphics", price: 99.99},
+  {id: 10, title: "Logo Design", description: "Custom logos", price: 22.99},
+  {id: 11, title: "Social Media Management", description: "Grow your followers", price: 150},
+  {id: 12, title: "Email Marketing", description: "Boost engagement 40%", price: 69.99},
+  {id: 13, title: "App Development", description: "Mobile & Web apps", price: 499.99},
+  {id: 14, title: "UI/UX Design", description: "Improve user experience", price: 99.99},
+  {id: 15, title: "WordPress Website", description: "Easy-to-manage website", price: 59.99},
+  {id: 16, title: "Video Editing", description: "Professional video content", price: 39.99},
+  {id: 17, title: "Content Writing", description: "Engaging articles", price: 80},
+  {id: 18, title: "Translation Service", description: "Multi-language translation", price: 70},
+  {id: 19, title: "Digital Marketing", description: "Promote your brand", price: 200},
+  {id: 20, title: "PPC Advertising", description: "Google/Facebook Ads", price: 180}
+];
+
 
 
 /* ===============================
