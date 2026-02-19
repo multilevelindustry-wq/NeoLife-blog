@@ -7,7 +7,7 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-  {id: 1, title: "E-commerce Store 0212", description: "Create an Online E-commerce Store Today For Your Business ", price: 80},
+  {id: 1, title: "E-commerce Store 0212", description: "Create an Online E-commerce Store Today For Your Business ", price: 80, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
   {id: 2, title: "Business Website 3154", description: "Professional website", price: 120},
   {id: 3, title: "Blog Website", description: "Share your content online", price: 100},
   {id: 4, title: "Portfolio Website", description: "Showcase your work", price: 80},
