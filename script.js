@@ -92,35 +92,35 @@ function renderServices(serviceList){
 
     container.innerHTML += `
       <div class="card">
-        <div class="card">
-  <img src="${service.image}" 
-       style="width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px;">
 
-  <h3>${service.title}</h3>
-  <p>${service.description}</p>
-  <h4>$${service.price}</h4>
-  <button onclick="addToCart(${service.id})">Add to Cart</button>
+        <img src="${service.image || 'https://via.placeholder.com/300x160'}" 
+             style="width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px;">
 
-  <hr>
-  <div id="reviews-${service.id}"></div>
+        <h3>${service.title}</h3>
+        <p>${service.description}</p>
+        <h4>$${service.price}</h4>
+        <button onclick="addToCart(${service.id})">Add to Cart</button>
 
-  <select id="rating-${service.id}">
-    <option value="5">⭐⭐⭐⭐⭐</option>
-    <option value="4">⭐⭐⭐⭐</option>
-    <option value="3">⭐⭐⭐</option>
-    <option value="2">⭐⭐</option>
-    <option value="1">⭐</option>
-  </select>
+        <hr>
+        <div id="reviews-${service.id}"></div>
 
-  <input type="text" id="reviewText-${service.id}" placeholder="Write review">
-  <button onclick="submitReview(${service.id})">Submit Review</button>
-</div>
+        <select id="rating-${service.id}">
+          <option value="5">⭐⭐⭐⭐⭐</option>
+          <option value="4">⭐⭐⭐⭐</option>
+          <option value="3">⭐⭐⭐</option>
+          <option value="2">⭐⭐</option>
+          <option value="1">⭐</option>
+        </select>
+
+        <input type="text" id="reviewText-${service.id}" placeholder="Write review">
+        <button onclick="submitReview(${service.id})">Submit Review</button>
+
+      </div>
     `;
 
     displayReviews(service.id);
   });
 }
-
 if(document.getElementById("services")){
   const container = document.getElementById("services");
   services.forEach(service => {
