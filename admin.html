@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Panel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div style="padding:40px;">
+  <h2>Admin Dashboard</h2>
+  <h3>Messages</h3>
+<div id="adminMessages"></div>
+
+
+  <h3>Orders</h3>
+  <div id="orders"></div>
+
+  <h3>Project Submissions</h3>
+  <div id="projects"></div>
+  <button onclick="completeProject('${sub.id}')">Mark Completed</button>
+<input type="file" onchange="uploadFinished(event, '${sub.id}')">
+</div>
+
+<script>
+
+// 🔐 Protect Admin Page
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if(!localStorage.getItem("loggedIn") || !currentUser || currentUser.email !== "admin@site.com"){
+  alert("Access Denied!");
+  window.location.href = "login.html";
+}
+
+// Load Data
+let orders = JSON.parse(localStorage.getItem("orders")) || [];
+let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+let messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+let orderDiv = document.getElementById("orders");
+let projectDiv = document.getElementById("projects");
+let msgDiv = document.getElementById("adminMessages");
+
+
+// ================= ORDERS =================
+function renderOrders(){
+  orderDiv.innerHTML = "";
+
+  if(orders.length === 0){
+    orderDiv.innerHTML = "<p>No orders yet.</p>";
+    return;
+  }
+
+  orders.forEach(order => {
+    orderDiv.innerHTML += `
+      <div class="card">
+        <h4>Order ID: ${order.id}</h4>
+        <p><strong>Name:</strong> ${order.userName}</p>
+        <p><strong>Email:</strong> ${order.userEmail}</p>
+        <p><strong>Total:</strong> $${order.total}</p>
+        <p><strong>Submitted:</strong> ${order.submitted ? "Yes" : "No"}</p>
+        <p><strong>Date:</strong> ${order.date}</p>
+      </div>
+    `;
+  });
+}
+
+
+// ================= PROJECTS =================
+function renderProjects(){
+  projectDiv.innerHTML = "";
+
+  if(submissions.length === 0){
+    projectDiv.innerHTML = "<p>No project submissions.</p>";
+    return;
+  }
+
+  submissions.forEach(sub => {
+    projectDiv.innerHTML += `
+      <div class="card">
+        <h4>Order ID: ${sub.id}</h4>
+        <p><strong>Name:</strong> ${sub.userName}</p>
+        <p><strong>Email:</strong> ${sub.userEmail}</p>
+        <p><strong>Title:</strong> ${sub.projectTitle}</p>
+        <p><strong>Description:</strong> ${sub.projectDescription}</p>
+        <p><strong>Date:</strong> ${sub.date}</p>
+        <p><strong>Status:</strong> ${sub.completed ? "Completed" : "Pending"}</p>
+        <button onclick="downloadFile('${sub.fileData}', '${sub.fileName}')">Download File</button>
+        <br><br>
+        <button onclick="completeProject('${sub.id}')">Mark Completed</button>
+        <input type="file" onchange="uploadFinished(event, '${sub.id}')">
+      </div>
+    `;
+  });
+}
+
+
+// ================= MESSAGES =================
+function renderMessages(){
+  msgDiv.innerHTML = "";
+
+  if(messages.length === 0){
+    msgDiv.innerHTML = "<p>No messages.</p>";
+    return;
+  }
+
+  messages.forEach((m) => {
+    if(m.to !== "admin@site.com") return;
+
+    msgDiv.innerHTML += `
+      <div class="card">
+        <p><strong>From:</strong> ${m.from}</p>
+        <p>${m.text}</p>
+        <p><small>${m.date || ""}</small></p>
+        <button onclick="reply('${m.from}')">Reply</button>
+      </div>
+    `;
+  });
+}
+
+
+// ================= FUNCTIONS =================
+function downloadFile(data, fileName){
+  if(!data) return alert("No file available.");
+  let link = document.createElement("a");
+  link.href = data;
+  link.download = fileName;
+  link.click();
+}
+
+function reply(userEmail){
+  let text = prompt("Enter reply:");
+  if(!text) return;
+
+  messages.push({
+    from: "admin@site.com",
+    to: userEmail,
+    text: text,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("messages", JSON.stringify(messages));
+  alert("Reply sent!");
+}
+
+function completeProject(id){
+  submissions = submissions.map(s => {
+    if(s.id === id){
+      s.completed = true;
+    }
+    return s;
+  });
+
+  localStorage.setItem("submissions", JSON.stringify(submissions));
+  alert("Project marked completed.");
+  renderProjects();
+}
+
+function uploadFinished(event, id){
+  let file = event.target.files[0];
+  if(!file) return;
+
+  let reader = new FileReader();
+
+  reader.onload = function(e){
+    submissions = submissions.map(s => {
+      if(s.id === id){
+        s.finishedFile = e.target.result;
+        s.finishedFileName = file.name;
+      }
+      return s;
+    });
+
+    localStorage.setItem("submissions", JSON.stringify(submissions));
+    alert("Finished file uploaded.");
+  };
+
+  reader.readAsDataURL(file);
+}
+
+
+// ================= INIT =================
+renderOrders();
+renderProjects();
+renderMessages();
+
+</script>
+
+</body>
+</html>

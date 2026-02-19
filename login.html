@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div style="padding:40px;">
+  <h2>Login</h2>
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <button onclick="login()">Login</button><br><br>
+  if not registered<br>
+   <a href="register.html"><button >Register</button></a>
+</div>
+
+<script>
+
+function login(){
+
+  let emailValue = document.getElementById("email").value.trim();
+  let passwordValue = document.getElementById("password").value.trim();
+
+  if(!emailValue || !passwordValue){
+    alert("Enter email and password.");
+    return;
+  }
+
+  // Get all registered users (MLM system uses "users")
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+
+  if(users.length === 0){
+    alert("No registered account found.");
+    window.location.href = "register.html";
+    return;
+  }
+
+  // Find matching user
+  let foundUser = users.find(u => 
+    u.email === emailValue && u.password === passwordValue
+  );
+
+  if(foundUser){
+
+    localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("currentUser", JSON.stringify(foundUser));
+
+    alert("Login Successful!");
+
+    // Admin detection
+    if(foundUser.email === "admin@site.com"){
+      window.location.href = "admin.html";
+    } else {
+      window.location.href = "index.html";
+    }
+
+  } else {
+    alert("Invalid email or password.");
+  }
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Submit Project</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div style="padding:40px;">
+  <h2>Submit Your Project Details</h2>
+
+  <input type="text" placeholder="Project Title">
+  <textarea placeholder="Describe your project"></textarea>
+  <input type="file">
+  <button onclick="submitProject()">Submit</button>
+  <h3>Messages</h3>
+<div id="userMessages"></div>
+<input type="text" id="newMessage" placeholder="Send message to admin">
+<button onclick="sendMessage()">Send</button>
+  <button onclick="downloadInvoice()">Download Invoice</button>
+</div>
+
+<script>
+   
+let lastOrderID = localStorage.getItem("lastOrderID");
+
+if(!lastOrderID){
+  alert("You must complete payment before submitting project.");
+  window.location.href = "cart.html";
+}
+    
+if(!localStorage.getItem("loggedIn")){
+  alert("Please login first");
+  window.location.href = "login.html";
+}
+
+
+
+function submitProject(){
+
+  let title = document.querySelector("input[type='text']").value.trim();
+  let description = document.querySelector("textarea").value.trim();
+  let fileInput = document.querySelector("input[type='file']");
+
+  if(!title || !description){
+    alert("Project title and description required.");
+    return;
+  }
+
+  let lastOrderID = localStorage.getItem("lastOrderID");
+  if(!lastOrderID){
+    alert("No valid payment found.");
+    return;
+  }
+
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+
+  if(fileInput.files.length === 0){
+    alert("Please upload a file.");
+    return;
+  }
+
+  let file = fileInput.files[0];
+  let reader = new FileReader();
+
+  reader.onload = function(e){
+
+    let submission = {
+      id: lastOrderID,   // SAME AS ORDER ID
+      projectTitle: title,
+      projectDescription: description,
+      fileName: file.name,
+      fileData: e.target.result,
+      userName: currentUser.name,
+      userEmail: currentUser.email,
+      date: new Date().toLocaleString()
+    };
+
+    submissions.push(submission);
+    localStorage.setItem("submissions", JSON.stringify(submissions));
+
+    // Mark order as submitted
+    let allOrders = JSON.parse(localStorage.getItem("orders")) || [];
+    allOrders = allOrders.map(order => {
+      if(order.id === lastOrderID){
+        order.submitted = true;
+      }
+      return order;
+    });
+    localStorage.setItem("orders", JSON.stringify(allOrders));
+
+    localStorage.removeItem("lastOrderID");
+
+    alert("Project Submitted Successfully!");
+  };
+
+  reader.readAsDataURL(file);
+}
+
+
+
+function downloadInvoice(){
+  let orders = JSON.parse(localStorage.getItem("orders")) || [];
+  if(orders.length === 0){
+    alert("No orders found.");
+    return;
+  }
+
+  let lastOrder = orders[orders.length - 1];
+
+  let invoiceContent = `
+  INVOICE
+  -----------------------
+  Order ID: ${lastOrder.id}
+  Date: ${lastOrder.date}
+  Buyer: ${lastOrder.buyer}
+
+  Items:
+  ${lastOrder.items.map(i => i.title + " - $" + i.price).join("\n")}
+
+  Total: $${lastOrder.total}
+  `;
+
+  let blob = new Blob([invoiceContent], {type: "text/plain"});
+  let link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = lastOrder.id + ".txt";
+  link.click();
+}
+
+function sendMessage(){
+
+  let msg = document.getElementById("newMessage").value.trim();
+  if(!msg) return;
+
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+  messages.push({
+    from: currentUser.email,
+    to: "admin@site.com",
+    text: msg,
+    date: new Date().toLocaleString()
+  });
+
+  localStorage.setItem("messages", JSON.stringify(messages));
+  document.getElementById("newMessage").value = "";
+  alert("Message sent!");
+}
+
+let submissions = JSON.parse(localStorage.getItem("submissions")) || [];
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+submissions.forEach(sub => {
+  if(sub.userEmail === currentUser.email && sub.completed && sub.finishedFile){
+    document.getElementById("userMessages").innerHTML += `
+      <div class="card">
+        <p>Your project ${sub.id} is completed.</p>
+        <button onclick="downloadFinished('${sub.finishedFile}','${sub.finishedFileName}')">Download</button>
+      </div>
+    `;
+  }
+});
+
+function downloadFinished(data, name){
+  let link = document.createElement("a");
+  link.href = data;
+  link.download = name;
+  link.click();
+}
+</script>
+
+</body>
+</html>

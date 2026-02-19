@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Affiliate Dashboard</title>
+</head>
+<body>
+
+<h2>Affiliate Dashboard</h2>
+
+<div id="affiliateInfo"></div>
+
+<h3>Your Affiliate Link</h3>
+<input type="text" id="affiliateLink" readonly style="width:100%">
+
+<h3>PV Progress</h3>
+<div id="pvInfo"></div>
+
+<h3>Total Earnings</h3>
+<div id="earningsInfo"></div>
+
+<h3>Team Members</h3>
+<ul id="teamList"></ul>
+
+<button onclick="withdraw()">Withdraw Earnings</button>
+
+<script>
+const userId = localStorage.getItem("currentUser");
+const user = JSON.parse(localStorage.getItem("user_"+userId));
+
+document.getElementById("affiliateInfo").innerHTML =
+"Name: "+user.name+"<br>Email: "+user.email+"<br>ID: "+user.id;
+
+document.getElementById("affiliateLink").value =
+window.location.origin + "/register.html?ref=" + user.id;
+
+document.getElementById("pvInfo").innerHTML =
+"Personal PV: " + user.pv;
+
+document.getElementById("earningsInfo").innerHTML =
+"Total Earnings: $" + user.earnings +
+"<br>Withdrawable: $" + user.withdrawable;
+
+const teamList = document.getElementById("teamList");
+user.team.forEach(member=>{
+    const li = document.createElement("li");
+    li.innerText = member;
+    teamList.appendChild(li);
+});
+
+// Commission Structure
+function calculateCommission(pv){
+    if(pv >= 2000) return 0.25;
+    if(pv >= 600) return 0.20;
+    if(pv >= 300) return 0.15;
+    return 0.10;
+}
+
+function withdraw(){
+    alert("Withdrawal Requested");
+}
+</script>
+
+</body>
+</html>

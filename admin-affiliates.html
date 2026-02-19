@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Admin Affiliate Panel</title>
+</head>
+<body>
+
+<h2>All Affiliates</h2>
+<div id="allAffiliates"></div>
+
+<script>
+const container = document.getElementById("allAffiliates");
+
+for(let key in localStorage){
+    if(key.startsWith("user_")){
+        const user = JSON.parse(localStorage.getItem(key));
+
+        const div = document.createElement("div");
+        div.style.border="1px solid #ccc";
+        div.style.margin="10px";
+        div.style.padding="10px";
+
+        div.innerHTML = `
+        <b>${user.name}</b><br>
+        Email: ${user.email}<br>
+        PV: ${user.pv}<br>
+        Earnings: $${user.earnings}<br>
+        Team Size: ${user.team.length}
+        `;
+
+        container.appendChild(div);
+    }
+}
+</script>
+
+</body>
+</html>
