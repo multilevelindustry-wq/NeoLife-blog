@@ -10,7 +10,7 @@
   <h2>Web Services Store</h2>
   <nav>
     <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-    <a href="login.html">Login</a>
+    <a href="login.html" id="loginLink">Login</a>
   </nav>
 </header>
 
@@ -20,44 +20,56 @@
 </div>
 
 <div class="container" id="services"></div>
-  
+
 <script src="script.js"></script>
+
 <script>
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+// =======================
+// LOGIN + USER DISPLAY
+// =======================
+
 let loggedIn = localStorage.getItem("loggedIn");
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
 if(currentUser && loggedIn){
 
   let nav = document.querySelector("nav");
 
   // Remove login link
-  let loginLink = nav.querySelector('a[href="login.html"]');
+  let loginLink = document.getElementById("loginLink");
   if(loginLink){
     loginLink.remove();
   }
 
-  // Add user greeting
+  // Display Name
   let userSpan = document.createElement("span");
   let displayName = currentUser.name || currentUser.email.split("@")[0];
-userSpan.innerHTML = "Welcome, <b>" + displayName + "</b> ";
+  userSpan.innerHTML = "Welcome, <b>" + displayName + "</b>";
   userSpan.style.marginLeft = "15px";
 
   nav.appendChild(userSpan);
 
-  // Add logout button
+  // Logout Button
   let logoutBtn = document.createElement("button");
   logoutBtn.innerText = "Logout";
   logoutBtn.style.marginLeft = "10px";
   logoutBtn.onclick = function(){
       localStorage.removeItem("loggedIn");
       localStorage.removeItem("currentUser");
-      window.location.reload();
+      window.location.href = "login.html";
   };
 
   nav.appendChild(logoutBtn);
+
+}else{
+  // Redirect if not logged in
+  window.location.href = "register.html";
 }
 </script>
 
+<!-- =======================
+     REVIEW MODAL
+======================= -->
 
 <div id="reviewModal" style="display:none; position:fixed; 
      top:0; left:0; width:100%; height:100%; 
@@ -78,6 +90,9 @@ userSpan.innerHTML = "Welcome, <b>" + displayName + "</b> ";
   </div>
 </div>
 
+<!-- =======================
+     GLOBAL REVIEWS SECTION
+======================= -->
 
 <div id="allReviewsSection" style="display:none; padding:30px;">
   <h2>All Reviews</h2>
@@ -88,8 +103,7 @@ userSpan.innerHTML = "Welcome, <b>" + displayName + "</b> ";
   </button>
 </div>
 
-  
-  <!-- =======================
+<!-- =======================
      FOOTER
 ======================= -->
 
@@ -109,8 +123,6 @@ userSpan.innerHTML = "Welcome, <b>" + displayName + "</b> ";
     © 2026 Your Company Name. All Rights Reserved.
   </p>
 </footer>
-  
-
 
 </body>
-</html>
+  </html>
