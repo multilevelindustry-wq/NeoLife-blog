@@ -10,7 +10,7 @@
   <h2>Web Services Store</h2>
   <nav>
     <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-    <a href="login.html" id="loginLink">Login</a>
+    <a href="login.html">Login</a>
   </nav>
 </header>
 
@@ -21,55 +21,45 @@
 
 <div class="container" id="services"></div>
 
-<script src="script.js"></script>
-
+<script src="script.js">
+</script>
 <script>
-// =======================
-// LOGIN + USER DISPLAY
-// =======================
-
-let loggedIn = localStorage.getItem("loggedIn");
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+let loggedIn = localStorage.getItem("loggedIn");
 
 if(currentUser && loggedIn){
 
   let nav = document.querySelector("nav");
 
   // Remove login link
-  let loginLink = document.getElementById("loginLink");
+  let loginLink = nav.querySelector('a[href="login.html"]');
   if(loginLink){
     loginLink.remove();
   }
 
-  // Display Name
+  // Add user greeting
   let userSpan = document.createElement("span");
   let displayName = currentUser.name || currentUser.email.split("@")[0];
-  userSpan.innerHTML = "Welcome, <b>" + displayName + "</b>";
+userSpan.innerHTML = "Welcome, <b>" + displayName + "</b> ";
   userSpan.style.marginLeft = "15px";
 
   nav.appendChild(userSpan);
 
-  // Logout Button
+  // Add logout button
   let logoutBtn = document.createElement("button");
   logoutBtn.innerText = "Logout";
   logoutBtn.style.marginLeft = "10px";
   logoutBtn.onclick = function(){
       localStorage.removeItem("loggedIn");
       localStorage.removeItem("currentUser");
-      window.location.href = "login.html";
+      window.location.reload();
   };
 
   nav.appendChild(logoutBtn);
-
-}else{
-  // Redirect if not logged in
-  window.location.href = "register.html";
 }
+
 </script>
 
-<!-- =======================
-     REVIEW MODAL
-======================= -->
 
 <div id="reviewModal" style="display:none; position:fixed; 
      top:0; left:0; width:100%; height:100%; 
@@ -90,9 +80,6 @@ if(currentUser && loggedIn){
   </div>
 </div>
 
-<!-- =======================
-     GLOBAL REVIEWS SECTION
-======================= -->
 
 <div id="allReviewsSection" style="display:none; padding:30px;">
   <h2>All Reviews</h2>
@@ -101,9 +88,8 @@ if(currentUser && loggedIn){
     style="margin-top:15px; padding:8px; background:red; color:white;">
     Close
   </button>
-</div>
-
-<!-- =======================
+  
+  <!-- =======================
      FOOTER
 ======================= -->
 
@@ -123,6 +109,9 @@ if(currentUser && loggedIn){
     © 2026 Your Company Name. All Rights Reserved.
   </p>
 </footer>
+  
 
+
+</div>
 </body>
-</html>
+  </html>
