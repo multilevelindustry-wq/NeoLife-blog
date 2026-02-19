@@ -55,7 +55,7 @@ if(currentUser && loggedIn){
   logoutBtn.onclick = function(){
       localStorage.removeItem("loggedIn");
       localStorage.removeItem("currentUser");
-      window.location.href = "login.html";
+      window.location.reload();
   };
 
   nav.appendChild(logoutBtn);
