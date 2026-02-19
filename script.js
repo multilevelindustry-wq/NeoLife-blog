@@ -1,3 +1,281 @@
+/* ===============================
+   AFFILIATE ID GENERATOR
+================================ */
+function generateAffiliateID(){
+  return "AFF" + Date.now() + Math.floor(Math.random() * 1000);
+}
+
+
+/* ===============================
+   SERVICES LIST
+================================ */
+const services = [ /* KEEP YOUR 70 SERVICES HERE EXACTLY AS YOU SENT */ ];
+
+
+/* ===============================
+   ENSURE UNIQUE IDS
+================================ */
+services.forEach((s, i) => s.id = i + 1);
+
+
+/* ===============================
+   RENDER SERVICES (FLIP VERSION)
+================================ */
+function renderServices(serviceList){
+
+  const container = document.getElementById("services");
+  if(!container) return;
+
+  container.innerHTML = "";
+
+  serviceList.forEach(service => {
+
+    container.innerHTML += `
+      <div class="card-wrapper">
+        <div class="card-inner">
+
+          <div class="card card-front">
+            <h3>${service.title}</h3>
+            <p>${service.description}</p>
+            <h4>$${service.price}</h4>
+
+            <button onclick="addToCart(${service.id})">Add to Cart</button>
+
+            <hr>
+            <div id="reviews-${service.id}"></div>
+
+            <select id="rating-${service.id}">
+              <option value="5">⭐⭐⭐⭐⭐</option>
+              <option value="4">⭐⭐⭐⭐</option>
+              <option value="3">⭐⭐⭐</option>
+              <option value="2">⭐⭐</option>
+              <option value="1">⭐</option>
+            </select>
+
+            <input type="text" id="reviewText-${service.id}" placeholder="Write review">
+            <button onclick="submitReview(${service.id})">Submit Review</button>
+          </div>
+
+          <div class="card card-back" id="ad-${service.id}">
+            <div style="padding:15px; text-align:center;">
+              <h3 style="color:#ff7300;">💰 Earn Up To 70%</h3>
+              <p>Join our Affiliate Business Today and start earning massive commissions selling our services!</p>
+              <button onclick="window.location.href='register.html'" 
+                style="background:#ff7300; padding:10px; border:none; border-radius:6px; color:white;">
+                Join Now
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    `;
+  });
+
+  serviceList.forEach(service => {
+    displayReviews(service.id);
+  });
+}
+
+
+/* ===============================
+   INITIAL LOAD
+================================ */
+document.addEventListener("DOMContentLoaded", function(){
+  renderServices(services);
+  updateCartCount();
+});
+
+
+/* ===============================
+   CART SYSTEM
+================================ */
+function addToCart(id){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const product = services.find(s => s.id === id);
+  let existing = cart.find(item => item.id === id);
+
+  if(existing){
+    existing.quantity += 1;
+  } else {
+    cart.push({...product, quantity:1});
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+  alert("Added to cart!");
+}
+
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const count = document.getElementById("cart-count");
+  if(count) count.innerText = cart.length;
+}
+
+
+/* ===============================
+   REVIEW SYSTEM
+================================ */
+function submitReview(serviceID){
+
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if(!currentUser){
+    alert("Please login first.");
+    return;
+  }
+
+  let rating = document.getElementById("rating-" + serviceID).value;
+  let text = document.getElementById("reviewText-" + serviceID).value;
+
+  if(!text){
+    alert("Write a review first.");
+    return;
+  }
+
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+  reviews.push({
+    serviceID: serviceID,
+    userName: currentUser.name,
+    userEmail: currentUser.email,
+    rating: parseInt(rating),
+    text: text,
+    date: new Date().getTime()
+  });
+
+  localStorage.setItem("reviews", JSON.stringify(reviews));
+  document.getElementById("reviewText-" + serviceID).value = "";
+
+  displayReviews(serviceID);
+}
+
+
+function displayReviews(serviceID){
+
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  let container = document.getElementById("reviews-" + serviceID);
+  if(!container) return;
+
+  let serviceReviews = reviews.filter(r => String(r.serviceID) == String(serviceID));
+
+  container.innerHTML = `
+    <p>
+      <span onclick="goToAllReviews(${serviceID})"
+        style="color:#ff7300; cursor:pointer; font-weight:bold;">
+        (${serviceReviews.length} Reviews)
+      </span>
+    </p>
+  `;
+}
+
+
+function goToAllReviews(serviceID){
+
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  let serviceReviews = reviews.filter(r => String(r.serviceID) == String(serviceID));
+
+  let container = document.getElementById("allReviewsContent");
+  if(!container) return;
+
+  container.innerHTML = "";
+
+  if(serviceReviews.length === 0){
+    container.innerHTML = "<p>No reviews yet for this product.</p>";
+  } else {
+    serviceReviews.forEach(r => {
+      let stars = "⭐".repeat(parseInt(r.rating) || 0);
+      container.innerHTML += `
+        <div style="border-bottom:1px solid #ddd; padding:10px 0;">
+          <strong>${r.userName}</strong>
+          (${r.userEmail})<br>
+          ${stars}<br>
+          ${r.text}
+        </div>
+      `;
+    });
+  }
+
+  document.getElementById("allReviewsSection").style.display = "block";
+}
+
+function closeAllReviews(){
+  document.getElementById("allReviewsSection").style.display = "none";
+}
+
+
+/* ===============================
+   SEARCH SYSTEM
+================================ */
+const searchBox = document.getElementById("searchBox");
+
+if(searchBox){
+  searchBox.addEventListener("input", function(){
+    let query = this.value.toLowerCase();
+    let filtered = services.filter(s => 
+      s.title.toLowerCase().includes(query) || 
+      s.description.toLowerCase().includes(query)
+    );
+    renderServices(filtered);
+  });
+}
+
+
+/* ===============================
+   RANDOM FLIP ADS SYSTEM
+================================ */
+const registrationLink = "https://your-official-registration-link.com";
+
+const adDesigns = [
+  { class:"ad-style-1", title:"🔥 Earn Up To 70% Commission!", text:"Join our business today and start selling digital services worldwide.", button:"Start Earning Now" },
+  { class:"ad-style-2", title:"💎 Build Wealth Online", text:"Promote our services and earn massive weekly income.", button:"Join The Network" },
+  { class:"ad-style-3", title:"🚀 Become A Digital Partner", text:"Turn your phone into a money machine today.", button:"Register Free" },
+  { class:"ad-style-4", title:"💰 70% Commission System", text:"No experience needed. We provide everything.", button:"Join Now" }
+];
+
+function insertRandomAd(wrapper){
+  const adBox = wrapper.querySelector(".card-back");
+  const randomAd = adDesigns[Math.floor(Math.random() * adDesigns.length)];
+
+  adBox.className = "card card-back " + randomAd.class;
+
+  adBox.innerHTML = `
+    <h3>${randomAd.title}</h3>
+    <p>${randomAd.text}</p>
+    <div class="ad-cta" onclick="window.location.href='${registrationLink}'">
+      ${randomAd.button}
+    </div>
+  `;
+}
+
+function observeCards(){
+
+  const wrappers = document.querySelectorAll(".card-wrapper");
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+        if(Math.random() < 0.3){
+          entry.target.classList.add("flip");
+          insertRandomAd(entry.target);
+        }
+      } else {
+        entry.target.classList.remove("flip");
+      }
+
+    });
+  }, { threshold: 0.6 });
+
+  wrappers.forEach(wrapper => observer.observe(wrapper));
+}
+
+window.addEventListener("load", observeCards);
+
+
+
+
+
+
 // ===============================
 // AFFILIATE ID GENERATOR
 // ===============================
