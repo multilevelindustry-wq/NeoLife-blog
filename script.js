@@ -414,3 +414,30 @@ function openReviewModal(serviceID){
 function closeReviewModal(){
   document.getElementById("reviewModal").style.display = "none";
       }
+
+
+
+let currentAd = 0;
+    const ads = ['ad1', 'ad2', 'ad3'];
+
+    function showAd(adId) {
+        const adElement = document.getElementById(adId);
+        adElement.style.display = 'flex';
+        setTimeout(() => {
+            const closeButton = adElement.querySelector('.close-btn');
+            closeButton.style.display = 'block';
+        }, 3000);
+    }
+
+    function closeAd(adId) {
+        const adElement = document.getElementById(adId);
+        adElement.style.display = 'none';
+        currentAd++;
+        if (currentAd < ads.length) {
+            setTimeout(() => showAd(ads[currentAd]), 15000);
+        }
+    }
+
+    window.onload = () => {
+        showAd(ads[currentAd]);
+    };
