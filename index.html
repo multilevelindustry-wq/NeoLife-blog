@@ -28,20 +28,18 @@
 // LOGIN + USER DISPLAY
 // =======================
 
-  
 let loggedIn = localStorage.getItem("loggedIn");
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  
-if(currentUser && loggedIn){
 
-  let nav = document.querySelector("nav");
+let nav = document.querySelector("nav");
+
+if(currentUser && loggedIn){
 
   // Remove login link
   let loginLink = document.getElementById("loginLink");
   if(loginLink){
     loginLink.remove();
   }
-  
 
   // Display Name
   let userSpan = document.createElement("span");
@@ -62,7 +60,8 @@ if(currentUser && loggedIn){
   };
 
   nav.appendChild(logoutBtn);
-  }else{
+
+}else{
   // Not logged in
   // DO NOTHING — allow browsing
 }
