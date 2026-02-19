@@ -35,13 +35,13 @@ let nav = document.querySelector("nav");
 
 if(currentUser && loggedIn){
 
-  // Remove login link
+  let nav = document.querySelector("nav");
+
   let loginLink = document.getElementById("loginLink");
   if(loginLink){
     loginLink.remove();
   }
 
-  // Display Name
   let userSpan = document.createElement("span");
   let displayName = currentUser.name || currentUser.email.split("@")[0];
   userSpan.innerHTML = "Welcome, <b>" + displayName + "</b>";
@@ -49,7 +49,6 @@ if(currentUser && loggedIn){
 
   nav.appendChild(userSpan);
 
-  // Logout Button
   let logoutBtn = document.createElement("button");
   logoutBtn.innerText = "Logout";
   logoutBtn.style.marginLeft = "10px";
@@ -61,10 +60,7 @@ if(currentUser && loggedIn){
 
   nav.appendChild(logoutBtn);
 
-}else{
-  // Not logged in
-  // DO NOTHING — allow browsing
-}
+  }
 </script>
 
 <!-- =======================
