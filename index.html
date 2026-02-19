@@ -115,3 +115,101 @@ userSpan.innerHTML = "Welcome, <b>" + displayName + "</b> ";
 </div>
 </body>
 </html>
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interstitial Ads Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .ad-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+        .ad-content {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .close-btn {
+            display: none;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div id="ad1" class="ad-container">
+    <div class="ad-content">
+        <h2></h2>
+        <img src="IMG-20250924-WA0007.jpg" alt="Ad 1" width="300">
+        <button class="close-btn" onclick="closeAd('ad1')">Close</button>
+    </div>
+</div>
+
+<div id="ad2" class="ad-container">
+    <div class="ad-content">
+        <h2></h2>
+        <img src="IMG-20250924-WA0007.jpg" alt="Ad 2" width="300">
+        <button class="close-btn" onclick="closeAd('ad2')">Close</button>
+    </div>
+</div>
+
+<div id="ad3" class="ad-container">
+    <div class="ad-content">
+        <h2></h2>
+           <a href="https://myoffice.neolife.com/silentlogin?token=KkoJBH5_mDBCPYEOxCklSVaeITsFa_cvuSS_rzNmHUnwO4RbDVnILAGKJ3Amu9_m6--ssWmtOGIEhxIoNnNWAUbkvkVd42SQo1sJzjXJHyU!" ><img src="IMG-20250924-WA0007.jpg" alt="Ad 3" width="300"></a>
+        <button class="close-btn" onclick="closeAd('ad3')">Close</button>
+    </div>
+</div>
+
+<script>
+    let currentAd = 0;
+    const ads = ['ad1', 'ad2', 'ad3'];
+
+    function showAd(adId) {
+        const adElement = document.getElementById(adId);
+        adElement.style.display = 'flex';
+        setTimeout(() => {
+            const closeButton = adElement.querySelector('.close-btn');
+            closeButton.style.display = 'block';
+        }, 3000);
+    }
+
+    function closeAd(adId) {
+        const adElement = document.getElementById(adId);
+        adElement.style.display = 'none';
+        currentAd++;
+        if (currentAd < ads.length) {
+            setTimeout(() => showAd(ads[currentAd]), 15000);
+        }
+    }
+
+    window.onload = () => {
+        showAd(ads[currentAd]);
+    };
+</script>
+
+</body>
+</html>
