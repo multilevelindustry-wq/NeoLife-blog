@@ -48,6 +48,17 @@
 // ============================
 // LOGIN PROTECTION
 // ============================
+
+
+  if(!localStorage.getItem("loggedIn")){
+   document.getElementById("checkoutBtn").onclick = function(){
+       alert("Login required to checkout.");
+       window.location.href = "login.html";
+   };
+  }
+
+
+  
 let loggedIn = localStorage.getItem("loggedIn");
 let currentUser = localStorage.getItem("currentUser");
 
