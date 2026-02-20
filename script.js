@@ -76,7 +76,19 @@ const services = [
   {id: 67, title: "Criminal defense lawyers and Bankruptcy lawyers", description: "Visual content marketing", price: 150},
   {id: 68, title: "Professional Newsletter Design", description: "Email newsletter templates", price: 50},
   {id: 69, title: "Language schools and Driving schools", description: "Persuasive marketing content", price: 80},
-  {id: 70, title: "Online fitness coaches and Nutrition coaches", description: "Unique web functionalities", price: 300}
+  {id: 70, title: "Online fitness coaches and Nutrition coaches", description: "Unique web functionalities", price: 300},
+  {id: 71, title: "Property management companies and Real estate investors", description: "Bug-free software", price: 180},
+  {id: 72, title: "Airbnb property managers and Commercial real estate brokers", description: "High-quality product images", price: 100},
+  {id: 73, title: "Shipping companies and Amazon FBA agencies", description: "3D product designs", price: 250},
+  {id: 74, title: "Shopify development agencies and Product sourcing companies", description: "Promotional animation", price: 200},
+  {id: 75, title: "Print-on-demand companies and Wholesale suppliers", description: "Content for video/audio", price: 70},
+  {id: 76, title: "Dropshipping agents and Packaging companies", description: "Professional voice work", price: 60},
+  {id: 77, title: "Logistics companies and Freight forwarding companies", description: "Reach global audience", price: 100},
+  {id: 78, title: "Videography services and Luxury car rental services", description: "Visual content marketing", price: 150},
+  {id: 79, title: "Corporate event planners and Conference organizers", description: "Email newsletter templates", price: 50},
+  {id: 80, title: "DJ services and Photography studios", description: "Persuasive marketing content", price: 80},
+  {id: 81, title: "Wedding planners and Catering companies", description: "Unique web functionalities", price: 300},
+  {id: 82, title: "Party rental companies and Event venues", description: "Unique web functionalities", price: 300}
 ];
 
 
