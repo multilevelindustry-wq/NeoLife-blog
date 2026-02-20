@@ -299,20 +299,6 @@ function closeAllReviews(){
 
 
 
-  document.getElementById("allReviewsSection").style.display = "block";
-  window.scrollTo(0, document.body.scrollHeight);
-}
-
-function closeAllReviews(){
-  document.getElementById("allReviewsSection").style.display = "none";
-}
-
-
-
-
-
-
-
 if(document.getElementById("services")){
   services.forEach(service => {
     displayReviews(service.id);
@@ -332,7 +318,7 @@ function editReview(index, serviceID){
   r.text = newText;
   r.rating = newRating;
 
-  reviews[index] = r;
+  revis[index] = r;
   localStorage.setItem("reviews", JSON.stringify(reviews));
 
   displayReviews(serviceID);
