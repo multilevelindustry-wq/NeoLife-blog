@@ -195,16 +195,16 @@ function renderServices(serviceList){
         <hr>
         <div id="reviews-${service.id}"></div>
 
-        <select id="rating-${service.id}">
-          <option value="5">⭐⭐⭐⭐⭐</option>
-          <option value="4">⭐⭐⭐⭐</option>
-          <option value="3">⭐⭐⭐</option>
-          <option value="2">⭐⭐</option>
-          <option value="1">⭐</option>
-        </select>
+  <select id="rating-${service.id}">
+  <option value="5">⭐⭐⭐⭐⭐</option>
+  <option value="4">⭐⭐⭐⭐</option>
+  <option value="3">⭐⭐⭐</option>
+  <option value="2">⭐⭐</option>
+  <option value="1">⭐</option>
+</select>
 
-        <input type="text" id="reviewText-${service.id}" placeholder="Write review">
-        <button onclick="submitReview(${service.id})">Submit Review</button>
+<input type="text" id="reviewText-${service.id}" placeholder="Write review">
+<button onclick="submitReview(${service.id})">Submit Review</button>
 
       </div>
     `;
