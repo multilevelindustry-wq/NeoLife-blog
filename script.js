@@ -47,51 +47,93 @@ const services = [
   {id: 38, title: "Insurance agencies and Mortgage brokers", description: "Expert legal advice", price: 200, image: ""},
   {id: 39, title: "Water damage restoration, Fire damage restoration and Home remodeling contractors", description: "Human resources strategy", price: 150, image: "" },
   {id: 40, title: "Towing companies and Car dealerships", description: "Tech support for business", price: 100,image: "" },
-  {id: 41, title: "Auto repair shops, Auto body repair ", description: "Protect your business", price: 200, image: "" },
-  {id: 42, title: "Mobile mechanics and Car detailing services", description: "Keep your site running", price: 80, image: "" },
-  {id: 43, title: "Lawn care companies and Pool cleaning services", description: "Protect data securely", price: 100, image: "" },
-  {id: 44, title: "Recruitment agencies Business consultants", description: "Store your files safely", price: 120, image: "" },
-  {id: 45, title: "Marketing agencies and Web design agencies", description: "Staff technical training", price: 150, image: "" },
-  {id: 46, title: "Used car dealers, Car rental companies and Truck repair services", description: "Optimize your website", price: 100, image: "" },
-  {id: 47, title: "Printing companies and IT support companies", description: "Analyze your competitors", price: 120, image: "" },
-  {id: 48, title: "Sports therapy centers and Boxing gyms", description: "Boost search rankings", price: 90, image: "" },
-  {id: 49, title: "CrossFit gyms and Pilates studios", description: "Create engaging emails", price: 60, image: "" },
-  {id: 50, title: "Makeup artists and Skincare clinics", description: "Find potential clients", price: 150, image: "" },
-  {id: 51, title: "Event Management", description: "Organize events effectively", price: 200, image: "" },
-  {id: 52, title: "Tattoo studios and Massage therapy centers", description: "Improve your public image", price: 180, image: "" },
-  {id: 53, title: "Affiliate Marketing Ads", description: "Earn with referrals", price: 120, image: "" },
-  {id: 54, title: "Beauty salons and Nail salons", description: "Publish your podcasts", price: 80, image: "" },
-  {id: 55, title: "Video Marketing", description: "Promote with video", price: 150, image: "" },
-  {id: 56, title: "App Store Optimization", description: "Get more downloads", price: 120, image: "" },
-  {id: 57, title: "Barbershops and Lash technicians", description: "Improve user experience", price: 100, image: "" },
-  {id: 58, title: "Website Customer Support Setup", description: "Support system for clients", price: 150, image: "" },
-  {id: 59, title: "Private schools and Online course creators", description: "Insights from your data", price: 200, image: "" },
-  {id: 60, title: "Gyms and Personal trainers", description: "Bug-free software", price: 180, image: "" },
-  {id: 61, title: "Study abroad agencies and Skill training institutes", description: "High-quality product images", price: 100, image: "" },
-  {id: 62, title: "Coding bootcamps and Tutoring centers", description: "3D product designs", price: 250, image: "" },
-  {id: 63, title: "Animation Video", description: "Promotional animation", price: 200, image: "" },
-  {id: 64, title: "Yoga studios and Martial arts schools", description: "Content for video/audio", price: 70, image: ""},
-  {id: 65, title: "Bridal stylists and Spa centers", description: "Professional voice work", price: 60, image: "" },
-  {id: 66, title: "Translation & Localization", description: "Reach global audience", price: 100, image: "" },
-  {id: 67, title: "Criminal defense lawyers and Bankruptcy lawyers", description: "Visual content marketing", price: 150, image: ""},
-  {id: 68, title: "Professional Newsletter Design", description: "Email newsletter templates", price: 50, image: "" },
-  {id: 69, title: "Language schools and Driving schools", description: "Persuasive marketing content", price: 80, image: "" },
-  {id: 70, title: "Online fitness coaches and Nutrition coaches", description: "Unique web functionalities", price: 300, image: "" },
-  {id: 71, title: "Property management companies and Real estate investors", description: "Bug-free software", price: 180, image: "" },
-  {id: 72, title: "Airbnb property managers and Commercial real estate brokers", description: "High-quality product images", price: 100, image: "" },
-  {id: 73, title: "Shipping companies and Amazon FBA agencies", description: "3D product designs", price: 250, image: "" },
-  {id: 74, title: "Shopify development agencies and Product sourcing companies", description: "Promotional animation", price: 200, image: "" },
-  {id: 75, title: "Print-on-demand companies and Wholesale suppliers", description: "Content for video/audio", price: 70, image: ""},
-  {id: 76, title: "Dropshipping agents and Packaging companies", description: "Professional voice work", price: 60, image: "" },
-  {id: 77, title: "Logistics companies and Freight forwarding companies", description: "Reach global audience", price: 100, image: "" },
-  {id: 78, title: "Videography services and Luxury car rental services", description: "Visual content marketing", price: 150, image: "" },
-  {id: 79, title: "Corporate event planners and Conference organizers", description: "Email newsletter templates", price: 50, image: "" },
-  {id: 80, title: "DJ services and Photography studios", description: "Persuasive marketing content", price: 80, image: "" },
-  {id: 81, title: "Wedding planners and Catering companies", description: "Unique web functionalities", price: 300, image: "" },
-  {id: 82, title: "Party rental companies and Event venues", description: "Unique web functionalities", price: 300, image: "" },
-  {id: 83, title: " Travel agencies and Visa consulting firms", description: "Unique web functionalities", price: 300, image: "" },
-  {id: 84, title: " Shopify development agencies and Product sourcing companies", description: "Unique web functionalities", price: 300, image: ""}
-  
+{id: 41, title: "Auto Repair & Collision Shop High-Intent Lead System", description: "We deliver ready-to-book vehicle owners actively searching for repairs, body work, and emergency services in your area — turning searches into scheduled appointments.", price: 200},
+
+{id: 42, title: "Mobile Mechanic & Car Detailing Client Acquisition System", description: "Connect with car owners who need immediate on-site repair or premium detailing services and are ready to pay.", price: 80},
+
+{id: 43, title: "Lawn Care & Pool Service Recurring Customer Engine", description: "Attract homeowners looking for ongoing lawn maintenance and pool cleaning services to generate predictable monthly income.", price: 100},
+
+{id: 44, title: "Recruitment & Business Consulting Lead Generation System", description: "We bring businesses actively seeking hiring solutions and professional consulting expertise straight to your inbox.", price: 120},
+
+{id: 45, title: "Marketing & Web Design Agency Client Growth System", description: "High-ticket businesses looking for branding, websites, and digital growth strategies delivered consistently.", price: 150},
+
+{id: 46, title: "Auto Dealer, Rental & Truck Repair Buyer Pipeline", description: "Connect with serious vehicle buyers and commercial clients ready to inquire and purchase.", price: 100},
+
+{id: 47, title: "Printing & IT Support Business Lead Booster", description: "Businesses actively searching for printing services and reliable tech support solutions.", price: 120},
+
+{id: 48, title: "Sports Therapy & Performance Gym Client Funnel", description: "Athletes and fitness enthusiasts looking for injury recovery and performance training programs.", price: 90},
+
+{id: 49, title: "CrossFit & Pilates Membership Growth Campaign", description: "Health-focused individuals ready to enroll in premium fitness memberships and transformation programs.", price: 60},
+
+{id: 50, title: "Beauty Clinic & Makeup Artist Appointment Engine", description: "High-value beauty clients actively booking premium skincare, makeup, and cosmetic services.", price: 150},
+
+{id: 51, title: "Event Management Client Acquisition Campaign", description: "Corporate and private clients planning weddings, parties, and conferences searching for reliable organizers.", price: 200},
+
+{id: 52, title: "Tattoo & Wellness Therapy Booking System", description: "Bring in customers ready to schedule tattoo sessions and therapeutic wellness treatments.", price: 180},
+
+{id: 53, title: "Affiliate Marketing Performance Ad System", description: "Scalable campaigns designed to generate consistent commissions and referral-based revenue.", price: 120},
+
+{id: 54, title: "Salon & Nail Studio Appointment Booster", description: "Local beauty clients searching daily for hair, nail, and grooming appointments.", price: 80},
+
+{id: 55, title: "High-Converting Video Marketing Campaigns", description: "Strategic video ads that increase brand awareness, engagement, and direct conversions.", price: 150},
+
+{id: 56, title: "App Store Growth & Visibility Optimization System", description: "Increase downloads, rankings, and app visibility using proven optimization strategies.", price: 120},
+
+{id: 57, title: "Barbershop & Lash Studio Client Growth System", description: "Daily appointment-ready customers searching for grooming and lash services.", price: 100},
+
+{id: 58, title: "Website Customer Support Automation Setup", description: "Professional chat, automation, and support systems that increase retention and customer satisfaction.", price: 150},
+
+{id: 59, title: "Private School & Online Course Enrollment System", description: "Parents and students actively seeking trusted education and skill training programs.", price: 200},
+
+{id: 60, title: "Gym & Personal Trainer Membership Generator", description: "Fitness-ready prospects looking to start personal training and monthly memberships.", price: 180},
+
+{id: 61, title: "Study Abroad & Training Institute Lead Funnel", description: "Students ready to apply for international education and career skill programs.", price: 100},
+
+{id: 62, title: "Coding Bootcamp & Tutoring Enrollment Campaign", description: "Learners searching for practical tech skills and academic improvement programs.", price: 250},
+
+{id: 63, title: "Professional Animated Video Production Service", description: "High-quality animated videos that simplify complex messages and boost conversions.", price: 200},
+
+{id: 64, title: "Yoga & Martial Arts Student Acquisition System", description: "Health-conscious individuals ready to enroll in wellness, yoga, and self-defense classes.", price: 70},
+
+{id: 65, title: "Bridal & Spa Premium Booking Campaign", description: "Brides and luxury clients looking for professional styling and relaxation services.", price: 60},
+
+{id: 66, title: "Global Translation & Localization Client Generator", description: "Businesses expanding internationally and seeking accurate multilingual solutions.", price: 100},
+
+{id: 67, title: "High-Value Legal Lead Generation System", description: "Urgent, serious prospects searching for criminal defense and bankruptcy legal services.", price: 150},
+
+{id: 68, title: "High-Converting Newsletter & Email Design Service", description: "Professionally designed email campaigns that increase open rates and drive sales.", price: 50},
+
+{id: 69, title: "Language & Driving School Enrollment Campaign", description: "Students actively searching for language courses and driving certifications.", price: 80},
+
+{id: 70, title: "Online Fitness & Nutrition Coaching Client Engine", description: "Health-driven clients ready to invest in premium coaching and transformation programs.", price: 300},
+
+{id: 71, title: "Property Management & Investor Lead Pipeline", description: "Property owners and investors actively seeking management and acquisition services.", price: 180},
+
+{id: 72, title: "Airbnb & Commercial Real Estate Client Acquisition Ads", description: "Serious property clients looking to rent, lease, and invest in profitable real estate.", price: 100},
+
+{id: 73, title: "E-commerce Logistics & FBA Client Funnel Ads", description: "Online sellers searching for reliable shipping and fulfillment partners.", price: 250},
+
+{id: 74, title: "Shopify & Product Sourcing Business Growth System Ads", description: "Ambitious store owners ready to scale with expert development and sourcing support.", price: 200},
+
+{id: 75, title: "Print-on-Demand & Wholesale Business Client Engine Ads", description: "Entrepreneurs launching product-based businesses and seeking reliable suppliers.", price: 70},
+
+{id: 76, title: "Dropshipping & Packaging Service Growth Campaign Ads", description: "Fast-scaling e-commerce brands looking for trusted sourcing and packaging partners.", price: 60},
+
+{id: 77, title: "Freight & Logistics Company Lead Generator", description: "Businesses needing dependable shipping and freight forwarding solutions.", price: 100},
+
+{id: 78, title: "Luxury Service & Videography Client Acquisition", description: "Premium clients ready to book high-end experiences and professional media services.", price: 150},
+
+{id: 79, title: "Corporate Event & Conference Booking System", description: "Companies planning large-scale events actively searching for experienced organizers.", price: 50},
+
+{id: 80, title: "DJ & Photography Event Booking Engine", description: "Event clients looking to secure professional entertainment and photography services.", price: 80},
+
+{id: 81, title: "Wedding & Catering Premium Client Campaign", description: "Brides and corporate clients ready to secure full-service planning and catering.", price: 300},
+
+{id: 82, title: "Event Venue & Party Rental Booking Funnel", description: "Customers actively searching for venues and rental equipment for upcoming events.", price: 300},
+
+{id: 83, title: "Travel & Visa Consulting Lead System", description: "Travelers urgently seeking visa processing and international travel support.", price: 300},
+
+{id: 84, title: "Advanced Shopify Growth & Sourcing System", description: "Serious e-commerce entrepreneurs ready to scale aggressively with expert systems.", price: 300}
 ];
 
 
