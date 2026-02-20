@@ -299,19 +299,6 @@ if(document.getElementById("services")){
   displayReviews(serviceID);
 }
 
-const searchBox = document.getElementById("searchBox");
-
-searchBox.addEventListener("input", function(){
-
-  let query = this.value.toLowerCase();
-
-  let filtered = services.filter(s => 
-    s.title.toLowerCase().includes(query) || 
-    s.description.toLowerCase().includes(query)
-  );
-
-  renderServices(filtered);
-});
 
 
 
@@ -378,18 +365,41 @@ const headlines = [
   "Grow Smarter With Data-Driven Advertising."
 ];
 
-let index = 0;
 const textElement = document.getElementById("rotatingText");
 
-function rotateText() {
-  textElement.style.opacity = 0;
+if (textElement) {
 
-  setTimeout(() => {
-    textElement.innerText = headlines[index];
-    textElement.style.opacity = 1;
-    index = (index + 1) % headlines.length;
-  }, 500);
+  let index = 0;
+
+  function rotateText() {
+    textElement.style.opacity = 0;
+
+    setTimeout(() => {
+      textElement.innerText = headlines[index];
+      textElement.style.opacity = 1;
+      index = (index + 1) % headlines.length;
+    }, 500);
+  }
+
+  rotateText();
+  setInterval(rotateText, 6500);
 }
 
-rotateText();
-setInterval(rotateText, 6500);
+
+
+
+const searchBox = document.getElementById("searchBox");
+
+if (searchBox) {
+  searchBox.addEventListener("input", function(){
+
+    let query = this.value.toLowerCase();
+
+    let filtered = services.filter(s => 
+      s.title.toLowerCase().includes(query) || 
+      s.description.toLowerCase().includes(query)
+    );
+
+    renderServices(filtered);
+  });
+}
