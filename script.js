@@ -74,7 +74,7 @@ const services = [
   {id: 65, title: "Bridal stylists and Spa centers", description: "Professional voice work", price: 60, image: "" },
   {id: 66, title: "Translation & Localization", description: "Reach global audience", price: 100, image: "" },
   {id: 67, title: "Criminal defense lawyers and Bankruptcy lawyers", description: "Visual content marketing", price: 150, image: ""},
-  {id: 68, title: "Professional Newsletter Design", description: "Email newsletter templates", price: 50, image: image: "" },
+  {id: 68, title: "Professional Newsletter Design", description: "Email newsletter templates", price: 50, image: "" },
   {id: 69, title: "Language schools and Driving schools", description: "Persuasive marketing content", price: 80, image: "" },
   {id: 70, title: "Online fitness coaches and Nutrition coaches", description: "Unique web functionalities", price: 300, image: "" },
   {id: 71, title: "Property management companies and Real estate investors", description: "Bug-free software", price: 180, image: "" },
