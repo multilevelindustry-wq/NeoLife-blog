@@ -7,17 +7,17 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 1, title: "Shopify / E-commerce Store Setup", description: "We build fully optimized, conversion-focused Shopify stores designed to turn visitors into paying customers. Complete setup, payment integration, mobile optimization and launch-ready.", price: 80, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
+{id: 1, title: "Shopify / E-commerce Store Setup", description: "We build fully optimized, conversion-focused Shopify stores designed to turn visitors into paying customers. Complete setup, payment integration, mobile optimization and launch-ready. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 80, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
 
-{id: 2, title: "Professional Business Website Creation", description: "High-performance business website built to establish authority, generate daily inquiries and increase customer trust instantly.", price: 120, image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d" },
+{id: 2, title: "Professional Business Website Creation", description: "High-performance business website built to establish authority, generate daily inquiries and increase customer trust instantly. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 120, image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d" },
 
-{id: 3, title: "SEO-Optimized Blog Website Setup", description: "Launch a powerful blog platform optimized for traffic, speed and monetization — ready to grow your online presence.", price: 100, image: "https://images.unsplash.com/photo-1718212456991-54ab241fae82" },
+{id: 3, title: "SEO-Optimized Blog Website Setup", description: "Launch a powerful blog platform optimized for traffic, speed and monetization — ready to grow your online presence. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 100, image: "https://images.unsplash.com/photo-1718212456991-54ab241fae82" },
 
-{id: 4, title: "Website Maintenance & Security Management", description: "Monthly updates, security monitoring, performance optimization and technical fixes — so your website runs smoothly 24/7.", price: 80, image: "https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b" },
+{id: 4, title: "Website Maintenance & Security Management", description: "Monthly updates, security monitoring, performance optimization and technical fixes — so your website runs smoothly 24/7. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 80, image: "https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b" },
 
-{id: 5, title: "Local Business Lead-Focused Website Design", description: "Conversion-optimized website built specifically to attract local customers and generate consistent daily leads.", price: 50, image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f" },
+{id: 5, title: "Local Business Lead-Focused Website Design", description: "Conversion-optimized website built specifically to attract local customers and generate consistent daily leads. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 50, image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f" },
 
-{id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book.", price: 200, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
+{id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 200, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
 
 {id: 7, title: "Local Business Branding & Web Presence", description: "Professional design and positioning that makes your local company look trustworthy, premium and ready for customers.", price: 70, image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8" },
 
@@ -190,7 +190,7 @@ function renderServices(serviceList){
         <h3>${service.title}</h3>
         <p>${service.description}</p>
         <h4>$${service.price}</h4>
-        <button onclick="addToCart(${service.id})">Add to Cart</button>
+        <button onclick="addToCart(${service.id})">Start My Lead Campaign</button>
 
         <hr>
         <div id="reviews-${service.id}"></div>
