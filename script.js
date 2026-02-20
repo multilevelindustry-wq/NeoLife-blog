@@ -440,4 +440,4 @@ function rotateText() {
 }
 
 rotateText();
-setInterval(rotateText, 15000);
+setInterval(rotateText, 9000);
