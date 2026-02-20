@@ -88,7 +88,10 @@ const services = [
   {id: 79, title: "Corporate event planners and Conference organizers", description: "Email newsletter templates", price: 50},
   {id: 80, title: "DJ services and Photography studios", description: "Persuasive marketing content", price: 80},
   {id: 81, title: "Wedding planners and Catering companies", description: "Unique web functionalities", price: 300},
-  {id: 82, title: "Party rental companies and Event venues", description: "Unique web functionalities", price: 300}
+  {id: 82, title: "Party rental companies and Event venues", description: "Unique web functionalities", price: 300},
+  {id: 83, title: " Travel agencies and Visa consulting firms", description: "Unique web functionalities", price: 300},
+  {id: 84, title: " Shopify development agencies and Product sourcing companies", description: "Unique web functionalities", price: 300}
+  
 ];
 
 
