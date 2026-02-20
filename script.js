@@ -31,7 +31,7 @@ const services = [
 
 {id: 12, title: "Dentist & Chiropractor Patient Lead System", description: "New patients actively searching for dental and chiropractic care delivered directly to your clinic monthly.", price: 150, image: "https://images.unsplash.com/photo-1662837625427-970713d74aa6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8RGVudGlzdCUyMCUyNiUyMENoaXJvcHJhY3RvciUyMFBhdGllbnQlMjBMZWFkJTIwU3lzdGVtfGVufDB8fDB8fHww" },
 
-{id: 13, title: "Professional WordPress Website Setup", description: "Fully customized WordPress website that is responsive, fast and easy to manage.", price: 120, image: "https://images.unsplash.com/photo-1581276879432-15a19d654956" },
+{id: 13, title: "Professional WordPress Website Setup", description: "Fully customized WordPress website that is responsive, fast and easy to manage.", price: 120, image: "https://images.unsplash.com/photo-1678341859828-bfb1a2bd527a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UHJvZmVzc2lvbmFsJTIwV29yZFByZXNzJTIwV2Vic2l0ZSUyMFNldHVwfGVufDB8fDB8fHww" },
 
 {id: 14, title: "Weight Loss & Mental Health Clinic Leads", description: "Confidential high-intent inquiries from individuals actively searching for professional treatment and consultation.", price: 400, image: "https://images.unsplash.com/photo-1584515933487-779824d29309" },
 
@@ -45,11 +45,11 @@ const services = [
 
 {id: 19, title: "Professional Video Editing Service", description: "High-impact promotional videos designed to increase engagement and drive conversions.", price: 120, image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d" },
 
-{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: "We generate urgent medical inquiries and orthodontic consultations ready to book appointments.", price: 100, image: "https://images.unsplash.com/photo-1580281657527-47a49c2f70f3" },
+{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: "We generate urgent medical inquiries and orthodontic consultations ready to book appointments.", price: 100, image: "https://media.istockphoto.com/id/1293534212/photo/orthodontist-placing-rubber-bands-on-female-patient-braces.webp?a=1&b=1&s=612x612&w=0&k=20&c=9gQVBip8U-7QScwFJmO1_NwH4KgAQV0X_UHM-NFZeTU=" },
 
 {id: 21, title: "Content Writing Service", description: "Engaging, SEO-optimized content that builds authority and converts readers into customers.", price: 80, image: "https://images.unsplash.com/photo-1455390582262-044cdead277a" },
 
-{id: 22, title: "Professional Translation Services", description: "Accurate multi-language translation helping businesses expand globally and connect with new markets.", price: 70, image: "https://images.unsplash.com/photo-1526378722370-3c11bfa65c4f" },
+{id: 22, title: "Professional Translation Services", description: "Accurate multi-language translation helping businesses expand globally and connect with new markets.", price: 70, image: "https://media.istockphoto.com/id/1793552915/photo/translation-services-concept-the-meeting-at-the-white-office-table.webp?a=1&b=1&s=612x612&w=0&k=20&c=R7moEY1Iw8WPwFlxKVPO8YfjnPwRL0BxFRKTuRbaqUY=" },
 
 {id: 23, title: "Immigration & Divorce Lawyer Lead Campaign", description: "Urgent, high-value legal prospects actively searching for representation delivered directly to your firm.", price: 200, image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f" },
 
@@ -131,13 +131,13 @@ const services = [
 
 { id: 62, title: "Webinar Funnel Setup", description: "Complete webinar system designed to educate, nurture, and sell.", price: 199.99, image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28" },
 
-{ id: 63, title: "Online Course Platform Setup", description: "Launch your digital course with a professional learning platform.", price: 229.99, image: "https://images.unsplash.com/photo-1584697964403-9f36c3d6b1f9" },
+{ id: 63, title: "Online Course Platform Setup", description: "Launch your digital course with a professional learning platform.", price: 229.99, image: "https://media.istockphoto.com/id/2227482635/photo/digital-learning-system-with-quiz-and-report-on-tablet.webp?a=1&b=1&s=612x612&w=0&k=20&c=mUytEFnS4eRXz_pJy8VlqUgdZzUknqz8cbAApHvRHKU=" },
 
 { id: 64, title: "Membership Website Setup", description: "Create recurring revenue with a premium membership system.", price: 249.99, image: "https://images.unsplash.com/photo-1556745757-8d76bdb6984b" },
 
 { id: 65, title: "Dropshipping Store Setup", description: "Fully built dropshipping store ready to generate sales.", price: 199.99, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
 
-{ id: 66, title: "Product Research Service", description: "Data-driven product research to find high-demand winning products.", price: 99.99, image: "https://images.unsplash.com/photo-1508385082359-f48d3f9b2c5f" },
+{ id: 66, title: "Product Research Service", description: "Data-driven product research to find high-demand winning products.", price: 99.99, image: "https://images.unsplash.com/photo-1560264280-88b68371db39?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8UHJvZHVjdCUyMFJlc2VhcmNoJTIwU2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" },
 
 { id: 67, title: "Ad Creative Design", description: "Eye-catching ad creatives that boost clicks and conversions.", price: 89.99, image: "https://images.unsplash.com/photo-1545235617-9465d2a55698" },
 
@@ -149,7 +149,7 @@ const services = [
 
 { id: 71, title: "Business Automation Setup", description: "Streamline your processes and save time with smart automation.", price: 199.99, image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c" },
 
-{ id: 72, title: "Chatbot Setup", description: "Automated chatbot system that engages visitors 24/7.", price: 99.99, image: "https://images.unsplash.com/photo-1581090700227-4c4f50a6a1b1" },
+{ id: 72, title: "Chatbot Setup", description: "Automated chatbot system that engages visitors 24/7.", price: 99.99, image: "https://plus.unsplash.com/premium_photo-1682023587356-86065925727a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Q2hhdGJvdCUyMFNldHVwfGVufDB8fDB8fHww" },
 
 { id: 73, title: "Lead Qualification System", description: "Filter and prioritize high-value prospects automatically.", price: 149.99, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" },
 
