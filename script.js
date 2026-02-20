@@ -411,3 +411,33 @@ function openReviewModal(serviceID){
 function closeReviewModal(){
   document.getElementById("reviewModal").style.display = "none";
    }
+
+
+const headlines = [
+  "We Deliver High-Quality Leads That Turn Into Paying Customers.",
+  "Predictable Sales. Consistent Growth. Real Results.",
+  "Stop Chasing Clients — Start Attracting Them.",
+  "Turn Traffic Into Revenue Every Single Month.",
+  "Your Business Deserves More Qualified Buyers.",
+  "Scale Faster With Our Proven Lead System.",
+  "More Bookings. More Calls. More Sales.",
+  "We Build Systems That Bring Customers Daily.",
+  "Ready-To-Buy Prospects Sent Directly To You.",
+  "Grow Smarter With Data-Driven Advertising."
+];
+
+let index = 0;
+const textElement = document.getElementById("rotatingText");
+
+function rotateText() {
+  textElement.style.opacity = 0;
+
+  setTimeout(() => {
+    textElement.innerText = headlines[index];
+    textElement.style.opacity = 1;
+    index = (index + 1) % headlines.length;
+  }, 500);
+}
+
+rotateText();
+setInterval(rotateText, 2000);
