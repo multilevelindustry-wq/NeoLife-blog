@@ -121,32 +121,9 @@ function renderServices(serviceList){
     displayReviews(service.id);
   });
 }
+
 if(document.getElementById("services")){
-  const container = document.getElementById("services");
-  services.forEach(service => {
-    container.innerHTML += `
-  <div class="card">
-    <h3>${service.title}</h3>
-    <p>${service.description}</p>
-    <h4>$${service.price}</h4>
-    <button onclick="addToCart(${service.id})">Add to Cart</button>
-
-    <hr>
-    <div id="reviews-${service.id}"></div>
-
-    <select id="rating-${service.id}">
-      <option value="5">⭐⭐⭐⭐⭐</option>
-      <option value="4">⭐⭐⭐⭐</option>
-      <option value="3">⭐⭐⭐</option>
-      <option value="2">⭐⭐</option>
-      <option value="1">⭐</option>
-    </select>
-
-    <input type="text" id="reviewText-${service.id}" placeholder="Write review">
-    <button onclick="submitReview(${service.id})">Submit Review</button>
-  </div>
-`;
-  });
+  renderServices(services);
 }
 
 
