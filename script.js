@@ -227,35 +227,7 @@ function displayReviews(serviceID){
 
 
 
-function goToAllReviews(serviceID){
 
-  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-  let serviceReviews = reviews.filter(r => String(r.serviceID) == String(serviceID));
-
-  let container = document.getElementById("allReviewsContent");
-  container.innerHTML = "";
-
-  if(serviceReviews.length === 0){
-    container.innerHTML = "<p>No reviews yet for this product.</p>";
-  } else {
-
-    serviceReviews.forEach(r => {
-
-      let stars = "⭐".repeat(parseInt(r.rating) || 0);
-
-      container.innerHTML += `
-        <div style="border-bottom:1px solid #ddd; padding:10px 0;">
-          <strong>${r.userName || "Anonymous"}</strong>
-          (${r.userEmail || "No Email"})<br>
-          ${stars}<br>
-          ${r.text || ""}
-        </div>
-      `;
-    });
-
-  }
-  
 
 
 function goToAllReviews(serviceID){
@@ -265,13 +237,19 @@ let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
   let serviceReviews = reviews.filter(r => String(r.serviceID) == String(serviceID));
 
   let container = document.getElementById("allReviewsContent");
+  contfunction goToAllReviews(serviceID){
+
+  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  let serviceReviews = reviews.filter(r => String(r.serviceID) == String(serviceID));
+  let container = document.getElementById("allReviewsContent");
+
   container.innerHTML = "";
 
   if(serviceReviews.length === 0){
     container.innerHTML = "<p>No reviews yet for this product.</p>";
   } else {
 
-    serviceReviews.forEach(r => {
+    serviceReviews.forEach((r) => {
 
       let stars = "⭐".repeat(parseInt(r.rating) || 0);
 
@@ -287,12 +265,11 @@ let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
 
   }
 
-
-
   document.getElementById("allReviewsSection").style.display = "block";
   window.scrollTo(0, document.body.scrollHeight);
-}
-
+    }
+  
+  
 function closeAllReviews(){
   document.getElementById("allReviewsSection").style.display = "none";
 }
