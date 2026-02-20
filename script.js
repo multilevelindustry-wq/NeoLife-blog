@@ -65,7 +65,7 @@ const services = [
 
 {id: 29, title: "E-Book Design & Publishing Setup", description: "Professionally structured and designed eBooks ready for publishing and monetization.", price: 80, image: "https://images.unsplash.com/photo-1512820790803-83ca734da794" },
 
-{id: 30, title: "Online Course Content Development", description: "Structured, high-value educational content designed to attract students and maximize enrollments.", price: 150, image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8" }
+{id: 30, title: "Online Course Content Development", description: "Structured, high-value educational content designed to attract students and maximize enrollments.", price: 150, image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8" },
 
 { id: 31, title: "Sales Funnel Design", description: "We craft strategic funnels that guide visitors step-by-step into becoming paying customers.", price: 129.99, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" },
 
