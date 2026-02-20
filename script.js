@@ -225,19 +225,7 @@ function displayReviews(serviceID){
 }
 
 
-
-
-
-
-
 function goToAllReviews(serviceID){
-
-let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-  let serviceReviews = reviews.filter(r => String(r.serviceID) == String(serviceID));
-
-  let container = document.getElementById("allReviewsContent");
-  contfunction goToAllReviews(serviceID){
 
   let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
   let serviceReviews = reviews.filter(r => String(r.serviceID) == String(serviceID));
@@ -264,25 +252,22 @@ let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
     });
 
   }
-
   document.getElementById("allReviewsSection").style.display = "block";
   window.scrollTo(0, document.body.scrollHeight);
     }
-  
-  
+
+
 function closeAllReviews(){
   document.getElementById("allReviewsSection").style.display = "none";
 }
-
-
-
 if(document.getElementById("services")){
   services.forEach(service => {
     displayReviews(service.id);
   });
 }
 
-function editReview(index, serviceID){
+
+  function editReview(index, serviceID){
   let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
   let r = reviews[index];
 
@@ -290,16 +275,20 @@ function editReview(index, serviceID){
   if(newText === null) return;
 
   let newRating = prompt("Edit rating (1-5):", r.rating);
-  if(newRating === null || newRating <1 || newRating>5) return;
+  if(newRating === null || newRating < 1 || newRating > 5) return;
 
   r.text = newText;
   r.rating = newRating;
 
-  revis[index] = r;
-  localStorage.setItem("reviews", JSON.stringify(reviews));
+  reviews[index] = r;  // ✅ FIXED
 
+  localStorage.setItem("reviews", JSON.stringify(reviews));
   displayReviews(serviceID);
-   }
+  }
+
+
+  
+
    function deleteReview(index, serviceID){
   if(!confirm("Delete this review?")) return;
 
