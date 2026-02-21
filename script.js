@@ -7,61 +7,61 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 1, title: "Shopify / E-commerce Store Setup", description: "We build fully optimized, conversion-focused Shopify stores designed to turn visitors into paying customers. Complete setup, payment integration, mobile optimization and launch-ready. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 80, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
+{id: 1, title: "Shopify / E-commerce Store Setup", description: "We build fully optimized, conversion-focused Shopify stores designed to turn visitors into paying customers. Complete setup, payment integration, mobile optimization and launch-ready, Starting 99.99 .", price: 99.99, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
 
-{id: 2, title: "Professional Business Website Creation", description: "High-performance business website built to establish authority, generate daily inquiries and increase customer trust instantly. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 120, image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d" },
+{id: 2, title: "Professional Business Website Creation", description: "High-performance business website built to establish authority, generate daily inquiries and increase customer trust instantly.", price: 49.990, image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d" },
 
-{id: 3, title: "SEO-Optimized Blog Website Setup", description: "Launch a powerful blog platform optimized for traffic, speed and monetization — ready to grow your online presence. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 100, image: "https://images.unsplash.com/photo-1718212456991-54ab241fae82" },
+{id: 3, title: "SEO-Optimized Blog Website Setup", description: "Launch a powerful blog platform optimized for traffic, speed and monetization — ready to grow your online presence. ", price: 59.49, image: "https://images.unsplash.com/photo-1718212456991-54ab241fae82" },
 
-{id: 4, title: "Website Maintenance & Security Management", description: "Monthly updates, security monitoring, performance optimization and technical fixes — so your website runs smoothly 24/7. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 80, image: "https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b" },
+{id: 4, title: "Website Maintenance & Security Management", description: "Monthly updates, security monitoring, performance optimization and technical fixes — so your website runs smoothly 24/7.", price: 47.99, image: "https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b" },
 
-{id: 5, title: "Local Business Lead-Focused Website Design", description: "Conversion-optimized website built specifically to attract local customers and generate consistent daily leads. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 50, image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f" },
+{id: 5, title: "Local Business Lead-Focused Website Design", description: "Conversion-optimized website built specifically to attract local customers and generate consistent daily leads.", price: 39.68, image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f" },
 
-{id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book. <br>✔ Exclusive Leads <br> ✔ High Buying Intent <br> ✔ Geo-Targeted Campaigns <br> ✔ Monthly Predictable Results", price: 200, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
+{id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book.", price: 189.85, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
 
-{id: 7, title: "Local Business Branding & Web Presence", description: "Professional design and positioning that makes your local company look trustworthy, premium and ready for customers.", price: 70, image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8" },
+{id: 7, title: "Local Business Branding & Web Presence", description: "Professional design and positioning that makes your local company look trustworthy, premium and ready for customers.", price: 50.89, image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8" },
 
-{id: 8, title: "HVAC & Solar Installation Lead Generation", description: "Connect with property owners requesting HVAC repair or solar installations. High-intent prospects delivered monthly.", price: 40, image: "https://plus.unsplash.com/premium_photo-1671808063467-865289c2959c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SFZBQyUyMCUyNiUyMFNvbGFyJTIwSW5zdGFsbGF0aW9uJTIwTGVhZCUyMEdlbmVyYXRpb258ZW58MHx8MHx8fDA%3D" },
+{id: 8, title: "HVAC & Solar Installation Lead Generation", description: "Connect with property owners requesting HVAC repair or solar installations. High-intent prospects delivered monthly.", price: 40.78, image: "https://plus.unsplash.com/premium_photo-1671808063467-865289c2959c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SFZBQyUyMCUyNiUyMFNvbGFyJTIwSW5zdGFsbGF0aW9uJTIwTGVhZCUyMEdlbmVyYXRpb258ZW58MHx8MHx8fDA%3D" },
 
-{id: 9, title: "Social Media Sales & Conversion Ads", description: "Strategic ad campaigns built to generate real inquiries, booked calls and sales — not just likes and impressions.", price: 150, image: "https://images.unsplash.com/photo-1557838923-2985c318be48" },
+{id: 9, title: "Social Media Sales & Conversion Ads", description: "Strategic ad campaigns built to generate real inquiries, booked calls and sales — not just likes and impressions.", price: 87.65, image: "https://images.unsplash.com/photo-1557838923-2985c318be48" },
 
-{id: 10, title: "Home Services Lead Campaign (Cleaning, Garage, Windows)", description: "Homeowners requesting quotes for cleaning, repairs and installations delivered as qualified local leads.", price: 100, image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952" },
+{id: 10, title: "Home Services Lead Campaign (Cleaning, Garage, Windows)", description: "Homeowners requesting quotes for cleaning, repairs and installations delivered as qualified local leads.", price: 90.64, image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952" },
 
-{id: 11, title: "TikTok & Facebook Ads Management", description: "We create and manage high-converting ad campaigns that generate consistent leads and measurable ROI.", price: 500, image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113" },
+{id: 11, title: "TikTok & Facebook Ads Management", description: "We create and manage high-converting ad campaigns that generate consistent leads and measurable ROI.", price: 249.76, image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113" },
 
 {id: 12, title: "Dentist & Chiropractor Patient Lead System", description: "New patients actively searching for dental and chiropractic care delivered directly to your clinic monthly.", price: 150, image: "https://images.unsplash.com/photo-1662837625427-970713d74aa6?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NHx8RGVudGlzdCUyMCUyNiUyMENoaXJvcHJhY3RvciUyMFBhdGllbnQlMjBMZWFkJTIwU3lzdGVtfGVufDB8fDB8fHww" },
 
 {id: 13, title: "Professional WordPress Website Setup", description: "Fully customized WordPress website that is responsive, fast and easy to manage.", price: 120, image: "https://images.unsplash.com/photo-1678341859828-bfb1a2bd527a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8UHJvZmVzc2lvbmFsJTIwV29yZFByZXNzJTIwV2Vic2l0ZSUyMFNldHVwfGVufDB8fDB8fHww" },
 
-{id: 14, title: "Weight Loss & Mental Health Clinic Leads", description: "Confidential high-intent inquiries from individuals actively searching for professional treatment and consultation.", price: 400, image: "https://images.unsplash.com/photo-1584515933487-779824d29309" },
+{id: 14, title: "Weight Loss & Mental Health Clinic Leads", description: "Confidential high-intent inquiries from individuals actively searching for professional treatment and consultation.", price: 222.92, image: "https://images.unsplash.com/photo-1584515933487-779824d29309" },
 
-{id: 15, title: "Advanced SEO Domination Service", description: "Rank higher on Google and attract ready-to-buy customers consistently with strategic SEO optimization.", price: 250, image: "https://images.unsplash.com/photo-1556155092-8707de31f9c4" },
+{id: 15, title: "Advanced SEO Domination Service", description: "Rank higher on Google and attract ready-to-buy customers consistently with strategic SEO optimization.", price: 186.65, image: "https://images.unsplash.com/photo-1556155092-8707de31f9c4" },
 
-{id: 16, title: "High-Converting Landing Page Design", description: "Strategic landing page engineered to convert paid traffic into leads and sales at maximum efficiency.", price: 200, image: "https://images.unsplash.com/photo-1559028012-481c04fa702d" },
+{id: 16, title: "High-Converting Landing Page Design", description: "Strategic landing page engineered to convert paid traffic into leads and sales at maximum efficiency.", price: 137.80, image: "https://images.unsplash.com/photo-1559028012-481c04fa702d" },
 
-{id: 17, title: "Painting & Fence Installation Lead Campaign", description: "Homeowners requesting painting and fence services delivered as exclusive, ready-to-book leads.", price: 180, image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6" },
+{id: 17, title: "Painting & Fence Installation Lead Campaign", description: "Homeowners requesting painting and fence services delivered as exclusive, ready-to-book leads.", price: 132.49, image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6" },
 
-{id: 18, title: "Eye Clinic & Hearing Center Patient Leads", description: "Qualified patients searching for eye care and hearing services delivered consistently every month.", price: 150, image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5" },
+{id: 18, title: "Eye Clinic & Hearing Center Patient Leads", description: "Qualified patients searching for eye care and hearing services delivered consistently every month.", price: 90.99, image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5" },
 
-{id: 19, title: "Professional Video Editing Service", description: "High-impact promotional videos designed to increase engagement and drive conversions.", price: 120, image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d" },
+{id: 19, title: "Professional Video Editing Service", description: "High-impact promotional videos designed to increase engagement and drive conversions.", price: 120.97, image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d" },
 
-{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: "We generate urgent medical inquiries and orthodontic consultations ready to book appointments.", price: 100, image: "https://media.istockphoto.com/id/1293534212/photo/orthodontist-placing-rubber-bands-on-female-patient-braces.webp?a=1&b=1&s=612x612&w=0&k=20&c=9gQVBip8U-7QScwFJmO1_NwH4KgAQV0X_UHM-NFZeTU=" },
+{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: "We generate urgent medical inquiries and orthodontic consultations ready to book appointments.", price: 80.85, image: "https://media.istockphoto.com/id/1293534212/photo/orthodontist-placing-rubber-bands-on-female-patient-braces.webp?a=1&b=1&s=612x612&w=0&k=20&c=9gQVBip8U-7QScwFJmO1_NwH4KgAQV0X_UHM-NFZeTU=" },
 
-{id: 21, title: "Content Writing Service", description: "Engaging, SEO-optimized content that builds authority and converts readers into customers.", price: 80, image: "https://images.unsplash.com/photo-1455390582262-044cdead277a" },
+{id: 21, title: "Content Writing Service", description: "Engaging, SEO-optimized content that builds authority and converts readers into customers.", price: 68.79, image: "https://images.unsplash.com/photo-1455390582262-044cdead277a" },
 
-{id: 22, title: "Professional Translation Services", description: "Accurate multi-language translation helping businesses expand globally and connect with new markets.", price: 70, image: "https://media.istockphoto.com/id/1793552915/photo/translation-services-concept-the-meeting-at-the-white-office-table.webp?a=1&b=1&s=612x612&w=0&k=20&c=R7moEY1Iw8WPwFlxKVPO8YfjnPwRL0BxFRKTuRbaqUY=" },
+{id: 22, title: "Professional Translation Services", description: "Accurate multi-language translation helping businesses expand globally and connect with new markets.", price: 72.89, image: "https://media.istockphoto.com/id/1793552915/photo/translation-services-concept-the-meeting-at-the-white-office-table.webp?a=1&b=1&s=612x612&w=0&k=20&c=R7moEY1Iw8WPwFlxKVPO8YfjnPwRL0BxFRKTuRbaqUY=" },
 
-{id: 23, title: "Immigration & Divorce Lawyer Lead Campaign", description: "Urgent, high-value legal prospects actively searching for representation delivered directly to your firm.", price: 200, image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f" },
+{id: 23, title: "Immigration & Divorce Lawyer Lead Campaign", description: "Urgent, high-value legal prospects actively searching for representation delivered directly to your firm.", price: 170.53, image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f" },
 
-{id: 24, title: "Gutter & Moving Company Lead Generation", description: "Property owners actively requesting installation and moving services delivered monthly.", price: 90, image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa" },
+{id: 24, title: "Gutter & Moving Company Lead Generation", description: "Property owners actively requesting installation and moving services delivered monthly.", price: 80.89, image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa" },
 
-{id: 25, title: "Online Tutors & Music Teachers Lead System", description: "Students and parents searching for trusted tutors and music instructors delivered as direct inquiries.", price: 60, image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b" },
+{id: 25, title: "Online Tutors & Music Teachers Lead System", description: "Students and parents searching for trusted tutors and music instructors delivered as direct inquiries.", price: 60.67, image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b" },
 
-{id: 26, title: "Real Estate & Home Inspection Lead Pipeline", description: "Motivated buyers, sellers and homeowners actively requesting inspections and consultations.", price: 50, image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994" },
+{id: 26, title: "Real Estate & Home Inspection Lead Pipeline", description: "Motivated buyers, sellers and homeowners actively requesting inspections and consultations.", price: 64.99, image: "https://images.unsplash.com/photo-1568605114967-8130f3a36994" },
 
 {id: 27, title: "Professional Resume / CV Design", description: "Modern, attention-grabbing resumes designed to help professionals stand out and get hired.", price: 40, image: "https://images.unsplash.com/photo-1586281380349-632531db7ed4" },
 
-{id: 28, title: "Corporate Presentation Design", description: "High-impact, persuasive slide decks that impress investors, clients and stakeholders.", price: 70, image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7" },
+{id: 28, title: "Corporate Presentation Design", description: "High-impact, persuasive slide decks that impress investors, clients and stakeholders.", price: 70.79, image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7" },
 
 {id: 29, title: "E-Book Design & Publishing Setup", description: "Professionally structured and designed eBooks ready for publishing and monetization.", price: 80, image: "https://images.unsplash.com/photo-1512820790803-83ca734da794" },
 
@@ -121,19 +121,19 @@ const services = [
 
 { id: 57, title: "Social Media Management", description: "Engaging content and growth strategies to convert followers into clients.", price: 199.99, image: "https://images.unsplash.com/photo-1611926653458-09294b3142bf" },
 
-{ id: 58, title: "Influencer Marketing Setup", description: "Connect your brand with influencers that drive real sales impact.", price: 179.99, image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf" },
+{ id: 58, title: "Influencer Marketing Setup", description: "Connect your brand with influencers that drive real sales impact.", price: 139.69, image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf" },
 
-{ id: 59, title: "YouTube Channel Setup", description: "Professional YouTube branding optimized for growth and monetization.", price: 129.99, image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0" },
+{ id: 59, title: "YouTube Channel Setup", description: "Professional YouTube branding optimized for growth and monetization.", price: 100.23, image: "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0" },
 
-{ id: 60, title: "Video Sales Letter Creation", description: "Compelling video scripts that persuade viewers to buy instantly.", price: 149.99, image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7" },
+{ id: 60, title: "Video Sales Letter Creation", description: "Compelling video scripts that persuade viewers to buy instantly.", price: 129.75, image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7" },
 
 { id: 61, title: "Lead Magnet Design", description: "High-converting free offers that attract and capture quality leads.", price: 79.99, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" },
 
-{ id: 62, title: "Webinar Funnel Setup", description: "Complete webinar system designed to educate, nurture, and sell.", price: 199.99, image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28" },
+{ id: 62, title: "Webinar Funnel Setup", description: "Complete webinar system designed to educate, nurture, and sell.", price: 99.76, image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28" },
 
-{ id: 63, title: "Online Course Platform Setup", description: "Launch your digital course with a professional learning platform.", price: 229.99, image: "https://media.istockphoto.com/id/2227482635/photo/digital-learning-system-with-quiz-and-report-on-tablet.webp?a=1&b=1&s=612x612&w=0&k=20&c=mUytEFnS4eRXz_pJy8VlqUgdZzUknqz8cbAApHvRHKU=" },
+{ id: 63, title: "Online Course Platform Setup", description: "Launch your digital course with a professional learning platform.", price: 229.79, image: "https://media.istockphoto.com/id/2227482635/photo/digital-learning-system-with-quiz-and-report-on-tablet.webp?a=1&b=1&s=612x612&w=0&k=20&c=mUytEFnS4eRXz_pJy8VlqUgdZzUknqz8cbAApHvRHKU=" },
 
-{ id: 64, title: "Membership Website Setup", description: "Create recurring revenue with a premium membership system.", price: 249.99, image: "https://images.unsplash.com/photo-1556745757-8d76bdb6984b" },
+{ id: 64, title: "Membership Website Setup", description: "Create recurring revenue with a premium membership system.", price: 189.99, image: "https://images.unsplash.com/photo-1556745757-8d76bdb6984b" },
 
 { id: 65, title: "Dropshipping Store Setup", description: "Fully built dropshipping store ready to generate sales.", price: 199.99, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
 
