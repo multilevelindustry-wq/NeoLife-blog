@@ -8,25 +8,25 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 1, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 5x per Week More For 2Gb reward.", price: 1.27, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
+{id: 1, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 50x per Week N13,000 Cash Gift", price: 1.29, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
 
-{id: 2, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 5x per Month Get Free 5Gb 7 Days Plan", price: 2.37, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
+{id: 2, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 65x per Month Get N25,000 Cash price", price: 2.40, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
 
-{id: 3, title: "3Gb For 2Days Airtel Data Plan", description: "Quick 2Days Data Offer, Order 11x Per week Get 6Gb Reward", price: 0.75, image: " https://media.istockphoto.com/id/1208250906/photo/3gb-3d.jpg?s=612x612&w=0&k=20&c=s-Z_wo7Q2BBfxwXNrju-QpG_73dTr9k3_ErQt53Itt0=" },
+{id: 3, title: "3Gb For 2Days Airtel Data Plan", description: "Quick 2Days Data Offer, Order 70x Per month Get N17,000 Cash Reward", price: 0.87, image: " https://media.istockphoto.com/id/1208250906/photo/3gb-3d.jpg?s=612x612&w=0&k=20&c=s-Z_wo7Q2BBfxwXNrju-QpG_73dTr9k3_ErQt53Itt0=" },
 
-{id: 4, title: "2Gb For 30Days Airtel Data Plan", description: "Buy 2Gb Data Plan Today For 30Days, Get 10Gb For Every 20x Orders Placed in a Month", price: 1.21, image: "https://media.istockphoto.com/id/1208250910/photo/2gb-3d.jpg?s=612x612&w=0&k=20&c=hY6m2hmx5YGABRjg99Rd71qdR1Q_LZ7Z-lZWIyY8d3E=" },
+{id: 4, title: "2Gb For 30Days Airtel Data Plan", description: "Buy 2Gb Data Plan Today For 30Days, Purchase 100x Per month to Win N20,000 Cash Price", price: 1.21, image: "https://media.istockphoto.com/id/1208250910/photo/2gb-3d.jpg?s=612x612&w=0&k=20&c=hY6m2hmx5YGABRjg99Rd71qdR1Q_LZ7Z-lZWIyY8d3E=" },
 
-{id: 5, title: "600Mb For 2Days Airtel Data Plan", description: "Fast And Reliable Data Plan Order 100x Per month Get N5000 Cash Price", price: 0.21, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
+{id: 5, title: "600Mb For 2Days Airtel Data Plan", description: "Fast And Reliable Data Plan Order 100x Per month Get N7000 Cash Price", price: 0.21, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
 
 {id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book.", price: 189.85, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
 
-{id: 7, title: "Local Business Branding & Web Presence", description: "Professional design and positioning that makes your local company look trustworthy, premium and ready for customers.", price: 50.89, image: "https://media.istockphoto.com/id/1177549483/photo/32gb-is-a-storage-capacity-of-sd-cards-usb-stick-and-digital-media-white-background-isolated.jpg?s=612x612&w=0&k=20&c=Kghf00wiH0JbxfD-ud1XkQWheA-ggscD8uhrGyvEdXk=" },
+{id: 7, title: ". ", description: "Professional design and positioning that makes your local company look trustworthy, premium and ready for customers.", price: 50.89, image: "https://media.istockphoto.com/id/1177549483/photo/32gb-is-a-storage-capacity-of-sd-cards-usb-stick-and-digital-media-white-background-isolated.jpg?s=612x612&w=0&k=20&c=Kghf00wiH0JbxfD-ud1XkQWheA-ggscD8uhrGyvEdXk=" },
 
 {id: 8, title: "HVAC & Solar Installation Lead Generation", description: "Connect with property owners requesting HVAC repair or solar installations. High-intent prospects delivered monthly.", price: 40.78, image: "https://plus.unsplash.com/premium_photo-1671808063467-865289c2959c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SFZBQyUyMCUyNiUyMFNvbGFyJTIwSW5zdGFsbGF0aW9uJTIwTGVhZCUyMEdlbmVyYXRpb258ZW58MHx8MHx8fDA%3D" },
 
 {id: 9, title: "Social Media Sales & Conversion Ads", description: "Strategic ad campaigns built to generate real inquiries, booked calls and sales — not just likes and impressions.", price: 87.65, image: "https://images.unsplash.com/photo-1557838923-2985c318be48" },
 
-{id: 10, title: "Home Services Lead Campaign (Cleaning, Garage, Windows)", description: "Homeowners requesting quotes for cleaning, repairs and installations delivered as qualified local leads.", price: 90.64, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
+{id: 10, title: "1.5Gb For 7Days Social Plan Airtel Data Plan", description: "Get Exciting 7Days Social Data Plan, Buy 100x of 1.5Gb per month, Win N10,000 Cash Price", price: 90.64, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
 
 {id: 11, title: "TikTok & Facebook Ads Management", description: "We create and manage high-converting ad campaigns that generate consistent leads and measurable ROI.", price: 249.76, image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113" },
 
