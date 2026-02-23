@@ -168,10 +168,7 @@ function processPV(userID, orderAmount){
 
 
 
-  // ===============================
-// PAYSTACK PAYMENT
-// ===============================
-function payWithPaystack(){
+  function payWithPaystack(){
 
   let currentUser = JSON.parse(localStorage.getItem("currentUser"));
   if(!currentUser){
@@ -180,17 +177,18 @@ function payWithPaystack(){
     return;
   }
 
+  // Convert USD to NGN (change rate if needed)
+  let exchangeRate = 1500; 
+  let totalNGN = total * exchangeRate;
+
   let handler = PaystackPop.setup({
-    key: 'pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b', // PUBLIC KEY ONLY
+    key: 'pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b',
     email: currentUser.email,
-    amount: total * 100, // Paystack uses kobo (multiply by 100)
-    currency: "USD", // Change to NGN if needed
+    amount: Math.round(totalNGN * 100),
+    currency: "NGN",
+    ref: 'PS-' + Date.now(),
 
     callback: function(response){
-
-      // ===============================
-      // SAVE ORDER (SAME AS PAYPAL)
-      // ===============================
 
       let allOrders = JSON.parse(localStorage.getItem("orders")) || [];
 
@@ -204,12 +202,35 @@ function payWithPaystack(){
         userEmail: currentUser.email,
         items: cart,
         total: total,
+        totalNGN: totalNGN,
         date: new Date().toLocaleString(),
         submitted: false
       };
 
       allOrders.push(order);
       localStorage.setItem("orders", JSON.stringify(allOrders));
+
+      let userOrders = JSON.parse(localStorage.getItem("userOrders_" + currentUser.email)) || [];
+      userOrders.push(order);
+      localStorage.setItem("userOrders_" + currentUser.email, JSON.stringify(userOrders));
+
+      processPV(currentUser.id, total);
+
+      localStorage.removeItem("cart");
+
+      alert("Payment Successful!");
+
+      window.location.href = "dashboard.html";
+    },
+
+    onClose: function(){
+      alert("Transaction was not completed.");
+    }
+
+  });
+
+  handler.openIframe();
+  }
 
       // Save personal order history
       let userOrders = JSON.parse(localStorage.getItem("userOrders_" + currentUser.email)) || [];
@@ -233,7 +254,8 @@ function payWithPaystack(){
   });
 
   handler.openIframe();
-        }
+                               }
+
   
 </script>
 
