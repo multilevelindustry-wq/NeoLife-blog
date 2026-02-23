@@ -12,21 +12,21 @@ const services = [
 
 {id: 2, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 5x per Month Get 5Gb 7 Days Plan For Free.", price: 2.37, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
 
-{id: 3, title: "SEO-Optimized Blog Website Setup", description: "Launch a powerful blog platform optimized for traffic, speed and monetization — ready to grow your online presence. ", price: 59.49, image: "https://images.unsplash.com/photo-1718212456991-54ab241fae82" },
+{id: 3, title: "SEO-Optimized Blog Website Setup", description: "Launch a powerful blog platform optimized for traffic, speed and monetization — ready to grow your online presence. ", price: 59.49, image: " https://media.istockphoto.com/id/1208250906/photo/3gb-3d.jpg?s=612x612&w=0&k=20&c=s-Z_wo7Q2BBfxwXNrju-QpG_73dTr9k3_ErQt53Itt0=" },
 
-{id: 4, title: "Website Maintenance & Security Management", description: "Monthly updates, security monitoring, performance optimization and technical fixes — so your website runs smoothly 24/7.", price: 47.99, image: "https://images.unsplash.com/photo-1581092583537-20d51b4b4f1b" },
+{id: 4, title: "Website Maintenance & Security Management", description: "Monthly updates, security monitoring, performance optimization and technical fixes — so your website runs smoothly 24/7.", price: 47.99, image: "https://media.istockphoto.com/id/1208250910/photo/2gb-3d.jpg?s=612x612&w=0&k=20&c=hY6m2hmx5YGABRjg99Rd71qdR1Q_LZ7Z-lZWIyY8d3E=" },
 
-{id: 5, title: "Local Business Lead-Focused Website Design", description: "Conversion-optimized website built specifically to attract local customers and generate consistent daily leads.", price: 39.68, image: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f" },
+{id: 5, title: "Local Business Lead-Focused Website Design", description: "Conversion-optimized website built specifically to attract local customers and generate consistent daily leads.", price: 39.68, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
 
 {id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book.", price: 189.85, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
 
-{id: 7, title: "Local Business Branding & Web Presence", description: "Professional design and positioning that makes your local company look trustworthy, premium and ready for customers.", price: 50.89, image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8" },
+{id: 7, title: "Local Business Branding & Web Presence", description: "Professional design and positioning that makes your local company look trustworthy, premium and ready for customers.", price: 50.89, image: "https://media.istockphoto.com/id/1177549483/photo/32gb-is-a-storage-capacity-of-sd-cards-usb-stick-and-digital-media-white-background-isolated.jpg?s=612x612&w=0&k=20&c=Kghf00wiH0JbxfD-ud1XkQWheA-ggscD8uhrGyvEdXk=" },
 
 {id: 8, title: "HVAC & Solar Installation Lead Generation", description: "Connect with property owners requesting HVAC repair or solar installations. High-intent prospects delivered monthly.", price: 40.78, image: "https://plus.unsplash.com/premium_photo-1671808063467-865289c2959c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SFZBQyUyMCUyNiUyMFNvbGFyJTIwSW5zdGFsbGF0aW9uJTIwTGVhZCUyMEdlbmVyYXRpb258ZW58MHx8MHx8fDA%3D" },
 
 {id: 9, title: "Social Media Sales & Conversion Ads", description: "Strategic ad campaigns built to generate real inquiries, booked calls and sales — not just likes and impressions.", price: 87.65, image: "https://images.unsplash.com/photo-1557838923-2985c318be48" },
 
-{id: 10, title: "Home Services Lead Campaign (Cleaning, Garage, Windows)", description: "Homeowners requesting quotes for cleaning, repairs and installations delivered as qualified local leads.", price: 90.64, image: "https://images.unsplash.com/photo-1581578731548-c64695cc6952" },
+{id: 10, title: "Home Services Lead Campaign (Cleaning, Garage, Windows)", description: "Homeowners requesting quotes for cleaning, repairs and installations delivered as qualified local leads.", price: 90.64, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
 
 {id: 11, title: "TikTok & Facebook Ads Management", description: "We create and manage high-converting ad campaigns that generate consistent leads and measurable ROI.", price: 249.76, image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113" },
 
@@ -40,7 +40,7 @@ const services = [
 
 {id: 16, title: "High-Converting Landing Page Design", description: "Strategic landing page engineered to convert paid traffic into leads and sales at maximum efficiency.", price: 137.80, image: "https://images.unsplash.com/photo-1559028012-481c04fa702d" },
 
-{id: 17, title: "Painting & Fence Installation Lead Campaign", description: "Homeowners requesting painting and fence services delivered as exclusive, ready-to-book leads.", price: 132.49, image: "https://images.unsplash.com/photo-1596394516093-501ba68a0ba6" },
+{id: 17, title: "Painting & Fence Installation Lead Campaign", description: "Homeowners requesting painting and fence services delivered as exclusive, ready-to-book leads.", price: 132.49, image: "https://media.istockphoto.com/id/1215222296/photo/call-18-for-emergency-3d-rendering-illustration-on-white-background.jpg?s=612x612&w=0&k=20&c=G38zf0BwBzd36Z_YNLqzHVyKNB8I4wl_9pHNJ412BwE=" },
 
 {id: 18, title: "Eye Clinic & Hearing Center Patient Leads", description: "Qualified patients searching for eye care and hearing services delivered consistently every month.", price: 90.99, image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5" },
 
@@ -84,9 +84,9 @@ const services = [
 
 { id: 38, title: "TikTok Ads Management", description: "Creative TikTok ads that capture attention and convert fast.", price: 139.99, image: "https://images.unsplash.com/photo-1611605698335-8b1569810432" },
 
-{ id: 39, title: "Google Ads Setup", description: "Search and display campaigns targeting ready-to-buy customers.", price: 149.99, image: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd" },
+{ id: 39, title: "Google Ads Setup", description: "Search and display campaigns targeting ready-to-buy customers.", price: 149.99, image: "https://media.istockphoto.com/id/1177549487/photo/16gb-is-a-storage-capacity-of-sd-cards-usb-stick-and-digital-media-white-background-isolated.jpg?s=612x612&w=0&k=20&c=hKLBZbEGqQ0w7L8OO2jcKBk_REN68b9VVbgCFLd9fCE=" },
 
-{ id: 40, title: "Conversion Rate Optimization", description: "We optimize your website to turn more visitors into paying clients.", price: 119.99, image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a" },
+{ id: 40, title: "Conversion Rate Optimization", description: "We optimize your website to turn more visitors into paying clients.", price: 119.99, image: "https://media.istockphoto.com/id/1494593118/photo/300-mbps-green-3d.jpg?s=612x612&w=0&k=20&c=KrdUFHymJrac1Qneffk0KAob3aftd1u-2fF0r7pbIHU=" },
 
 { id: 41, title: "CRM Setup & Integration", description: "Professional CRM setup to manage leads, automate follow-ups, and close more sales.", price: 149.99, image: "https://images.unsplash.com/photo-1553877522-43269d4ea984" },
 
