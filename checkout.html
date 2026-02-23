@@ -18,11 +18,21 @@
 
   <!-- PayPal Button Container -->
   <div id="paypal-button-container" style="margin-top:30px;"></div>
+  
+  <div style="margin-top:20px;">
+  <button onclick="payWithPaystack()" 
+          style="padding:12px 25px; background:#0ba4db; color:white; border:none; border-radius:5px; cursor:pointer;">
+    Pay With Paystack
+  </button>
+  </div>
 </div>
 
 <!-- YOUR PAYPAL SDK (UNCHANGED) -->
 <script src="https://www.paypal.com/sdk/js?client-id=Aey_vJzSIErk6JUHmkIU41JQ4W1vA2FlfBNf5Vtkg7j4YLaWHkFtw4WSPI0SWiCzhaNKqPt2oGuVIF1n&components=buttons&currency=USD"></script>
+<script src="https://js.paystack.co/v1/inline.js"></script>
 
+
+  
 <script>
 
 if(!localStorage.getItem("loggedIn")){
@@ -156,6 +166,75 @@ function processPV(userID, orderAmount){
   localStorage.setItem("users", JSON.stringify(users));
 }
 
+
+
+  // ===============================
+// PAYSTACK PAYMENT
+// ===============================
+function payWithPaystack(){
+
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if(!currentUser){
+    alert("Please login first");
+    window.location.href = "login.html";
+    return;
+  }
+
+  let handler = PaystackPop.setup({
+    key: 'pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b', // PUBLIC KEY ONLY
+    email: currentUser.email,
+    amount: total * 100, // Paystack uses kobo (multiply by 100)
+    currency: "USD", // Change to NGN if needed
+
+    callback: function(response){
+
+      // ===============================
+      // SAVE ORDER (SAME AS PAYPAL)
+      // ===============================
+
+      let allOrders = JSON.parse(localStorage.getItem("orders")) || [];
+
+      let orderID = "ORD-" + Date.now();
+
+      let order = {
+        id: orderID,
+        paystackRef: response.reference,
+        userID: currentUser.id,
+        userName: currentUser.name,
+        userEmail: currentUser.email,
+        items: cart,
+        total: total,
+        date: new Date().toLocaleString(),
+        submitted: false
+      };
+
+      allOrders.push(order);
+      localStorage.setItem("orders", JSON.stringify(allOrders));
+
+      // Save personal order history
+      let userOrders = JSON.parse(localStorage.getItem("userOrders_" + currentUser.email)) || [];
+      userOrders.push(order);
+      localStorage.setItem("userOrders_" + currentUser.email, JSON.stringify(userOrders));
+
+      // Process PV & Commission
+      processPV(currentUser.id, total);
+
+      localStorage.removeItem("cart");
+
+      alert("Payment Successful! Order ID: " + orderID);
+
+      window.location.href = "dashboard.html";
+    },
+
+    onClose: function(){
+      alert("Payment cancelled.");
+    }
+
+  });
+
+  handler.openIframe();
+        }
+  
 </script>
 
 </body>
