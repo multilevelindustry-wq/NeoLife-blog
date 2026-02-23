@@ -128,49 +128,10 @@ const services = [
 
 { id: 60, title: "Video Sales Letter Creation", description: "Compelling video scripts that persuade viewers to buy instantly.", price: 129.75, image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7" },
 
-{ id: 61, title: "Lead Magnet Design", description: "High-converting free offers that attract and capture quality leads.", price: 79.99, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" },
-
-{ id: 62, title: "Webinar Funnel Setup", description: "Complete webinar system designed to educate, nurture, and sell.", price: 99.76, image: "https://images.unsplash.com/photo-1587614382346-4ec70e388b28" },
- 
-{ id: 63, title: "Online Course Platform Setup", description: "Launch your digital course with a professional learning platform.", price: 229.79, image: "https://media.istockphoto.com/id/2227482635/photo/digital-learning-system-with-quiz-and-report-on-tablet.webp?a=1&b=1&s=612x612&w=0&k=20&c=mUytEFnS4eRXz_pJy8VlqUgdZzUknqz8cbAApHvRHKU=" },
-
-{ id: 64, title: "Membership Website Setup", description: "Create recurring revenue with a premium membership system.", price: 189.99, image: "https://images.unsplash.com/photo-1556745757-8d76bdb6984b" },
-
-{ id: 65, title: "Dropshipping Store Setup", description: "Fully built dropshipping store ready to generate sales.", price: 199.99, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
-
-{ id: 66, title: "Product Research Service", description: "Data-driven product research to find high-demand winning products.", price: 99.99, image: "https://images.unsplash.com/photo-1560264280-88b68371db39?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8UHJvZHVjdCUyMFJlc2VhcmNoJTIwU2VydmljZXxlbnwwfHwwfHx8MA%3D%3D" },
-
-{ id: 67, title: "Ad Creative Design", description: "Eye-catching ad creatives that boost clicks and conversions.", price: 89.99, image: "https://images.unsplash.com/photo-1545235617-9465d2a55698" },
-
-{ id: 68, title: "Retargeting Ads Setup", description: "Reconnect with visitors and turn them into customers.", price: 129.99, image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a" },
-
-{ id: 69, title: "Marketing Analytics Setup", description: "Track, measure, and optimize your campaigns for maximum profit.", price: 119.99, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" },
-
-{ id: 70, title: "Sales Page Design", description: "High-impact sales pages built to close deals effectively.", price: 149.99, image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f" },
-
-{ id: 71, title: "Business Automation Setup", description: "Streamline your processes and save time with smart automation.", price: 199.99, image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c" },
-
-{ id: 72, title: "Chatbot Setup", description: "Automated chatbot system that engages visitors 24/7.", price: 99.99, image: "https://plus.unsplash.com/premium_photo-1682023587356-86065925727a?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8Q2hhdGJvdCUyMFNldHVwfGVufDB8fDB8fHww" },
-
-{ id: 73, title: "Lead Qualification System", description: "Filter and prioritize high-value prospects automatically.", price: 149.99, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" },
-
-{ id: 74, title: "Sales Script Writing", description: "Professional scripts designed to increase closing rates.", price: 79.99, image: "https://images.unsplash.com/photo-1455390582262-044cdead277a" },
-
-{ id: 75, title: "Cold Email Campaign Setup", description: "Strategic outreach campaigns that generate qualified appointments.", price: 159.99, image: "https://images.unsplash.com/photo-1556155092-490a1ba16284" },
-
-{ id: 76, title: "LinkedIn Lead Generation", description: "Targeted LinkedIn strategies to attract high-value B2B clients.", price: 179.99, image: "https://images.unsplash.com/photo-1611926653458-09294b3142bf" },
-
-{ id: 77, title: "Brand Positioning Strategy", description: "Stand out from competitors with a powerful positioning plan.", price: 189.99, image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" },
-
-{ id: 78, title: "High-Ticket Funnel Setup", description: "Premium funnels designed to close high-value clients consistently.", price: 249.99, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" },
-
-{ id: 79, title: "Appointment Booking System", description: "Automated booking system to secure more client meetings.", price: 99.99, image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d" },
-
-{ id: 80, title: "Digital Product Launch Setup", description: "Complete launch strategy to maximize revenue and visibility.", price: 229.99, image: "https://images.unsplash.com/photo-1492724441997-5dc865305da7" },
-
-{ id: 81, title: "Full Marketing System Package", description: "All-in-one marketing system built to scale your business fast.", price: 499.99, image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71" }
 
 ];
+
+
 // ===============================
 // SERVICES AUTO-ID FIX
 // ===============================
