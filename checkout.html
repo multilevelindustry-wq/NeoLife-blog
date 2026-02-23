@@ -23,7 +23,7 @@
   <div style="margin-top:20px;">
     <button onclick="payWithPaystack()" 
       style="padding:12px 25px; background:#0ba4db; color:white; border:none; border-radius:5px; cursor:pointer;">
-      Pay With Paystack
+      Pay With Paystack (Auto NGN)
     </button>
   </div>
 </div>
@@ -54,15 +54,15 @@ if(cart.length === 0){
   window.location.href = "cart.html";
 }
 
-let total = 0;
+let totalUSD = 0;
 cart.forEach(item => {
-  total += item.price * (item.quantity || 1);
+  totalUSD += item.price * (item.quantity || 1);
 });
 
-document.getElementById("totalAmount").innerText = total.toFixed(2);
+document.getElementById("totalAmount").innerText = totalUSD.toFixed(2);
 
 // ===============================
-// PAYPAL
+// PAYPAL (USD)
 // ===============================
 if (typeof paypal !== "undefined") {
 
@@ -72,7 +72,7 @@ if (typeof paypal !== "undefined") {
       return actions.order.create({
         purchase_units: [{
           amount: {
-            value: total.toFixed(2)
+            value: totalUSD.toFixed(2)
           }
         }]
       });
@@ -81,7 +81,7 @@ if (typeof paypal !== "undefined") {
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
 
-        saveOrder(details.id);
+        saveOrder(details.id, totalUSD, "USD");
 
         alert("PayPal Payment Successful!");
         window.location.href = "dashboard.html";
@@ -93,7 +93,7 @@ if (typeof paypal !== "undefined") {
 }
 
 // ===============================
-// PAYSTACK
+// PAYSTACK (AUTO CONVERT TO NGN)
 // ===============================
 function payWithPaystack(){
 
@@ -103,16 +103,20 @@ function payWithPaystack(){
     return;
   }
 
+  // 🔥 Automatic Conversion Rate (You can adjust)
+  let exchangeRate = 1500; 
+  let totalNGN = totalUSD * exchangeRate;
+
   let handler = PaystackPop.setup({
-    key: 'pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b', 
+    key: 'pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b',
     email: currentUser.email,
-    amount: Math.round(total * 100), // kobo
-    currency: "USD",
+    amount: Math.round(totalNGN * 100), // kobo
+    currency: "NGN",
     ref: 'PS-' + Date.now(),
 
     callback: function(response){
 
-      saveOrder(response.reference);
+      saveOrder(response.reference, totalUSD, "NGN");
 
       alert("Paystack Payment Successful!");
       window.location.href = "dashboard.html";
@@ -130,7 +134,7 @@ function payWithPaystack(){
 // ===============================
 // SAVE ORDER FUNCTION
 // ===============================
-function saveOrder(reference){
+function saveOrder(reference, amount, currency){
 
   let currentUser = JSON.parse(localStorage.getItem("currentUser"));
   let allOrders = JSON.parse(localStorage.getItem("orders")) || [];
@@ -144,7 +148,8 @@ function saveOrder(reference){
     userName: currentUser.name,
     userEmail: currentUser.email,
     items: cart,
-    total: total,
+    totalUSD: totalUSD,
+    currencyPaid: currency,
     date: new Date().toLocaleString()
   };
 
@@ -158,5 +163,3 @@ function saveOrder(reference){
 
 </body>
 </html>
-
-
