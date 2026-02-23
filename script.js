@@ -8,9 +8,9 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 1, title: "5Gb For 7 Days", description: "Order 5Gb For 7 Days 5x More For 1Gb reward.", price: 1.30, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
+{id: 1, title: "5Gb For 7 Days Airtel Data", description: "Order 5Gb For 7 Days 5x per Week More For 2Gb reward.", price: 1.30, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
 
-{id: 2, title: "Professional Business Website Creation", description: "High-performance business website built to establish authority, generate daily inquiries and increase customer trust instantly.", price: 69.96, image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d" },
+{id: 2, title: "10Gb For 30Days Airtel Data", description: "Get started with 10Gb monthly, Order 5x per Month Get 5Gb 7 Days Plan For Free.", price: 2.50, image: "https://media.istockphoto.com/id/1286015263/photo/3d-illustration-of-cloud-service-uploading-10-gigabytes.jpg?s=612x612&w=0&k=20&c=RNmYwdC3Er9SYMPbRG5nCqIUKKdw5N0lZHdQDaeSTFw=" },
 
 {id: 3, title: "SEO-Optimized Blog Website Setup", description: "Launch a powerful blog platform optimized for traffic, speed and monetization — ready to grow your online presence. ", price: 59.49, image: "https://images.unsplash.com/photo-1718212456991-54ab241fae82" },
 
