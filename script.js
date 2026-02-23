@@ -8,9 +8,9 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 1, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 5x per Week More For 2Gb reward.", price: 1.30, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
+{id: 1, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 5x per Week More For 2Gb reward.", price: 1.23, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
 
-{id: 2, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 5x per Month Get 5Gb 7 Days Plan For Free.", price: 2.50, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
+{id: 2, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 5x per Month Get 5Gb 7 Days Plan For Free.", price: 2.35, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
 
 {id: 3, title: "SEO-Optimized Blog Website Setup", description: "Launch a powerful blog platform optimized for traffic, speed and monetization — ready to grow your online presence. ", price: 59.49, image: "https://images.unsplash.com/photo-1718212456991-54ab241fae82" },
 
