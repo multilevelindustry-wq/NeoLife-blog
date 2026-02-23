@@ -8,7 +8,7 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 1, title: "Shopify / E-commerce Store Setup", description: "We build fully optimized, conversion-focused Shopify stores designed to turn visitors into paying customers. Complete setup, payment integration, mobile optimization and launch-ready, Starting 99.99 .", price: 99.99, image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d" },
+{id: 1, title: "5Gb For 7 Days", description: "Order 5Gb For 7 Days 5x More For 1Gb reward.", price: 1.30, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
 
 {id: 2, title: "Professional Business Website Creation", description: "High-performance business website built to establish authority, generate daily inquiries and increase customer trust instantly.", price: 69.96, image: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d" },
 
