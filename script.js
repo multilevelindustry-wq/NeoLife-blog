@@ -16,7 +16,7 @@ const services = [
 
 {id: 4, title: "2Gb For 30Days Airtel Data Plan", description: "Buy 2Gb Data Plan Today For 30Days, Get 10Gb For Every 20x Orders Placed in a Month", price: 1.21, image: "https://media.istockphoto.com/id/1208250910/photo/2gb-3d.jpg?s=612x612&w=0&k=20&c=hY6m2hmx5YGABRjg99Rd71qdR1Q_LZ7Z-lZWIyY8d3E=" },
 
-{id: 5, title: "Local Business Lead-Focused Website Design", description: "Conversion-optimized website built specifically to attract local customers and generate consistent daily leads.", price: 39.68, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
+{id: 5, title: "600Mb For 2Days Airtel Data Plan", description: "Fast And Reliable Data Plan Order 100x Per month Get N5000 Cash Price", price: 0.21, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
 
 {id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book.", price: 189.85, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
 
