@@ -132,6 +132,9 @@ const services = [
 ];
 
 
+
+
+
 // ===============================
 // SERVICES AUTO-ID FIX
 // ===============================
@@ -139,7 +142,7 @@ services.forEach((s, i) => s.id = i + 1);
 
 
 // ===============================
-// OPTIMIZED RENDER SERVICES
+// ULTRA FAST RENDER SERVICES
 // ===============================
 function renderServices(serviceList){
 
@@ -148,57 +151,129 @@ function renderServices(serviceList){
 
   container.innerHTML = "";
 
-  let html = "";
+  const fragment = document.createDocumentFragment();
+  const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+  // Fast review count map
+  const reviewMap = {};
+  for (let r of reviews) {
+    reviewMap[r.serviceID] = (reviewMap[r.serviceID] || 0) + 1;
+  }
 
   serviceList.forEach(service => {
 
-    html += `
-      <div class="card">
+    const card = document.createElement("div");
+    card.className = "card";
 
-        <img 
-          src="${service.image || 'https://via.placeholder.com/300x160'}"
-          loading="lazy"
-          decoding="async"
-          style="width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px;">
+    card.innerHTML = `
+      <img 
+        src="${service.image || 'https://via.placeholder.com/300x160'}"
+        loading="lazy"
+        decoding="async"
+        style="width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px;">
 
-        <h3>${service.title}</h3>
-        <p>${service.description}</p>
-        <h4>$${service.price}</h4>
-        <button onclick="addToCart(${service.id})">Start My Lead Campaign</button>
+      <h3>${service.title}</h3>
+      <p>${service.description}</p>
+      <h4>$${service.price}</h4>
 
-        <hr>
-        <div id="reviews-${service.id}"></div>
+      <button class="add-cart-btn" data-id="${service.id}">
+        Start My Lead Campaign
+      </button>
 
-        <select id="rating-${service.id}">
-          <option value="5">⭐⭐⭐⭐⭐</option>
-          <option value="4">⭐⭐⭐⭐</option>
-          <option value="3">⭐⭐⭐</option>
-          <option value="2">⭐⭐</option>
-          <option value="1">⭐</option>
-        </select>
+      <hr>
+      <p>
+        <span class="review-count" data-id="${service.id}"
+          style="color:#ff7300; cursor:pointer; font-weight:bold;">
+          (${reviewMap[service.id] || 0} Reviews)
+        </span>
+      </p>
 
-        <input type="text" id="reviewText-${service.id}" placeholder="Write review">
-        <button onclick="submitReview(${service.id})">Submit Review</button>
+      <select class="rating-select" data-id="${service.id}">
+        <option value="5">⭐⭐⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="1">⭐</option>
+      </select>
 
-      </div>
+      <input type="text" class="review-input" data-id="${service.id}" placeholder="Write review">
+      <button class="submit-review-btn" data-id="${service.id}">
+        Submit Review
+      </button>
     `;
+
+    fragment.appendChild(card);
   });
 
-  container.innerHTML = html;
-
-  // Display reviews after full render
-  serviceList.forEach(service => {
-    displayReviews(service.id);
-  });
+  container.appendChild(fragment);
 }
 
+
+// ===============================
+// INITIAL RENDER
+// ===============================
 if(document.getElementById("services")){
   renderServices(services);
 }
 
 
 // ===============================
-// CART SYSTEM (UNCHANGED LOGIC)
+// EVENT DELEGATION (FAST)
+// ===============================
+document.addEventListener("click", function(e){
+
+  // Add To Cart
+  if(e.target.classList.contains("add-cart-btn")){
+    const id = parseInt(e.target.dataset.id);
+    addToCart(id);
+  }
+
+  // Submit Review
+  if(e.target.classList.contains("submit-review-btn")){
+    const id = parseInt(e.target.dataset.id);
+
+    let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    if(!currentUser){
+      alert("Please login first.");
+      return;
+    }
+
+    const input = document.querySelector(`.review-input[data-id="${id}"]`);
+    const rating = document.querySelector(`.rating-select[data-id="${id}"]`).value;
+
+    if(!input.value){
+      alert("Write a review first.");
+      return;
+    }
+
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+    reviews.push({
+      serviceID: id,
+      userName: currentUser.name,
+      userEmail: currentUser.email,
+      rating: parseInt(rating),
+      text: input.value,
+      date: Date.now()
+    });
+
+    localStorage.setItem("reviews", JSON.stringify(reviews));
+
+    input.value = "";
+    renderServices(services);
+  }
+
+  // Open Review Modal
+  if(e.target.classList.contains("review-count")){
+    const id = parseInt(e.target.dataset.id);
+    openReviewModal(id);
+  }
+
+});
+
+
+// ===============================
+// CART SYSTEM
 // ===============================
 function addToCart(id){
 
@@ -221,78 +296,14 @@ function addToCart(id){
 function updateCartCount(){
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const count = document.getElementById("cart-count");
-  if(count) count.innerText = cart.length;
+  if(count) count.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
 }
 
 updateCartCount();
 
 
 // ===============================
-// REVIEWS SYSTEM (OPTIMIZED)
-// ===============================
-function submitReview(serviceID){
-
-  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  if(!currentUser){
-    alert("Please login first.");
-    return;
-  }
-
-  let rating = document.getElementById("rating-" + serviceID).value;
-  let text = document.getElementById("reviewText-" + serviceID).value;
-
-  if(!text){
-    alert("Write a review first.");
-    return;
-  }
-
-  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-  reviews.push({
-    serviceID: serviceID,
-    userName: currentUser.name,
-    userEmail: currentUser.email,
-    rating: parseInt(rating),
-    text: text,
-    date: new Date().getTime()
-  });
-
-  localStorage.setItem("reviews", JSON.stringify(reviews));
-
-  document.getElementById("reviewText-" + serviceID).value = "";
-
-  displayReviews(serviceID);
-}
-
-
-function displayReviews(serviceID){
-
-  let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
-  let container = document.getElementById("reviews-" + serviceID);
-  if(!container) return;
-
-  let count = 0;
-
-  for(let i = 0; i < reviews.length; i++){
-    if(String(reviews[i].serviceID) == String(serviceID)){
-      count++;
-    }
-  }
-
-  container.innerHTML = `
-    <p>
-      <span onclick="goToAllReviews(${serviceID})"
-        style="color:#ff7300; cursor:pointer; font-weight:bold;">
-        (${count} Reviews)
-      </span>
-    </p>
-  `;
-}
-
-
-// ===============================
-// REVIEW MODAL (UNCHANGED LOGIC)
+// REVIEW MODAL
 // ===============================
 function openReviewModal(serviceID){
 
@@ -300,6 +311,8 @@ function openReviewModal(serviceID){
 
   let modal = document.getElementById("reviewModal");
   let modalContent = document.getElementById("modalReviews");
+
+  if(!modal || !modalContent) return;
 
   modalContent.innerHTML = "";
 
@@ -331,12 +344,13 @@ function openReviewModal(serviceID){
 }
 
 function closeReviewModal(){
-  document.getElementById("reviewModal").style.display = "none";
+  const modal = document.getElementById("reviewModal");
+  if(modal) modal.style.display = "none";
 }
 
 
 // ===============================
-// ROTATING HEADLINES (SMOOTH)
+// ROTATING HEADLINES
 // ===============================
 const headlines = [
   "We Deliver High-Quality Leads That Turn Into Paying Customers.",
@@ -373,7 +387,7 @@ if (textElement) {
 
 
 // ===============================
-// OPTIMIZED SEARCH (DEBOUNCED)
+// DEBOUNCED SEARCH (FAST)
 // ===============================
 const searchBox = document.getElementById("searchBox");
 
@@ -397,10 +411,12 @@ if (searchBox) {
       renderServices(filtered);
 
     }, 300);
+
   });
-    }
+
+}
 
 
 
 
-
+  
