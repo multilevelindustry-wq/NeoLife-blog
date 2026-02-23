@@ -20,7 +20,7 @@ const services = [
 
 {id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book.", price: 189.85, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
 
-{id: 7, title: ". ", description: "Professional design and positioning that makes your local company look trustworthy, premium and ready for customers.", price: 50.89, image: "https://media.istockphoto.com/id/1177549483/photo/32gb-is-a-storage-capacity-of-sd-cards-usb-stick-and-digital-media-white-background-isolated.jpg?s=612x612&w=0&k=20&c=Kghf00wiH0JbxfD-ud1XkQWheA-ggscD8uhrGyvEdXk=" },
+{id: 7, title: "7Gb For 2Days Mtn Data Plan", description: "Order 85x 7Gb per Month Earn N18,000 Cash", price: 1.55, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
 {id: 8, title: "HVAC & Solar Installation Lead Generation", description: "Connect with property owners requesting HVAC repair or solar installations. High-intent prospects delivered monthly.", price: 40.78, image: "https://plus.unsplash.com/premium_photo-1671808063467-865289c2959c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SFZBQyUyMCUyNiUyMFNvbGFyJTIwSW5zdGFsbGF0aW9uJTIwTGVhZCUyMEdlbmVyYXRpb258ZW58MHx8MHx8fDA%3D" },
 
