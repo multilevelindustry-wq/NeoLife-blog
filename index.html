@@ -249,85 +249,183 @@ Big Sales Are Happening Now 🔥
 <div class="category-wrapper">
 <div class="category-track" id="categoriesBottom"></div>
 </div>
-
 <script>
 
-/* ================= CART COUNT ================= */
+/* ===============================
+   SAFE SERVICES CHECK
+================================ */
+if(typeof services === "undefined"){
+  var services = [];
+}
+
+/* ===============================
+   CART COUNT (GLOBAL)
+================================ */
 function updateCartCount(){
- let cart=JSON.parse(localStorage.getItem("cart"))||[];
- document.getElementById("cart-count").innerText=
- cart.reduce((sum,item)=>sum+item.quantity,0);
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  document.getElementById("cart-count").innerText =
+    cart.reduce((sum,item)=> sum + (item.quantity || 1),0);
 }
 updateCartCount();
 
-/* ================= LOGIN STATUS ================= */
-let currentUser=JSON.parse(localStorage.getItem("currentUser"));
+/* ===============================
+   LOGIN DISPLAY SYSTEM
+================================ */
+const loginLink = document.getElementById("loginLink");
+const nav = loginLink.parentElement;
+
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
 if(currentUser){
- document.getElementById("loginLink").innerText="Hi, "+currentUser.name;
+  loginLink.innerText = currentUser.name;
+  loginLink.href = "#";
+}else{
+  loginLink.innerText = "Login";
 }
 
-/* ================= CATEGORY ================= */
-const categories=[
-"E-commerce","Business","Blog","Leads","SEO","Graphics","Ads"
+/* ===============================
+   CATEGORY WITH LINKS
+================================ */
+const categories = [
+ {name:"E-commerce", link:"category.html?cat=ecommerce"},
+ {name:"Business", link:"category.html?cat=business"},
+ {name:"Blog", link:"category.html?cat=blog"},
+ {name:"Leads", link:"category.html?cat=leads"},
+ {name:"SEO", link:"category.html?cat=seo"},
+ {name:"Graphics", link:"category.html?cat=graphics"},
+ {name:"Ads", link:"category.html?cat=ads"},
 ];
 
 function renderCategories(id){
- const container=document.getElementById(id);
- container.innerHTML="";
- [...categories,...categories].forEach(cat=>{
-  container.innerHTML+=
-  `<div class="category-card">${cat}</div>`;
- });
+  const container = document.getElementById(id);
+  container.innerHTML = "";
+  [...categories,...categories].forEach(cat=>{
+    container.innerHTML += `
+      <a href="${cat.link}" style="text-decoration:none;">
+        <div class="category-card">${cat.name}</div>
+      </a>
+    `;
+  });
 }
 
 renderCategories("categoriesTop");
 renderCategories("categoriesBottom");
 
-/* ================= PRODUCTS ================= */
+/* ===============================
+   ADD TO CART (INSTANT)
+================================ */
+function addToCart(id){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let product = services.find(p => p.id === id);
+  if(!product) return;
+
+  let existing = cart.find(i => i.id === id);
+  if(existing){
+    existing.quantity += 1;
+  }else{
+    cart.push({...product, quantity:1});
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+}
+
+/* ===============================
+   PRODUCT RENDER FIX
+================================ */
 function renderProducts(section,start,end){
- const container=document.getElementById(section);
- container.innerHTML="";
- services.slice(start,end).forEach(p=>{
-  container.innerHTML+=`
-  <div class="card">
-   <img src="${p.image||'https://via.placeholder.com/300'}">
-   <h4>${p.title}</h4>
-   <p>${p.description}</p>
-   <strong>$${p.price}</strong>
-   <button onclick="addToCart(${p.id})">Add To Cart</button>
-  </div>`;
- });
+  const container = document.getElementById(section);
+  container.innerHTML = "";
+
+  if(!services.length){
+    container.innerHTML = "<p>No products available</p>";
+    return;
+  }
+
+  services.slice(start,end).forEach(p=>{
+    container.innerHTML += `
+      <div class="card">
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <strong>$${p.price}</strong>
+        <button onclick="addToCart(${p.id})">
+          Add To Cart
+        </button>
+      </div>
+    `;
+  });
 }
 
 renderProducts("productSection1",0,6);
 renderProducts("productSection2",6,12);
 
-/* ================= FEATURED ROTATOR ================= */
-let featuredIndex=0;
+/* ===============================
+   BEAUTIFUL 7 SLIDE BANNER
+================================ */
+const bannerProducts = services.slice(0,7);
+let bannerIndex = 0;
+
+function rotateBanner(){
+  if(!bannerProducts.length) return;
+
+  const p = bannerProducts[bannerIndex];
+
+  document.getElementById("bannerText").innerHTML = `
+    <div>
+      <h2>${p.title}</h2>
+      <p>${p.description}</p>
+      <h3>$${p.price}</h3>
+      <button onclick="window.location='all-products.html'">
+        Check Now
+      </button>
+    </div>
+  `;
+
+  bannerIndex = (bannerIndex + 1) % bannerProducts.length;
+}
+
+rotateBanner();
+setInterval(rotateBanner,4000);
+
+/* ===============================
+   FEATURED ROTATOR
+================================ */
+let featuredIndex = 0;
 function rotateFeatured(){
- let p=services[featuredIndex];
- document.getElementById("featuredProduct").innerHTML=`
- <img src="${p.image||'https://via.placeholder.com/600'}" style="width:100%;max-height:300px;object-fit:cover;border-radius:15px;">
- <h3>${p.title}</h3>
- <p>${p.description}</p>
- <h2>$${p.price}</h2>
- <button onclick="addToCart(${p.id})">Add To Cart</button>
- `;
- featuredIndex=(featuredIndex+1)%services.length;
+  if(!services.length) return;
+
+  let p = services[featuredIndex];
+
+  document.getElementById("featuredProduct").innerHTML = `
+    <h2>${p.title}</h2>
+    <p>${p.description}</p>
+    <h3>$${p.price}</h3>
+    <button onclick="addToCart(${p.id})">
+      Add To Cart
+    </button>
+  `;
+
+  featuredIndex = (featuredIndex + 1) % services.length;
 }
 rotateFeatured();
-setInterval(rotateFeatured,4000);
+setInterval(rotateFeatured,5000);
 
-/* ================= COUNTDOWN ================= */
-let end=new Date().getTime()+86400000;
+/* ===============================
+   FLASH SALE COUNTDOWN
+================================ */
+let end = new Date().getTime() + 86400000;
+
 setInterval(()=>{
- let now=new Date().getTime();
- let distance=end-now;
- let h=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
- let m=Math.floor((distance%(1000*60*60))/(1000*60));
- let s=Math.floor((distance%(1000*60))/1000);
- document.getElementById("countdown").innerText=
- "Flash Sale Ends In: "+h+"h "+m+"m "+s+"s";
+  let now = new Date().getTime();
+  let distance = end - now;
+
+  let h = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((distance%(1000*60*60))/(1000*60));
+  let s = Math.floor((distance%(1000*60))/1000);
+
+  document.getElementById("countdown").innerText =
+   "Flash Sale Ends In: " + h+"h "+m+"m "+s+"s";
+
 },1000);
 
 </script>
