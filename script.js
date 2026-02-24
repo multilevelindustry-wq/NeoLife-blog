@@ -18,13 +18,13 @@ const services = [
 
 {id: 5, title: "600Mb For 2Days Airtel Data Plan", description: "Fast And Reliable Data Plan Order 100x Per month Get N7000 Cash Price", price: 0.21, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
 
-{id: 6, title: "Roofing & Plumbing High-Intent Lead Campaign", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book.", price: 189.85, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
+{id: 6, title: "60Gb For 30Days Mtn Data Plan", description: "We deliver exclusive homeowner leads actively searching for roof repair and plumbing services in your area — ready to book.", price: 189.85, image: "https://images.unsplash.com/photo-1605152276897-4f618f831968" },
 
 {id: 7, title: "7Gb For 2Days Mtn Data Plan", description: "Order 85x 7Gb per Month Earn N18,000 Cash", price: 1.55, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 8, title: "HVAC & Solar Installation Lead Generation", description: "Connect with property owners requesting HVAC repair or solar installations. High-intent prospects delivered monthly.", price: 40.78, image: "https://plus.unsplash.com/premium_photo-1671808063467-865289c2959c?w=800&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8SFZBQyUyMCUyNiUyMFNvbGFyJTIwSW5zdGFsbGF0aW9uJTIwTGVhZCUyMEdlbmVyYXRpb258ZW58MHx8MHx8fDA%3D" },
+{id: 8, title: "3.2Gb For 2Days Mtn Data Plan", description: "Enjoy 3.2Gb 2Days Offer, Order 100x per Month Earn N26,000 Cash Out", price: 1.02, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 9, title: "Social Media Sales & Conversion Ads", description: "Strategic ad campaigns built to generate real inquiries, booked calls and sales — not just likes and impressions.", price: 87.65, image: "https://images.unsplash.com/photo-1557838923-2985c318be48" },
+{id: 9, title: "30Gb For 30Days Mtb Data Plan", description: "Get started with 30Days Monthly Offer, Order 40x per month N40,000 Cash Token", price: 8.59, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
 {id: 10, title: "1.5Gb For 7Days Social Plan Airtel Data Plan", description: "Get Exciting 7Days Social Data Plan, Buy 100x of 1.5Gb per month, Win N10,000 Cash Price", price: 90.64, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
 
