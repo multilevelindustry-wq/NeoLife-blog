@@ -3,40 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Home</title>
+<title>Premium Store</title>
 
 <style>
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#f5f5f5;
+
+/* ===============================
+   YOUR BACKGROUND DESIGN
+================================ */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('https://images.unsplash.com/photo-1492724441997-5dc865305da7') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
 }
 
-header{
-  background:#111;
-  color:white;
-  padding:15px;
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: -1;
+}
+
+/* ================= HEADER ================= */
+header {
   display:flex;
   justify-content:space-between;
   align-items:center;
+  padding:20px 60px;
+  backdrop-filter:blur(10px);
+  background:rgba(0,0,0,0.4);
+  position:sticky;
+  top:0;
+  z-index:1000;
 }
 
-header a{
-  color:white;
+nav a {
+  color:#fff;
+  margin-left:20px;
   text-decoration:none;
-  margin-left:15px;
+  font-weight:600;
 }
 
-.section{
-  padding:40px 20px;
+nav a:hover { color:#ff9800; }
+
+/* ================= BANNER ================= */
+.banner {
+  height:300px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:bold;
+  text-align:center;
+  background:linear-gradient(45deg,#ff7300,#ff9800);
+  animation:fadeBanner 6s infinite;
 }
 
-/* =========================
-   CATEGORY SLIDER
-========================= */
+@keyframes fadeBanner {
+  0%{opacity:0.7}
+  50%{opacity:1}
+  100%{opacity:0.7}
+}
+
+/* ================= CATEGORY SLIDER ================= */
 .category-wrapper{
   overflow:hidden;
-  position:relative;
+  margin:40px;
 }
 
 .category-track{
@@ -48,97 +82,124 @@ header a{
 .category-card{
   min-width:180px;
   background:white;
+  color:#111;
   padding:20px;
-  border-radius:12px;
+  border-radius:15px;
   text-align:center;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  cursor:pointer;
-  transition:0.3s;
-}
-
-.category-card:hover{
-  transform:translateY(-5px);
+  font-weight:bold;
 }
 
 @keyframes scrollLeft{
-  0%{ transform:translateX(0); }
-  100%{ transform:translateX(-50%); }
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
 }
 
-/* =========================
-   PRODUCT GRID
-========================= */
+/* ================= PRODUCT GRID ================= */
 .products{
   display:grid;
-  gap:20px;
-}
-
-@media(min-width:768px){
-  .products{
-    grid-template-columns:repeat(3,1fr);
-  }
+  gap:25px;
+  padding:40px;
 }
 
 @media(max-width:767px){
-  .products{
-    grid-template-columns:repeat(2,1fr);
-  }
+  .products{grid-template-columns:repeat(2,1fr);}
 }
 
-.product-card{
+@media(min-width:768px){
+  .products{grid-template-columns:repeat(3,1fr);}
+}
+
+.card{
   background:white;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  display:flex;
-  flex-direction:column;
+  color:#111;
+  padding:20px;
+  border-radius:18px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  transition:0.3s;
 }
 
-.product-card img{
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.card img{
   width:100%;
   height:160px;
   object-fit:cover;
   border-radius:10px;
 }
 
-.product-card h4{
-  margin:10px 0 5px;
-}
-
-.product-card p{
-  font-size:14px;
-  flex:1;
-}
-
-.product-card button{
-  background:#ff7300;
-  border:none;
+button{
   padding:10px;
+  border:none;
+  background:linear-gradient(45deg,#ff7300,#ff9800);
   color:white;
   border-radius:8px;
   cursor:pointer;
+  margin-top:10px;
+  font-weight:bold;
 }
 
-/* =========================
-   BIG FEATURED CARD
-========================= */
+/* ================= FEATURED ================= */
 .featured{
+  margin:40px;
+  padding:30px;
   background:white;
-  border-radius:15px;
-  padding:20px;
-  box-shadow:0 6px 15px rgba(0,0,0,0.1);
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+  color:#111;
+  border-radius:20px;
   text-align:center;
 }
 
-.featured img{
+/* ================= COUNTDOWN ================= */
+.countdown{
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px;
+  color:#ff9800;
+}
+
+/* ================= FLIP ADS ================= */
+.flip-container{
+  display:grid;
+  gap:30px;
+  padding:40px;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
+
+.card-wrapper{
+  perspective:1000px;
+}
+
+.card-inner{
+  position:relative;
   width:100%;
-  max-height:300px;
-  object-fit:cover;
-  border-radius:12px;
-  margin-bottom:15px;
+  height:200px;
+  transition:transform 0.8s;
+  transform-style:preserve-3d;
+}
+
+.card-wrapper:hover .card-inner{
+  transform:rotateY(180deg);
+}
+
+.card-front,.card-back{
+  position:absolute;
+  width:100%;
+  height:100%;
+  backface-visibility:hidden;
+  border-radius:15px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-weight:bold;
+  padding:20px;
+}
+
+.card-front{background:white;color:#111;}
+.card-back{
+  transform:rotateY(180deg);
+  background:linear-gradient(45deg,#ff7300,#ff9800);
 }
 
 </style>
@@ -146,140 +207,130 @@ header a{
 <body>
 
 <header>
-  <h2>My Store</h2>
-  <div>
-    <a href="login.html">Login</a>
-    <a href="register.html">Register</a>
-    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-  </div>
+<h2>Premium Store</h2>
+<nav>
+<a href="login.html" id="loginLink">Login</a>
+<a href="register.html">Register</a>
+<a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+</nav>
 </header>
 
-<!-- ================= CATEGORY TOP ================= -->
-<div class="section">
-  <div class="category-wrapper">
-    <div class="category-track" id="categoryTop"></div>
-  </div>
+<div class="banner" id="bannerText">
+Big Sales Are Happening Now 🔥
 </div>
 
-<!-- ================= 6 PRODUCTS ================= -->
-<div class="section">
-  <div class="products" id="productSection1"></div>
+<div class="category-wrapper">
+<div class="category-track" id="categoriesTop"></div>
 </div>
 
-<!-- ================= FEATURED ================= -->
-<div class="section">
-  <div class="featured" id="featuredProduct"></div>
+<div class="countdown" id="countdown"></div>
+
+<div class="products" id="productSection1"></div>
+
+<div class="featured" id="featuredProduct"></div>
+
+<div class="products" id="productSection2"></div>
+
+<div class="flip-container">
+<div class="card-wrapper">
+<div class="card-inner">
+<div class="card-front">Run Facebook Ads</div>
+<div class="card-back">Get Quality Leads Daily 🚀</div>
+</div>
+</div>
+<div class="card-wrapper">
+<div class="card-inner">
+<div class="card-front">Build E-commerce Store</div>
+<div class="card-back">Start Selling Online 💰</div>
+</div>
+</div>
 </div>
 
-<!-- ================= 6 PRODUCTS AGAIN ================= -->
-<div class="section">
-  <div class="products" id="productSection2"></div>
+<div class="category-wrapper">
+<div class="category-track" id="categoriesBottom"></div>
 </div>
-
-<!-- ================= CATEGORY BOTTOM ================= -->
-<div class="section">
-  <div class="category-wrapper">
-    <div class="category-track" id="categoryBottom"></div>
-  </div>
-</div>
-
 
 <script>
-/* ===============================
-   SAMPLE CATEGORIES
-=============================== */
-const categories = [
-  {name:"E-commerce", link:"category.html?cat=ecommerce"},
-  {name:"Business Website", link:"category.html?cat=business"},
-  {name:"Blog Website", link:"category.html?cat=blog"},
-  {name:"Lead Generation", link:"category.html?cat=leads"},
-  {name:"Ads Management", link:"category.html?cat=ads"},
-  {name:"SEO Services", link:"category.html?cat=seo"},
-  {name:"Graphic Design", link:"category.html?cat=graphics"},
+
+/* ================= CART COUNT ================= */
+function updateCartCount(){
+ let cart=JSON.parse(localStorage.getItem("cart"))||[];
+ document.getElementById("cart-count").innerText=
+ cart.reduce((sum,item)=>sum+item.quantity,0);
+}
+updateCartCount();
+
+/* ================= LOGIN STATUS ================= */
+let currentUser=JSON.parse(localStorage.getItem("currentUser"));
+if(currentUser){
+ document.getElementById("loginLink").innerText="Hi, "+currentUser.name;
+}
+
+/* ================= CATEGORY ================= */
+const categories=[
+"E-commerce","Business","Blog","Leads","SEO","Graphics","Ads"
 ];
 
-/* Duplicate for infinite loop */
-function renderCategories(containerId){
-  const container = document.getElementById(containerId);
-  let html = "";
-  [...categories, ...categories].forEach(cat=>{
-    html += `
-      <a href="${cat.link}" style="text-decoration:none;color:black;">
-        <div class="category-card">
-          <h4>${cat.name}</h4>
-        </div>
-      </a>
-    `;
-  });
-  container.innerHTML = html;
+function renderCategories(id){
+ const container=document.getElementById(id);
+ container.innerHTML="";
+ [...categories,...categories].forEach(cat=>{
+  container.innerHTML+=
+  `<div class="category-card">${cat}</div>`;
+ });
 }
 
-renderCategories("categoryTop");
-renderCategories("categoryBottom");
+renderCategories("categoriesTop");
+renderCategories("categoriesBottom");
 
-
-/* ===============================
-   PRODUCTS FROM YOUR SERVICES
-=============================== */
-function renderProducts(sectionId, start, end){
-  const container = document.getElementById(sectionId);
-  let html = "";
-
-  services.slice(start, end).forEach(product=>{
-    html += `
-      <div class="product-card">
-        <img src="${product.image || 'https://via.placeholder.com/300'}">
-        <h4>${product.title}</h4>
-        <p>${product.description}</p>
-        <strong>$${product.price}</strong>
-        <button onclick="addToCart(${product.id})">Add To Cart</button>
-      </div>
-    `;
-  });
-
-  container.innerHTML = html;
+/* ================= PRODUCTS ================= */
+function renderProducts(section,start,end){
+ const container=document.getElementById(section);
+ container.innerHTML="";
+ services.slice(start,end).forEach(p=>{
+  container.innerHTML+=`
+  <div class="card">
+   <img src="${p.image||'https://via.placeholder.com/300'}">
+   <h4>${p.title}</h4>
+   <p>${p.description}</p>
+   <strong>$${p.price}</strong>
+   <button onclick="addToCart(${p.id})">Add To Cart</button>
+  </div>`;
+ });
 }
 
-renderProducts("productSection1", 0, 6);
-renderProducts("productSection2", 6, 12);
+renderProducts("productSection1",0,6);
+renderProducts("productSection2",6,12);
 
-
-/* ===============================
-   FEATURED ROTATOR
-=============================== */
-const featured = document.getElementById("featuredProduct");
-let featuredIndex = 0;
-
+/* ================= FEATURED ROTATOR ================= */
+let featuredIndex=0;
 function rotateFeatured(){
-  const product = services[featuredIndex];
-
-  featured.innerHTML = `
-    <img src="${product.image || 'https://via.placeholder.com/600x300'}">
-    <h3>${product.title}</h3>
-    <p>${product.description}</p>
-    <h2>$${product.price}</h2>
-    <button onclick="addToCart(${product.id})">Add To Cart</button>
-  `;
-
-  featuredIndex = (featuredIndex + 1) % services.length;
+ let p=services[featuredIndex];
+ document.getElementById("featuredProduct").innerHTML=`
+ <img src="${p.image||'https://via.placeholder.com/600'}" style="width:100%;max-height:300px;object-fit:cover;border-radius:15px;">
+ <h3>${p.title}</h3>
+ <p>${p.description}</p>
+ <h2>$${p.price}</h2>
+ <button onclick="addToCart(${p.id})">Add To Cart</button>
+ `;
+ featuredIndex=(featuredIndex+1)%services.length;
 }
-
 rotateFeatured();
-setInterval(rotateFeatured, 4000);
+setInterval(rotateFeatured,4000);
 
-
-/* ===============================
-   CART COUNT
-=============================== */
-function updateCartCount(){
-  let cart = JSON.parse(localStorage.getItem("cart")) || [];
-  const count = document.getElementById("cart-count");
-  if(count) count.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
-}
-
-updateCartCount();
+/* ================= COUNTDOWN ================= */
+let end=new Date().getTime()+86400000;
+setInterval(()=>{
+ let now=new Date().getTime();
+ let distance=end-now;
+ let h=Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+ let m=Math.floor((distance%(1000*60*60))/(1000*60));
+ let s=Math.floor((distance%(1000*60))/1000);
+ document.getElementById("countdown").innerText=
+ "Flash Sale Ends In: "+h+"h "+m+"m "+s+"s";
+},1000);
 
 </script>
 
 </body>
-</html>
+  </html>
