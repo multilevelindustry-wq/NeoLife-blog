@@ -177,7 +177,7 @@ function renderServices(serviceList){
       <h4>$${service.price}</h4>
 
       <button class="add-cart-btn" data-id="${service.id}">
-        Start My Lead Campaign
+        Oerder Now 
       </button>
 
       <hr>
