@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Home</title>
+
+<style>
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#f5f5f5;
+}
+
+header{
+  background:#111;
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+header a{
+  color:white;
+  text-decoration:none;
+  margin-left:15px;
+}
+
+.section{
+  padding:40px 20px;
+}
+
+/* =========================
+   CATEGORY SLIDER
+========================= */
+.category-wrapper{
+  overflow:hidden;
+  position:relative;
+}
+
+.category-track{
+  display:flex;
+  gap:20px;
+  animation:scrollLeft 25s linear infinite;
+}
+
+.category-card{
+  min-width:180px;
+  background:white;
+  padding:20px;
+  border-radius:12px;
+  text-align:center;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.category-card:hover{
+  transform:translateY(-5px);
+}
+
+@keyframes scrollLeft{
+  0%{ transform:translateX(0); }
+  100%{ transform:translateX(-50%); }
+}
+
+/* =========================
+   PRODUCT GRID
+========================= */
+.products{
+  display:grid;
+  gap:20px;
+}
+
+@media(min-width:768px){
+  .products{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+@media(max-width:767px){
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+.product-card{
+  background:white;
+  padding:15px;
+  border-radius:12px;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  display:flex;
+  flex-direction:column;
+}
+
+.product-card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+.product-card h4{
+  margin:10px 0 5px;
+}
+
+.product-card p{
+  font-size:14px;
+  flex:1;
+}
+
+.product-card button{
+  background:#ff7300;
+  border:none;
+  padding:10px;
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* =========================
+   BIG FEATURED CARD
+========================= */
+.featured{
+  background:white;
+  border-radius:15px;
+  padding:20px;
+  box-shadow:0 6px 15px rgba(0,0,0,0.1);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+}
+
+.featured img{
+  width:100%;
+  max-height:300px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:15px;
+}
+
+</style>
+</head>
+<body>
+
+<header>
+  <h2>My Store</h2>
+  <div>
+    <a href="login.html">Login</a>
+    <a href="register.html">Register</a>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+  </div>
+</header>
+
+<!-- ================= CATEGORY TOP ================= -->
+<div class="section">
+  <div class="category-wrapper">
+    <div class="category-track" id="categoryTop"></div>
+  </div>
+</div>
+
+<!-- ================= 6 PRODUCTS ================= -->
+<div class="section">
+  <div class="products" id="productSection1"></div>
+</div>
+
+<!-- ================= FEATURED ================= -->
+<div class="section">
+  <div class="featured" id="featuredProduct"></div>
+</div>
+
+<!-- ================= 6 PRODUCTS AGAIN ================= -->
+<div class="section">
+  <div class="products" id="productSection2"></div>
+</div>
+
+<!-- ================= CATEGORY BOTTOM ================= -->
+<div class="section">
+  <div class="category-wrapper">
+    <div class="category-track" id="categoryBottom"></div>
+  </div>
+</div>
+
+
+<script>
+/* ===============================
+   SAMPLE CATEGORIES
+=============================== */
+const categories = [
+  {name:"E-commerce", link:"category.html?cat=ecommerce"},
+  {name:"Business Website", link:"category.html?cat=business"},
+  {name:"Blog Website", link:"category.html?cat=blog"},
+  {name:"Lead Generation", link:"category.html?cat=leads"},
+  {name:"Ads Management", link:"category.html?cat=ads"},
+  {name:"SEO Services", link:"category.html?cat=seo"},
+  {name:"Graphic Design", link:"category.html?cat=graphics"},
+];
+
+/* Duplicate for infinite loop */
+function renderCategories(containerId){
+  const container = document.getElementById(containerId);
+  let html = "";
+  [...categories, ...categories].forEach(cat=>{
+    html += `
+      <a href="${cat.link}" style="text-decoration:none;color:black;">
+        <div class="category-card">
+          <h4>${cat.name}</h4>
+        </div>
+      </a>
+    `;
+  });
+  container.innerHTML = html;
+}
+
+renderCategories("categoryTop");
+renderCategories("categoryBottom");
+
+
+/* ===============================
+   PRODUCTS FROM YOUR SERVICES
+=============================== */
+function renderProducts(sectionId, start, end){
+  const container = document.getElementById(sectionId);
+  let html = "";
+
+  services.slice(start, end).forEach(product=>{
+    html += `
+      <div class="product-card">
+        <img src="${product.image || 'https://via.placeholder.com/300'}">
+        <h4>${product.title}</h4>
+        <p>${product.description}</p>
+        <strong>$${product.price}</strong>
+        <button onclick="addToCart(${product.id})">Add To Cart</button>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+renderProducts("productSection1", 0, 6);
+renderProducts("productSection2", 6, 12);
+
+
+/* ===============================
+   FEATURED ROTATOR
+=============================== */
+const featured = document.getElementById("featuredProduct");
+let featuredIndex = 0;
+
+function rotateFeatured(){
+  const product = services[featuredIndex];
+
+  featured.innerHTML = `
+    <img src="${product.image || 'https://via.placeholder.com/600x300'}">
+    <h3>${product.title}</h3>
+    <p>${product.description}</p>
+    <h2>$${product.price}</h2>
+    <button onclick="addToCart(${product.id})">Add To Cart</button>
+  `;
+
+  featuredIndex = (featuredIndex + 1) % services.length;
+}
+
+rotateFeatured();
+setInterval(rotateFeatured, 4000);
+
+
+/* ===============================
+   CART COUNT
+=============================== */
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const count = document.getElementById("cart-count");
+  if(count) count.innerText = cart.reduce((sum, item) => sum + item.quantity, 0);
+}
+
+updateCartCount();
+
+</script>
+
+</body>
+</html>
