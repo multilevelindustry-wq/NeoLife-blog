@@ -253,18 +253,67 @@ Big Sales Are Happening Now 🔥
 
 
 
-   
+
 <script>
 
 /* ===============================
-   SAFE SERVICES CHECK
+   SAMPLE PRODUCTS (REAL DATA)
 ================================ */
-if(typeof services === "undefined"){
-  var services = [];
+const services = [
+{
+  id:1,
+  title:"E-commerce Store Setup",
+  description:"Professional online store built for high conversions.",
+  price:150,
+  image:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d"
+},
+{
+  id:2,
+  title:"Business Website",
+  description:"Premium responsive website for your brand.",
+  price:120,
+  image:"https://images.unsplash.com/photo-1498050108023-c5249f4df085"
+},
+{
+  id:3,
+  title:"SEO Optimization",
+  description:"Rank your website on Google first page.",
+  price:80,
+  image:"https://images.unsplash.com/photo-1460925895917-afdab827c52f"
+},
+{
+  id:4,
+  title:"Facebook Ads Setup",
+  description:"Generate daily leads with paid ads.",
+  price:100,
+  image:"https://images.unsplash.com/photo-1519389950473-47ba0277781c"
+},
+{
+  id:5,
+  title:"Graphic Design Pack",
+  description:"Flyers, logos and branding materials.",
+  price:60,
+  image:"https://images.unsplash.com/photo-1542744173-8e7e53415bb0"
+},
+{
+  id:6,
+  title:"Landing Page Design",
+  description:"High converting landing page design.",
+  price:90,
+  image:"https://images.unsplash.com/photo-1492724441997-5dc865305da7"
+},
+{
+  id:7,
+  title:"Blog Website",
+  description:"Modern blog with monetization system.",
+  price:110,
+  image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee"
 }
+];
+
 
 /* ===============================
-   CART COUNT (GLOBAL)
+   CART SYSTEM
 ================================ */
 function updateCartCount(){
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -273,56 +322,9 @@ function updateCartCount(){
 }
 updateCartCount();
 
-/* ===============================
-   LOGIN DISPLAY SYSTEM
-================================ */
-const loginLink = document.getElementById("loginLink");
-const nav = loginLink.parentElement;
-
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-if(currentUser){
-  loginLink.innerText = currentUser.name;
-  loginLink.href = "#";
-}else{
-  loginLink.innerText = "Login";
-}
-
-/* ===============================
-   CATEGORY WITH LINKS
-================================ */
-const categories = [
- {name:"E-commerce", link:"category.html?cat=ecommerce"},
- {name:"Business", link:"category.html?cat=business"},
- {name:"Blog", link:"category.html?cat=blog"},
- {name:"Leads", link:"category.html?cat=leads"},
- {name:"SEO", link:"category.html?cat=seo"},
- {name:"Graphics", link:"category.html?cat=graphics"},
- {name:"Ads", link:"category.html?cat=ads"},
-];
-
-function renderCategories(id){
-  const container = document.getElementById(id);
-  container.innerHTML = "";
-  [...categories,...categories].forEach(cat=>{
-    container.innerHTML += `
-      <a href="${cat.link}" style="text-decoration:none;">
-        <div class="category-card">${cat.name}</div>
-      </a>
-    `;
-  });
-}
-
-renderCategories("categoriesTop");
-renderCategories("categoriesBottom");
-
-/* ===============================
-   ADD TO CART (INSTANT)
-================================ */
 function addToCart(id){
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   let product = services.find(p => p.id === id);
-  if(!product) return;
 
   let existing = cart.find(i => i.id === id);
   if(existing){
@@ -336,20 +338,63 @@ function addToCart(id){
 }
 
 /* ===============================
-   PRODUCT RENDER FIX
+   LOGIN DISPLAY
+================================ */
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+const loginLink = document.getElementById("loginLink");
+
+if(currentUser){
+  loginLink.innerText = currentUser.name;
+  loginLink.href = "#";
+}else{
+  loginLink.innerText = "Login";
+}
+
+
+/* ===============================
+   CATEGORY WITH IMAGES
+================================ */
+const categories = [
+ {name:"E-commerce", image:"https://images.unsplash.com/photo-1556742049-0cfed4f6a45d", link:"category.html"},
+ {name:"Business", image:"https://images.unsplash.com/photo-1498050108023-c5249f4df085", link:"category.html"},
+ {name:"Blog", image:"https://images.unsplash.com/photo-1500530855697-b586d89ba3ee", link:"category.html"},
+ {name:"SEO", image:"https://images.unsplash.com/photo-1460925895917-afdab827c52f", link:"category.html"},
+ {name:"Graphics", image:"https://images.unsplash.com/photo-1542744173-8e7e53415bb0", link:"category.html"},
+ {name:"Ads", image:"https://images.unsplash.com/photo-1519389950473-47ba0277781c", link:"category.html"},
+ {name:"Marketing", image:"https://images.unsplash.com/photo-1492724441997-5dc865305da7", link:"category.html"}
+];
+
+function renderCategories(id){
+  const container = document.getElementById(id);
+  container.innerHTML = "";
+
+  [...categories,...categories].forEach(cat=>{
+    container.innerHTML += `
+      <a href="${cat.link}" style="text-decoration:none;">
+        <div class="category-card">
+          <img src="${cat.image}" style="width:100%;height:100px;object-fit:cover;border-radius:10px;">
+          <p>${cat.name}</p>
+        </div>
+      </a>
+    `;
+  });
+}
+
+renderCategories("categoriesTop");
+renderCategories("categoriesBottom");
+
+
+/* ===============================
+   PRODUCTS WITH IMAGES
 ================================ */
 function renderProducts(section,start,end){
   const container = document.getElementById(section);
   container.innerHTML = "";
 
-  if(!services.length){
-    container.innerHTML = "<p>No products available</p>";
-    return;
-  }
-
   services.slice(start,end).forEach(p=>{
     container.innerHTML += `
       <div class="card">
+        <img src="${p.image}">
         <h3>${p.title}</h3>
         <p>${p.description}</p>
         <strong>$${p.price}</strong>
@@ -362,46 +407,46 @@ function renderProducts(section,start,end){
 }
 
 renderProducts("productSection1",0,6);
-renderProducts("productSection2",6,12);
+renderProducts("productSection2",1,7);
+
 
 /* ===============================
-   BEAUTIFUL 7 SLIDE BANNER
+   BANNER SLIDER (7 PRODUCTS)
 ================================ */
-const bannerProducts = services.slice(0,7);
 let bannerIndex = 0;
 
 function rotateBanner(){
-  if(!bannerProducts.length) return;
-
-  const p = bannerProducts[bannerIndex];
+  const p = services[bannerIndex];
 
   document.getElementById("bannerText").innerHTML = `
-    <div>
+    <div style="text-align:center;">
+      <img src="${p.image}" style="height:180px;border-radius:12px;">
       <h2>${p.title}</h2>
       <p>${p.description}</p>
       <h3>$${p.price}</h3>
-      <button onclick="window.location='all-products.html'">
+      <button onclick="addToCart(${p.id})">
         Check Now
       </button>
     </div>
   `;
 
-  bannerIndex = (bannerIndex + 1) % bannerProducts.length;
+  bannerIndex = (bannerIndex + 1) % services.length;
 }
 
 rotateBanner();
 setInterval(rotateBanner,4000);
 
+
 /* ===============================
    FEATURED ROTATOR
 ================================ */
 let featuredIndex = 0;
-function rotateFeatured(){
-  if(!services.length) return;
 
+function rotateFeatured(){
   let p = services[featuredIndex];
 
   document.getElementById("featuredProduct").innerHTML = `
+    <img src="${p.image}" style="width:100%;max-height:300px;object-fit:cover;border-radius:15px;">
     <h2>${p.title}</h2>
     <p>${p.description}</p>
     <h3>$${p.price}</h3>
@@ -412,8 +457,10 @@ function rotateFeatured(){
 
   featuredIndex = (featuredIndex + 1) % services.length;
 }
+
 rotateFeatured();
 setInterval(rotateFeatured,5000);
+
 
 /* ===============================
    FLASH SALE COUNTDOWN
@@ -433,7 +480,7 @@ setInterval(()=>{
 
 },1000);
 
-</script>
+     </script>
 
 </body>
   </html>
