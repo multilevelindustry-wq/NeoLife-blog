@@ -26,7 +26,7 @@ const services = [
 
 {id: 9, title: "30Gb For 30Days Mtb Data Plan", description: "Get started with 30Days Monthly Offer, Order 40x per month N52,000 Cash Token", price: 8.59, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 10, title: "1.5Gb For 7Days Social Plan Airtel Data Plan", description: "Get Exciting 7Days Social Data Plan, Buy 100x of 1.5Gb per month, Win N10,000 Cash Price", price: 90.64, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
+{id: 10, title: "1.5Gb For 7Days Social Plan Airtel Data Plan", description: "Get Exciting 7Days Social Data Plan, Buy 100x of 1.5Gb per month, Win N11,000 Cash Price", price: 0.91, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
 
 {id: 11, title: "4Gb For 2Days Mtn Data Plan", description: "Quick Offer Of the Day, Order 75x Per Month For N17,000 Cash Price", price: 1.23, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
