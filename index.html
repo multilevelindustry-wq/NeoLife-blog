@@ -202,17 +202,64 @@ button{
   background:linear-gradient(45deg,#ff7300,#ff9800);
 }
 
+
+   /* ================= MOBILE FIX ================= */
+@media(max-width:768px){
+
+  header{
+    padding:15px 20px;
+    flex-direction:column;
+    gap:10px;
+  }
+
+  nav{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  nav a{
+    margin:8px;
+    font-size:14px;
+  }
+
+  .banner{
+    height:auto;
+    padding:30px 15px;
+    font-size:20px;
+  }
+
+  .featured{
+    margin:20px;
+    padding:20px;
+  }
+
+  .category-wrapper{
+    margin:20px;
+  }
+
+  .products{
+    padding:20px;
+  }
+
+  .card img{
+    height:130px;
+  }
+
+                  }
 </style>
 </head>
 <body>
 
 <header>
 <h2>Premium Store</h2>
-<nav>
+
+   <nav>
 <a href="login.html" id="loginLink">Login</a>
-<a href="register.html">Register</a>
-<a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
-</nav>
+<a href="register.html" id="registerLink">Register</a>
+<a href="#" id="cartLink">Cart (<span id="cart-count">0</span>)</a>
+   </nav>
+   
 </header>
 
 <div class="banner" id="bannerText">
@@ -336,19 +383,46 @@ function addToCart(id){
   localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
 }
-
 /* ===============================
-   LOGIN DISPLAY
+   LOGIN / LOGOUT DISPLAY
 ================================ */
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
 const loginLink = document.getElementById("loginLink");
+const registerLink = document.getElementById("registerLink");
+const cartLink = document.getElementById("cartLink");
 
 if(currentUser){
+
   loginLink.innerText = currentUser.name;
   loginLink.href = "#";
+
+  registerLink.innerText = "Logout";
+  registerLink.href = "#";
+
+  registerLink.onclick = function(){
+    localStorage.removeItem("currentUser");
+    alert("Logged Out Successfully");
+    window.location.reload();
+  };
+
+  cartLink.href = "cart.html";
+
 }else{
+
   loginLink.innerText = "Login";
-}
+  loginLink.href = "login.html";
+
+  registerLink.innerText = "Register";
+  registerLink.href = "register.html";
+
+  cartLink.onclick = function(e){
+    e.preventDefault();
+    alert("Please login first to access cart.");
+    window.location.href = "login.html";
+  };
+
+   }
 
 
 /* ===============================
@@ -419,16 +493,17 @@ function rotateBanner(){
   const p = services[bannerIndex];
 
   document.getElementById("bannerText").innerHTML = `
-    <div style="text-align:center;">
-      <img src="${p.image}" style="height:180px;border-radius:12px;">
-      <h2>${p.title}</h2>
-      <p>${p.description}</p>
-      <h3>$${p.price}</h3>
-      <button onclick="addToCart(${p.id})">
-        Check Now
-      </button>
-    </div>
-  `;
+  <div style="text-align:center;max-width:500px;">
+    <img src="${p.image}" 
+         style="width:100%;max-height:150px;object-fit:cover;border-radius:12px;margin-bottom:10px;">
+    <h3>${p.title}</h3>
+    <p style="font-size:14px;">${p.description}</p>
+    <strong>$${p.price}</strong><br>
+    <button onclick="addToCart(${p.id})">
+      Check Now
+    </button>
+  </div>
+`;
 
   bannerIndex = (bannerIndex + 1) % services.length;
 }
