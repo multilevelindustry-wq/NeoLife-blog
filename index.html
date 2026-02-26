@@ -258,6 +258,12 @@ button{
 <a href="register.html" id="registerLink">Register</a>
 <a href="#" id="cartLink">Cart (<span id="cart-count">0</span>)</a>
    </nav>
+
+   <div style="text-align:center; margin:20px 0;">
+  <input type="text" id="searchBox" placeholder="Search for products..." 
+         style="width:50%; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px;">
+   </div>
+
    
 </header>
 
@@ -590,6 +596,39 @@ setInterval(()=>{
 
 },1000);
 
+
+
+   
+// ===============================
+// DEBOUNCED SEARCH (FAST)
+// ===============================
+const searchBox = document.getElementById("searchBox");
+
+if (searchBox) {
+
+  let timeout;
+
+  searchBox.addEventListener("input", function(){
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+
+      let query = this.value.toLowerCase();
+
+      let filtered = services.filter(s => 
+        s.title.toLowerCase().includes(query) || 
+        s.description.toLowerCase().includes(query)
+      );
+
+      renderServices(filtered);
+
+    }, 300);
+
+  });
+
+   }
+   
      </script>
 
 </body>
