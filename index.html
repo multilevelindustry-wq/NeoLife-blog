@@ -7,30 +7,26 @@
 
 <style>
 /* ===============================
-   MOBILE FIRST
+   WRAPPER (PERFECT MOBILE + DESKTOP)
 ================================ */
 .wrapper{
-  width: 100%;
+  width:100%;
+  max-width:1200px;
+  margin:auto;
+  padding:0 12px;
 }
 
-   /* Small Tablet */
-@media (min-width: 720px){
+/* Tablet */
+@media (min-width:768px){
   .wrapper{
-    width:600px;
-  }
-}
-
-/* Small Tablet */
-@media (min-width: 1500px){
-  .wrapper{
-    width:10240px;
+    max-width:900px;
   }
 }
 
 /* Desktop */
-@media (min-width: 2400px){
+@media (min-width:1200px){
   .wrapper{
-    width:1024px;
+    max-width:1200px;
   }
 }
    
@@ -155,16 +151,22 @@ nav a:hover { color:#ff9800; }
 /* ================= PRODUCT GRID ================= */
 .products{
   display:grid;
-  gap:10px;
-  padding:10px;
+  gap:15px;
+  padding:15px;
 }
 
+/* Mobile → 2 per row (like your picture) */
 @media(max-width:767px){
-  .products{grid-template-columns:repeat(2,1fr);}
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
 }
 
+/* Desktop → 3 per row */
 @media(min-width:768px){
-  .products{grid-template-columns:repeat(3,1fr);}
+  .products{
+    grid-template-columns:repeat(3,1fr);
+  }
 }
 
 .card{
