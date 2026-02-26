@@ -5,35 +5,34 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Premium Store</title>
 
-<style>
+   /* ===============================
+   GLOBAL RESET + RESPONSIVE FIX
+================================ */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html, body{
+  width:100%;
+  overflow-x:hidden;
+}
+
 /* ===============================
-   WRAPPER (PERFECT MOBILE + DESKTOP)
+   WRAPPER (FIXED RESPONSIVE)
 ================================ */
 .wrapper{
-  width:980px;
+  width:100%;
   max-width:1200px;
   margin:auto;
+  padding:0 15px;
 }
 
-/* Tablet */
-@media (min-width:768px){
-  .wrapper{
-    max-width:900px;
-  }
-}
-
-/* Desktop */
-@media (min-width:1200px){
-  .wrapper{
-    max-width:1200px;
-  }
-}
-   
 /* ===============================
    YOUR BACKGROUND DESIGN
 ================================ */
 body {
-  margin: 0;
   font-family: 'Segoe UI', sans-serif;
   background: url('https://images.unsplash.com/photo-1492724441997-5dc865305da7') no-repeat center center fixed;
   background-size: cover;
@@ -53,7 +52,7 @@ header {
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:20px 60px;
+  padding:20px 30px;
   backdrop-filter:blur(10px);
   background:rgba(0,0,0,0.4);
   position:sticky;
@@ -66,18 +65,36 @@ nav a {
   margin-left:20px;
   text-decoration:none;
   font-weight:600;
+  font-size:14px;
 }
 
-nav a:hover { color:#ff9800; }
-  
+nav a:hover { 
+  color:#ff9800; 
+}
+
+/* Header Mobile Fix */
+@media(max-width:768px){
+  header{
+    flex-direction:column;
+    gap:10px;
+    text-align:center;
+    padding:15px;
+  }
+
+  nav a{
+    margin:0 10px;
+  }
+}
+
 /* ================= BANNER ADS ================= */
 .banner{
-  height:320px;
   display:flex;
   gap:15px;
   padding:15px;
   background:linear-gradient(45deg,#ff7300,#ff9800);
   overflow:hidden;
+  border-radius:10px;
+  margin-top:15px;
 }
 
 .banner-ad{
@@ -85,6 +102,7 @@ nav a:hover { color:#ff9800; }
   position:relative;
   border-radius:15px;
   overflow:hidden;
+  height:300px;
 }
 
 .banner-ad img{
@@ -120,10 +138,22 @@ nav a:hover { color:#ff9800; }
   padding:8px 14px;
   font-size:14px;
 }
+
+/* Banner Mobile */
+@media(max-width:768px){
+  .banner{
+    flex-direction:column;
+  }
+
+  .banner-ad{
+    height:180px;
+  }
+}
+
 /* ================= CATEGORY SLIDER ================= */
 .category-wrapper{
   overflow:hidden;
-  margin:20px;
+  margin:20px 0;
 }
 
 .category-track{
@@ -133,11 +163,11 @@ nav a:hover { color:#ff9800; }
 }
 
 .category-card{
-  min-width:180px;
+  min-width:160px;
   background:white;
   color:#111;
-  padding:5px;
-  border-radius:5px;
+  padding:8px;
+  border-radius:8px;
   text-align:center;
   font-weight:bold;
 }
@@ -151,10 +181,10 @@ nav a:hover { color:#ff9800; }
 .products{
   display:grid;
   gap:15px;
-  padding:15px;
+  padding:15px 0;
 }
 
-/* Mobile → 2 per row (like your picture) */
+/* Mobile → 2 per row */
 @media(max-width:767px){
   .products{
     grid-template-columns:repeat(2,1fr);
@@ -171,58 +201,69 @@ nav a:hover { color:#ff9800; }
 .card{
   background:white;
   color:#111;
-  padding:5px;
-  border-radius:5px;
+  padding:10px;
+  border-radius:10px;
   box-shadow:0 10px 30px rgba(0,0,0,0.4);
   transition:0.3s;
 }
 
 .card:hover{
-  transform:translateY(-10px);
+  transform:translateY(-6px);
 }
 
 .card img{
   width:100%;
-  height:160px;
+  height:150px;
   object-fit:cover;
-  border-radius:10px;
+  border-radius:8px;
+}
+
+.card h3{
+  font-size:16px;
+  margin-top:8px;
+}
+
+.card p{
+  font-size:13px;
+  margin:5px 0;
 }
 
 button{
-  padding:10px;
+  padding:8px 10px;
   border:none;
   background:linear-gradient(45deg,#ff7300,#ff9800);
   color:white;
-  border-radius:8px;
+  border-radius:6px;
   cursor:pointer;
-  margin-top:10px;
+  margin-top:8px;
   font-weight:bold;
+  font-size:13px;
 }
 
 /* ================= FEATURED ================= */
 .featured{
-  margin:40px;
-  padding:30px;
+  margin:30px 0;
+  padding:20px;
   background:white;
   color:#111;
-  border-radius:20px;
+  border-radius:15px;
   text-align:center;
 }
 
 /* ================= COUNTDOWN ================= */
 .countdown{
   text-align:center;
-  font-size:22px;
+  font-size:20px;
   font-weight:bold;
-  margin-top:10px;
+  margin:15px 0;
   color:#ff9800;
 }
 
 /* ================= FLIP ADS ================= */
 .flip-container{
   display:grid;
-  gap:30px;
-  padding:40px;
+  gap:20px;
+  padding:30px 0;
   grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 }
 
@@ -236,9 +277,6 @@ button{
   height:200px;
   transition:transform 0.8s;
   transform-style:preserve-3d;
-}
-
-.card-inner{
   animation:autoFlip 6s infinite;
 }
 
@@ -261,16 +299,20 @@ button{
   align-items:center;
   font-weight:bold;
   padding:20px;
+  text-align:center;
 }
 
-.card-front{background:white;color:#111;}
+.card-front{
+  background:white;
+  color:#111;
+}
+
 .card-back{
   transform:rotateY(180deg);
   background:linear-gradient(45deg,#ff7300,#ff9800);
+  color:white;
 }
 
-
-</style>
 </head>
 <body>
 <div class="wrapper">
