@@ -27,26 +27,47 @@ body::before {
 }
 
 /* ================= HEADER ================= */
-header {
+/* ================= HEADER LAYOUT FIX ================= */
+header{
   display:flex;
-  justify-content:space-between;
+  flex-direction:column;
   align-items:center;
-  padding:20px 60px;
-  backdrop-filter:blur(10px);
-  background:rgba(0,0,0,0.4);
-  position:sticky;
-  top:0;
-  z-index:1000;
+  gap:15px;
+  padding:20px;
 }
 
-nav a {
-  color:#fff;
-  margin-left:20px;
-  text-decoration:none;
-  font-weight:600;
+/* Keep nav horizontal */
+nav{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
 }
 
-nav a:hover { color:#ff9800; }
+/* Search Box */
+.search-container{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+
+#searchBox{
+  width:50%;
+  max-width:500px;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+/* Mobile Fix */
+@media(max-width:768px){
+  #searchBox{
+    width:90%;
+  }
+}
+
+
   
 /* ================= BANNER ADS ================= */
 .banner{
@@ -251,20 +272,19 @@ button{
 <body>
   <!-- All your website content here -->
 <header>
-<h2>Premium Store</h2>
+  <h2>Premium Store</h2>
 
-   <nav>
-<a href="login.html" id="loginLink">Login</a>
-<a href="register.html" id="registerLink">Register</a>
-<a href="#" id="cartLink">Cart (<span id="cart-count">0</span>)</a>
-   </nav>
-<br>
-   <div style="text-align:center; margin:20px 0;">
-  <input type="text" id="searchBox" placeholder="Search for products..." 
-         style="width:50%; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px;">
-   </div>
+  <nav>
+    <a href="login.html" id="loginLink">Login</a>
+    <a href="register.html" id="registerLink">Register</a>
+    <a href="#" id="cartLink">
+      Cart (<span id="cart-count">0</span>)
+    </a>
+  </nav>
 
-   
+  <div class="search-container">
+    <input type="text" id="searchBox" placeholder="Search for products...">
+  </div>
 </header>
 
 <div class="banner" id="bannerText">
