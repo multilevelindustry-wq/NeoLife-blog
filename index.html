@@ -629,25 +629,62 @@ setInterval(()=>{
 },1000);
 
 
+// ===============================
+// SEARCH SYSTEM (PRODUCT + CATEGORY)
+// ===============================
+
+const searchBox = document.getElementById("searchBox");
+
+function renderSearchResults(filtered){
+
+  const section1 = document.getElementById("productSection1");
+  const section2 = document.getElementById("productSection2");
+
+  section1.innerHTML = "";
+  section2.innerHTML = "";
+
+  if(filtered.length === 0){
+    section1.innerHTML = "<h3 style='grid-column:1/-1;text-align:center;'>No products found</h3>";
+    return;
+  }
+
+  filtered.forEach((p,index)=>{
+
+    const card = `
+      <div class="card">
+        <img src="${p.image}">
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <strong>$${p.price}</strong>
+        <button onclick="addToCart(${p.id})">
+          Add To Cart
+        </button>
+      </div>
+    `;
+
+    if(index < 6){
+      section1.innerHTML += card;
+    }else{
+      section2.innerHTML += card;
+    }
+
+  });
+}
 
 // ===============================
-// SEARCH CATEGORY MATCH
+// CATEGORY MATCH
 // ===============================
 function getMatchingCategories(query){
-
-  query = query.toLowerCase();
-
   return categories.filter(cat => 
     cat.name.toLowerCase().includes(query)
   );
-
 }
 
 function renderCategorySearchResults(matched){
 
-  const section1 = document.getElementById("productSection1");
-
   if(matched.length === 0) return;
+
+  const section1 = document.getElementById("productSection1");
 
   let html = `
     <div style="grid-column:1/-1;">
@@ -670,14 +707,48 @@ function renderCategorySearchResults(matched){
   html += `</div></div>`;
 
   section1.innerHTML = html + section1.innerHTML;
-
 }
 
+// ===============================
+// SEARCH INPUT LISTENER
+// ===============================
+if(searchBox){
 
-   renderSearchResults(filtered);
+  let timeout;
 
-let matchedCategories = getMatchingCategories(query);
-renderCategorySearchResults(matchedCategories);
+  searchBox.addEventListener("input", function(){
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+
+      let query = this.value.toLowerCase().trim();
+
+      // If empty → restore original products
+      if(query === ""){
+        renderProducts("productSection1",0,6);
+        renderProducts("productSection2",1,7);
+        return;
+      }
+
+      // Filter products
+      let filtered = services.filter(s => 
+        s.title.toLowerCase().includes(query) || 
+        s.description.toLowerCase().includes(query)
+      );
+
+      // Render products
+      renderSearchResults(filtered);
+
+      // Render matching categories on top
+      let matchedCategories = getMatchingCategories(query);
+      renderCategorySearchResults(matchedCategories);
+
+    }, 300);
+
+  });
+
+}
 
 </script>
 
