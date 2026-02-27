@@ -630,40 +630,56 @@ setInterval(()=>{
 
 
 
-   
 // ===============================
-// DEBOUNCED SEARCH (FAST)
+// SEARCH CATEGORY MATCH
 // ===============================
-const searchBox = document.getElementById("searchBox");
+function getMatchingCategories(query){
 
-if (searchBox) {
+  query = query.toLowerCase();
 
-  let timeout;
+  return categories.filter(cat => 
+    cat.name.toLowerCase().includes(query)
+  );
 
-  searchBox.addEventListener("input", function(){
+}
 
-    clearTimeout(timeout);
+function renderCategorySearchResults(matched){
 
-    timeout = setTimeout(() => {
+  const section1 = document.getElementById("productSection1");
 
-      let query = this.value.toLowerCase();
+  if(matched.length === 0) return;
 
-      let filtered = services.filter(s => 
-        s.title.toLowerCase().includes(query) || 
-        s.description.toLowerCase().includes(query)
-      );
+  let html = `
+    <div style="grid-column:1/-1;">
+      <h3 style="text-align:center;">Related Categories</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-bottom:20px;">
+  `;
 
-      renderServices(filtered);
-
-    }, 300);
-
+  matched.forEach(cat=>{
+    html += `
+      <a href="${cat.link}" style="text-decoration:none;">
+        <div class="category-card" style="width:180px;">
+          <img src="${cat.image}" 
+               style="width:100%;height:100px;object-fit:cover;border-radius:10px;">
+          <p>${cat.name}</p>
+        </div>
+      </a>
+    `;
   });
 
-   }
+  html += `</div></div>`;
+
+  section1.innerHTML = html + section1.innerHTML;
+
+}
 
 
-                         
-     </script>
+   renderSearchResults(filtered);
+
+let matchedCategories = getMatchingCategories(query);
+renderCategorySearchResults(matchedCategories);
+
+</script>
 
 </body>
   </html>
