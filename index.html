@@ -660,7 +660,38 @@ if (searchBox) {
   });
 
    }
-   
+
+
+     // ===============================
+// DEBOUNCED SEARCH (FAST)
+// ===============================
+const searchBox = document.getElementById("searchBox");
+
+if (searchBox) {
+
+  let timeout;
+
+  searchBox.addEventListener("input", function(){
+
+    clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+
+      let query = this.value.toLowerCase();
+
+      let filtered = services.filter(s => 
+        s.title.toLowerCase().includes(query) || 
+        s.description.toLowerCase().includes(query)
+      );
+
+      renderServices(filtered);
+
+    }, 300);
+
+  });
+
+     }
+                         
      </script>
 
 </body>
