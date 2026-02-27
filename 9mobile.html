@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Premium Web Services</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h2>Web Services Store</h2>
+  <nav>
+    <a href="cart.html">Cart (<span id="cart-count">0</span>)</a>
+    <a href="login.html" id="loginLink">Login</a>
+  </nav>
+</header>
+
+<div style="text-align:center; margin:20px 0;">
+  <input type="text" id="searchBox" placeholder="Search for products..." 
+         style="width:50%; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px;">
+</div>
+
+  
+<div style="text-align:center; margin-top:10px; height:60px;">
+  <h1 id="rotatingText" style="
+      font-size:28px;
+      font-weight:700;
+      line-height:1.3;
+      transition:opacity 0.5s ease;
+      max-width:800px;
+      margin:auto;">
+  </h1>
+</div>
+  
+<div class="container" id="services"></div>
+
+<script src="script.js"></script>
+
+<script>
+// =======================
+// LOGIN + USER DISPLAY
+// =======================
+
+let loggedIn = localStorage.getItem("loggedIn");
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+let nav = document.querySelector("nav");
+
+if(currentUser && loggedIn){
+
+  let nav = document.querySelector("nav");
+
+  let loginLink = document.getElementById("loginLink");
+  if(loginLink){
+    loginLink.remove();
+  }
+
+  let userSpan = document.createElement("span");
+  let displayName = currentUser.name || currentUser.email.split("@")[0];
+  userSpan.innerHTML = "Welcome, <b>" + displayName + "</b>";
+  userSpan.style.marginLeft = "15px";
+
+  nav.appendChild(userSpan);
+
+  let logoutBtn = document.createElement("button");
+  logoutBtn.innerText = "Logout";
+  logoutBtn.style.marginLeft = "10px";
+  logoutBtn.onclick = function(){
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("currentUser");
+      window.location.reload();
+  };
+
+  nav.appendChild(logoutBtn);
+
+}
+  
+</script>
+
+<div id="reviewModal" style="display:none; position:fixed; 
+     top:0; left:0; width:100%; height:100%; 
+     background:rgba(0,0,0,0.6); 
+     justify-content:center; align-items:center; z-index:9999;">
+
+  <div style="background:#fff; width:500px; max-height:80%; 
+       overflow-y:auto; padding:20px; border-radius:10px;">
+
+    <h3>All Reviews</h3>
+    <div id="modalReviews"></div>
+
+    <button onclick="closeReviewModal()" 
+      style="margin-top:10px; background:red; color:white; padding:8px;">
+      Close
+    </button>
+
+  </div>
+</div>
+
+<!-- =======================
+     GLOBAL REVIEWS SECTION
+======================= -->
+
+<div id="allReviewsSection" style="display:none; padding:30px;">
+  <h2>All Reviews</h2>
+  <div id="allReviewsContent"></div>
+  <button onclick="closeAllReviews()" 
+    style="margin-top:15px; padding:8px; background:red; color:white;">
+    Close
+  </button>
+</div>
+
+<!-- =======================
+     FOOTER
+======================= -->
+
+<footer style="background:#111; color:white; padding:40px 20px; margin-top:40px;">
+  <div style="display:flex; flex-wrap:wrap; justify-content:space-around; max-width:1200px; margin:auto;">
+    
+    <div><a href="privacy.html" style="color:white; text-decoration:none;">Privacy Policy</a></div>
+    <div><a href="terms.html" style="color:white; text-decoration:none;">Terms & Conditions</a></div>
+    <div><a href="Blog.html" style="color:white; text-decoration:none;">Blog</a></div>
+    <div><a href="support.html" style="color:white; text-decoration:none;">Customer Service</a></div>
+    <div><a href="refund.html" style="color:white; text-decoration:none;">Refund Policy</a></div>
+    <div><a href="faqs.html" style="color:white; text-decoration:none;">FAQs</a></div>
+    <div><a href="about.html" style="color:white; text-decoration:none;">About Us</a></div>
+    <div><a href="contact.html" style="color:white; text-decoration:none;">Contact Us</a></div>
+
+  </div>
+
+  <p style="text-align:center; margin-top:25px; font-size:14px;">
+    © 2026 NEO-LIFE-STORE. All Rights Reserved.
+  </p>
+      </footer>
+
+</body>
+</html>
