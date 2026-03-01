@@ -50,17 +50,26 @@ function register(){
   let sponsorID = new URLSearchParams(window.location.search).get("ref");
 
   let newUser = {
-    id: generateAffiliateID(),
-    name: nameValue,
-    email: emailValue,
-    password: passwordValue,
-    sponsorID: sponsorID || null,
-    personalPV: 0,
-    teamPV: 0,
-    totalEarnings: 0,
-    withdrawable: 0,
-    level: "Starter",
-    downlines: []
+  id: generateAffiliateID(),
+  name: nameValue,
+  email: emailValue,
+  password: passwordValue,
+  sponsorID: sponsorID || null,
+
+  affiliateID: generateAffiliateID(),
+
+  personalPV: 0,
+  teamPV: 0,
+  monthlyPV: 0,
+
+  earnings: 0,
+  withdrawable: 0,
+
+  rank: "Starter",
+  percentage: 0,
+
+  downlines: [],
+  withdrawals: []
   };
 
   // Add user to array
