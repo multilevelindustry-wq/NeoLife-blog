@@ -12,6 +12,7 @@
   <input type="text" id="name" placeholder="Full Name">
   <input type="email" id="email" placeholder="Email">
   <input type="password" id="password" placeholder="Password">
+  <input type="text" id="manualSponsor" placeholder="Sponsor Name (If no referral link)">
 
   <button onclick="register()">Register</button><br><br>
 
@@ -36,6 +37,7 @@ function register(){
   let nameValue = document.getElementById("name").value.trim();
   let emailValue = document.getElementById("email").value.trim();
   let passwordValue = document.getElementById("password").value.trim();
+  let manualSponsor = document.getElementById("manualSponsor").value.trim();
 
   if(!nameValue || !emailValue || !passwordValue){
     alert("All fields are required!");
@@ -49,8 +51,18 @@ function register(){
     return;
   }
 
-  // Get sponsor from URL
-  let sponsorID = new URLSearchParams(window.location.search).get("ref");
+  // ===============================
+  // GET SPONSOR FROM REF LINK
+  // ===============================
+  let sponsorRef = new URLSearchParams(window.location.search).get("ref");
+  let sponsorID = null;
+
+  if(sponsorRef){
+    let sponsorUser = users.find(u => u.affiliateID === sponsorRef);
+    if(sponsorUser){
+      sponsorID = sponsorUser.id;
+    }
+  }
 
   let newUser = {
     id: generateAffiliateID(),
@@ -60,11 +72,13 @@ function register(){
     email: emailValue,
     password: passwordValue,
 
-    sponsorID: sponsorID || null,
+    sponsorID: sponsorID,
+    sponsorNameManual: sponsorID ? "" : manualSponsor,
 
     personalPV: 0,
     teamPV: 0,
     monthlyPV: 0,
+    totalPV: 0,
 
     earnings: 0,
     withdrawable: 0,
@@ -74,7 +88,6 @@ function register(){
 
     downlines: [],
 
-    // PROFILE INFO (EMPTY UNTIL USER FILLS)
     phone: "",
     address: "",
     bankName: "",
@@ -101,6 +114,6 @@ function register(){
 }
 
 </script>
-
 </body>
 </html>
+
