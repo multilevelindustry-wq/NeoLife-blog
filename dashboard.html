@@ -118,26 +118,52 @@ if(affiliateUser){
 // ===============================
 // ORIGINAL FUNCTIONS (UNCHANGED)
 // ===============================
+  function sendMessage(){
+
+  let msg = document.getElementById("newMessage").value.trim();
+  if(!msg) return;
+
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+  messages.push({
+    from: currentUser.email,
+    to: "admin",
+    text: msg,
+    date: Date.now()
+  });
+
+  localStorage.setItem("messages", JSON.stringify(messages));
+
+  alert("Message Sent to Admin");
+  }
+
+  
 function submitProject(){
+
   let title = document.querySelector("input[type='text']").value.trim();
   let description = document.querySelector("textarea").value.trim();
-  let fileInput = document.querySelector("input[type='file']");
 
   if(!title || !description){
     alert("Project title and description required.");
     return;
   }
 
-  if(fileInput.files.length === 0){
-    alert("Please upload a file.");
-    return;
-  }
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  let projects = JSON.parse(localStorage.getItem("projects")) || [];
+
+  projects.push({
+    email: currentUser.email,
+    title:title,
+    description:description,
+    date:Date.now()
+  });
+
+  localStorage.setItem("projects", JSON.stringify(projects));
 
   alert("Project Submitted Successfully!");
-}
-
-function downloadInvoice(){ alert("Invoice Downloaded"); }
-function sendMessage(){ alert("Message Sent"); }
+      }
 
 </script>
 </body>
