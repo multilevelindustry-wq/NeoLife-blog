@@ -165,6 +165,24 @@ function submitProject(){
   alert("Project Submitted Successfully!");
       }
 
+  function updateProfile(){
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  let user = users.find(u => u.email === currentUser.email);
+  if(!user) return;
+
+  user.phone = document.getElementById("phone").value;
+  user.address = document.getElementById("address").value;
+  user.bankName = document.getElementById("bankName").value;
+  user.accountNumber = document.getElementById("accountNumber").value;
+  user.accountName = document.getElementById("accountName").value;
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Profile Updated");
+  }
 </script>
 </body>
   </html>
