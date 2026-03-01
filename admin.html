@@ -65,6 +65,7 @@ function adminLogin(){
     renderWithdrawals();
     renderProjects();
     renderMessages();
+    renderUsers();
 
   } else {
     alert("Invalid Admin Credentials");
@@ -80,6 +81,7 @@ if(sessionStorage.getItem("adminLoggedIn")==="true"){
     renderWithdrawals();
     renderProjects();
     renderMessages();
+    renderUsers();
   },100);
 }
 
