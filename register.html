@@ -75,6 +75,8 @@ function register(){
   // Add user to array
   users.push(newUser);
 
+  localStorage.setItem("user_" + newUser.email, JSON.stringify(newUser));
+
   // Update sponsor downlines if sponsor exists
   if(sponsorID){
     let sponsor = users.find(u => u.id === sponsorID);
