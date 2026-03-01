@@ -23,6 +23,7 @@
 
   <hr>
 
+  <!-- PROFILE UPDATE SECTION -->
   <h3>Update Profile Information</h3>
 
   <input type="text" id="phone" placeholder="Phone Number"><br><br>
@@ -34,9 +35,12 @@
   <button onclick="updateProfile()">Update Profile</button>
 
   <hr>
+
+  <!-- AFFILIATE DASHBOARD -->
   <div id="affiliateSection"></div>
 
   <hr>
+
   <h3>Request Withdrawal</h3>
   <input type="number" id="withdrawAmount" placeholder="Enter amount">
   <button onclick="requestWithdrawal()">Request</button>
@@ -53,9 +57,87 @@ if(!localStorage.getItem("loggedIn")){
 let affiliateUser = JSON.parse(localStorage.getItem("currentUser"));
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-/* ======================
-   PROJECT CONNECTED
-====================== */
+/* ===============================
+   LOAD PROFILE INTO INPUTS
+=============================== */
+function loadProfile(){
+  let user = users.find(u => u.email === affiliateUser.email);
+  if(!user) return;
+
+  document.getElementById("phone").value = user.phone || "";
+  document.getElementById("address").value = user.address || "";
+  document.getElementById("bankName").value = user.bankName || "";
+  document.getElementById("accountNumber").value = user.accountNumber || "";
+  document.getElementById("accountName").value = user.accountName || "";
+}
+loadProfile();
+
+/* ===============================
+   UPDATE PROFILE
+=============================== */
+function updateProfile(){
+
+  let user = users.find(u => u.email === affiliateUser.email);
+  if(!user) return;
+
+  user.phone = document.getElementById("phone").value.trim();
+  user.address = document.getElementById("address").value.trim();
+  user.bankName = document.getElementById("bankName").value.trim();
+  user.accountNumber = document.getElementById("accountNumber").value.trim();
+  user.accountName = document.getElementById("accountName").value.trim();
+
+  localStorage.setItem("users", JSON.stringify(users));
+
+  alert("Profile Updated Successfully!");
+}
+
+/* ===============================
+   FULL MLM DASHBOARD (RESTORED)
+=============================== */
+if(affiliateUser){
+
+  let dbUser = users.find(u => u.email === affiliateUser.email);
+
+  if(dbUser){
+
+    let refLink = window.location.origin + "/register.html?ref=" + dbUser.affiliateID;
+
+    let downlineUsers = users.filter(u => String(u.sponsorID) === String(dbUser.id));
+
+    let downlineList = downlineUsers.length > 0
+      ? downlineUsers.map(u => u.name + " (" + u.email + ")").join("<br>")
+      : "No downlines yet";
+
+    document.getElementById("affiliateSection").innerHTML = `
+      <h3>Affiliate Dashboard</h3>
+
+      <p><b>Name:</b> ${dbUser.name}</p>
+      <p><b>Email:</b> ${dbUser.email}</p>
+      <p><b>Affiliate ID:</b> ${dbUser.affiliateID}</p>
+      <p><b>Rank:</b> ${dbUser.rank}</p>
+
+      <p><b>Total Earnings:</b> $${(dbUser.earnings||0).toFixed(2)}</p>
+
+      <p><b>Withdrawable:</b> ${
+        dbUser.personalPV >= 30 
+        ? "$" + (dbUser.withdrawable||0).toFixed(2)
+        : "Locked (Complete 30 PV)"
+      }</p>
+
+      <p><b>Personal PV:</b> ${dbUser.personalPV}</p>
+      <p><b>Team PV:</b> ${dbUser.teamPV || 0}</p>
+
+      <p><b>Downlines:</b><br>${downlineList}</p>
+
+      <p><b>Your Referral Link:</b></p>
+      <input value="${refLink}" style="width:100%; padding:5px;">
+    `;
+  }
+}
+
+/* ===============================
+   SUBMIT PROJECT (CONNECTED)
+=============================== */
 function submitProject(){
 
   let title = document.getElementById("projectTitle").value.trim();
@@ -80,9 +162,9 @@ function submitProject(){
   alert("Project Submitted Successfully!");
 }
 
-/* ======================
-   MESSAGE CONNECTED
-====================== */
+/* ===============================
+   SEND MESSAGE (CONNECTED)
+=============================== */
 function sendMessage(){
   let msg = document.getElementById("newMessage").value.trim();
   if(!msg) return;
@@ -101,9 +183,9 @@ function sendMessage(){
   alert("Message Sent");
 }
 
-/* ======================
-   WITHDRAWAL CONNECTED
-====================== */
+/* ===============================
+   WITHDRAWAL REQUEST (CONNECTED)
+=============================== */
 function requestWithdrawal(){
 
   let amount = document.getElementById("withdrawAmount").value;
