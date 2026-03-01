@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <title>Submit Project</title>
@@ -9,8 +9,8 @@
 <div style="padding:40px;">
   <h2>Submit Your Project Details</h2>
 
-  <input type="text" placeholder="Project Title">
-  <textarea placeholder="Describe your project"></textarea>
+  <input type="text" id="projectTitle" placeholder="Project Title">
+  <textarea id="projectDescription" placeholder="Describe your project"></textarea>
   <input type="file">
   <button onclick="submitProject()">Submit</button>
 
@@ -23,9 +23,6 @@
 
   <hr>
 
-  <!-- ========================= -->
-  <!-- PROFILE UPDATE SECTION -->
-  <!-- ========================= -->
   <h3>Update Profile Information</h3>
 
   <input type="text" id="phone" placeholder="Phone Number"><br><br>
@@ -38,11 +35,16 @@
 
   <hr>
   <div id="affiliateSection"></div>
+
+  <hr>
+  <h3>Request Withdrawal</h3>
+  <input type="number" id="withdrawAmount" placeholder="Enter amount">
+  <button onclick="requestWithdrawal()">Request</button>
+
 </div>
 
 <script>
 
-// LOGIN PROTECTION
 if(!localStorage.getItem("loggedIn")){
   alert("Please login first");
   window.location.href = "login.html";
@@ -51,98 +53,36 @@ if(!localStorage.getItem("loggedIn")){
 let affiliateUser = JSON.parse(localStorage.getItem("currentUser"));
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
-// ===============================
-// LOAD PROFILE INTO INPUTS
-// ===============================
-function loadProfile(){
-  let user = users.find(u => u.email === affiliateUser.email);
-  if(!user) return;
+/* ======================
+   PROJECT CONNECTED
+====================== */
+function submitProject(){
 
-  document.getElementById("phone").value = user.phone || "";
-  document.getElementById("address").value = user.address || "";
-  document.getElementById("bankName").value = user.bankName || "";
-  document.getElementById("accountNumber").value = user.accountNumber || "";
-  document.getElementById("accountName").value = user.accountName || "";
-}
+  let title = document.getElementById("projectTitle").value.trim();
+  let description = document.getElementById("projectDescription").value.trim();
 
-loadProfile();
-
-// ===============================
-// UPDATE PROFILE (AUTO ADMIN SYNC)
-// ===============================
-function updateProfile(){
-
-  let user = users.find(u => u.email === affiliateUser.email);
-  if(!user) return;
-
-  user.phone = document.getElementById("phone").value.trim();
-  user.address = document.getElementById("address").value.trim();
-  user.bankName = document.getElementById("bankName").value.trim();
-  user.accountNumber = document.getElementById("accountNumber").value.trim();
-  user.accountName = document.getElementById("accountName").value.trim();
-
-  localStorage.setItem("users", JSON.stringify(users));
-
-  alert("Profile Updated Successfully!");
-}
-
-// ===============================
-// MLM DASHBOARD WITH DOWNLINES
-// ===============================
-if(affiliateUser){
-
-  let dbUser = users.find(u => u.email === affiliateUser.email);
-
-  if(dbUser){
-
-    let refLink = window.location.origin + "/register.html?ref=" + dbUser.affiliateID;
-
-    let downlineUsers = users.filter(u => String(u.sponsorID) === String(dbUser.id));
-
-    let downlineList = downlineUsers.length > 0
-      ? downlineUsers.map(u => u.name + " (" + u.email + ")").join("<br>")
-      : "No downlines yet";
-
-    document.getElementById("affiliateSection").innerHTML = `
-      <h3>Affiliate Dashboard</h3>
-      <p><b>Affiliate ID:</b> ${dbUser.affiliateID}</p>
-      <p><b>Rank:</b> ${dbUser.rank}</p>
-      <p><b>Total Earnings:</b> $${(dbUser.earnings||0).toFixed(2)}</p>
-      <p><b>Withdrawable:</b> ${
-        dbUser.personalPV >= 30 
-        ? "$" + (dbUser.withdrawable||0).toFixed(2)
-        : "Locked (Complete 30 PV)"
-      }</p>
-      <p><b>Personal PV:</b> ${dbUser.personalPV}</p>
-      <p><b>Downlines:</b><br>${downlineList}</p>
-      <input value="${refLink}" style="width:100%; padding:5px;">
-    `;
+  if(!title || !description){
+    alert("Please fill all fields");
+    return;
   }
+
+  let projects = JSON.parse(localStorage.getItem("projects")) || [];
+
+  projects.push({
+    email: affiliateUser.email,
+    title,
+    description,
+    date: Date.now()
+  });
+
+  localStorage.setItem("projects", JSON.stringify(projects));
+
+  alert("Project Submitted Successfully!");
 }
 
-// ===============================
-// LOAD USER MESSAGES
-// ===============================
-function loadUserMessages(){
-  let messages = JSON.parse(localStorage.getItem("messages")) || [];
-  let container = document.getElementById("userMessages");
-
-  container.innerHTML = "";
-
-  messages
-    .filter(m => m.from === affiliateUser.email || m.to === affiliateUser.email)
-    .forEach(m=>{
-      container.innerHTML += `
-        <div style="border:1px solid #ddd; padding:8px; margin-bottom:5px;">
-          <b>${m.from === "admin" ? "Admin" : "You"}:</b>
-          <p>${m.text}</p>
-        </div>
-      `;
-    });
-}
-loadUserMessages();
-
-// ===============================
+/* ======================
+   MESSAGE CONNECTED
+====================== */
 function sendMessage(){
   let msg = document.getElementById("newMessage").value.trim();
   if(!msg) return;
@@ -159,11 +99,32 @@ function sendMessage(){
   localStorage.setItem("messages", JSON.stringify(messages));
 
   alert("Message Sent");
-  loadUserMessages();
 }
 
-function submitProject(){
-  alert("Project Submitted Successfully!");
+/* ======================
+   WITHDRAWAL CONNECTED
+====================== */
+function requestWithdrawal(){
+
+  let amount = document.getElementById("withdrawAmount").value;
+
+  if(!amount || amount <= 0){
+    alert("Enter valid amount");
+    return;
+  }
+
+  let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
+
+  withdrawals.push({
+    email: affiliateUser.email,
+    amount: amount,
+    status: "Pending",
+    date: Date.now()
+  });
+
+  localStorage.setItem("withdrawals", JSON.stringify(withdrawals));
+
+  alert("Withdrawal Request Sent");
 }
 
 function downloadInvoice(){
