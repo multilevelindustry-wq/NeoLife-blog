@@ -105,6 +105,13 @@ if (typeof paypal !== "undefined") {
 
         saveOrder(details.id, totalUSD, "USD");
 
+        let totalPV = 0;
+cart.forEach(item=>{
+   totalPV += (item.pv || 0) * item.quantity;
+});
+
+processCommission(currentUser.email, totalAmount, totalPV);
+
         alert("PayPal Payment Successful!");
         window.location.href = "dashboard.html";
       });
@@ -139,6 +146,13 @@ function payWithPaystack(){
     callback: function(response){
 
       saveOrder(response.reference, totalUSD, "NGN");
+
+      let totalPV = 0;
+cart.forEach(item=>{
+   totalPV += (item.pv || 0) * item.quantity;
+});
+
+processCommission(currentUser.email, totalAmount, totalPV);
 
       alert("Paystack Payment Successful!");
       window.location.href = "dashboard.html";
