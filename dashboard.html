@@ -169,6 +169,30 @@ function downloadFinished(data, name){
   link.download = name;
   link.click();
 }
+
+ // ===============================
+// SHOW AFFILIATE INFO ON DASHBOARD
+// ===============================
+let affiliateUser = JSON.parse(localStorage.getItem("currentUser"));
+
+if(affiliateUser){
+
+    const box = document.createElement("div");
+    box.style.background="#fff";
+    box.style.padding="20px";
+    box.style.marginTop="30px";
+    box.style.borderRadius="10px";
+
+    box.innerHTML = `
+        <h3>Affiliate Dashboard</h3>
+        <p><b>Affiliate ID:</b> ${affiliateUser.affiliateID}</p>
+        <p><b>Total Earnings:</b> $${(affiliateUser.earnings || 0).toFixed(2)}</p>
+        <p><b>Total PV:</b> $${(affiliateUser.pv || 0).toFixed(2)}</p>
+        <p><b>Team Members:</b> ${affiliateUser.team ? affiliateUser.team.length : 0}</p>
+    `;
+
+    document.body.appendChild(box);
+}
 </script>
 
 </body>
