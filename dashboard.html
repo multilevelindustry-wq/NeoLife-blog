@@ -86,14 +86,21 @@ function requestWithdrawal(){
 // ===============================
 // SHOW DASHBOARD
 // ===============================
+
+  // ===============================
+// SHOW DASHBOARD WITH DOWNLINES
+// ===============================
 if(affiliateUser){
-
   let dbUser = users.find(u => u.email === affiliateUser.email);
-
   if(dbUser){
-
     let refLink = window.location.origin + "?ref=" + dbUser.email;
     let pvStatus = (dbUser.personalPV || 0) >= 30 ? "Activated" : "Not Activated";
+
+    // Get downline users as objects
+    let downlineUsers = users.filter(u => u.sponsorID === dbUser.id);
+    let downlineList = downlineUsers.length > 0
+      ? downlineUsers.map(u => u.name + " (" + u.email + ")").join(", ")
+      : "No downlines yet";
 
     document.getElementById("affiliateSection").innerHTML = `
       <h3>Affiliate Dashboard</h3>
@@ -107,6 +114,7 @@ if(affiliateUser){
       }</p>
       <p><b>Personal PV:</b> ${dbUser.personalPV || 0} ( ${pvStatus} )</p>
       <p><b>Total Network PV:</b> ${dbUser.totalPV || 0}</p>
+      <p><b>Downlines:</b> ${downlineList}</p>
       <p><b>Your Referral Link:</b></p>
       <input value="${refLink}" style="width:100%; padding:5px;">
       <br><br>
@@ -114,6 +122,9 @@ if(affiliateUser){
     `;
   }
 }
+
+
+  
 
 // ===============================
 // ORIGINAL FUNCTIONS (UNCHANGED)
