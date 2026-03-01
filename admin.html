@@ -6,20 +6,111 @@
 <body>
 
 <div style="padding:40px;">
-  <h2>Admin Dashboard</h2>
-  <h3>Withdrawal Requests</h3>
-  <div id="withdrawals"></div>
+
+  <!-- ADMIN LOGIN -->
+  <div id="adminLogin">
+    <h2>Admin Login</h2>
+    <input type="text" id="adminPhone" placeholder="Phone Number"><br><br>
+    <input type="password" id="adminPassword" placeholder="Password"><br><br>
+    <button onclick="adminLogin()">Login</button>
+  </div>
+
+  <!-- ADMIN DASHBOARD -->
+  <div id="adminDashboard" style="display:none;">
+    <h2>Admin Dashboard</h2>
+
+    <h3>Withdrawal Requests</h3>
+    <div id="withdrawals"></div>
+
+    <hr>
+
+    <h3>User Submissions</h3>
+    <div id="projects"></div>
+
+    <hr>
+
+    <h3>User Messages</h3>
+    <div id="messages"></div>
+  </div>
+
 </div>
 
 <script>
 
+// ===============================
+// ADMIN ACCESS CONFIG
+// ===============================
+const ADMIN_PHONE = "08085995394";
+const ADMIN_PASSWORD = "Neo5394Admin";
 
+// ===============================
+// ADMIN LOGIN
+// ===============================
+function adminLogin(){
+
+  let phone = document.getElementById("adminPhone").value.trim();
+  let pass = document.getElementById("adminPassword").value.trim();
+
+  if(phone === ADMIN_PHONE && pass === ADMIN_PASSWORD){
+
+    sessionStorage.setItem("adminLoggedIn","true");
+
+    document.getElementById("adminLogin").style.display="none";
+    document.getElementById("adminDashboard").style.display="block";
+
+    startInactivityTimer();
+    renderWithdrawals();
+    renderProjects();
+    renderMessages();
+
+  } else {
+    alert("Invalid Admin Credentials");
+  }
+}
+
+// Auto login if session exists
+if(sessionStorage.getItem("adminLoggedIn")==="true"){
+  document.getElementById("adminLogin").style.display="none";
+  document.getElementById("adminDashboard").style.display="block";
+  startInactivityTimer();
+  setTimeout(()=>{
+    renderWithdrawals();
+    renderProjects();
+    renderMessages();
+  },100);
+}
+
+// ===============================
+// 5 MINUTE AUTO LOCK
+// ===============================
+let inactivityTimer;
+
+function resetTimer(){
+  clearTimeout(inactivityTimer);
+  inactivityTimer = setTimeout(()=>{
+    alert("Session expired due to inactivity.");
+    sessionStorage.removeItem("adminLoggedIn");
+    location.reload();
+  }, 5 * 60 * 1000); // 5 minutes
+}
+
+function startInactivityTimer(){
+  document.addEventListener("mousemove", resetTimer);
+  document.addEventListener("keydown", resetTimer);
+  resetTimer();
+}
+
+// ===============================
+// ORIGINAL WITHDRAWAL SYSTEM
+// ===============================
 let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
 function renderWithdrawals(){
 
   let div = document.getElementById("withdrawals");
+  if(!div) return;
+
   div.innerHTML = "";
 
   withdrawals.forEach((w,i)=>{
@@ -50,7 +141,66 @@ function approveWithdrawal(index){
   location.reload();
 }
 
-renderWithdrawals();
+// ===============================
+// PROJECT SUBMISSIONS (CONNECTED)
+// ===============================
+function renderProjects(){
+
+  let projects = JSON.parse(localStorage.getItem("projects")) || [];
+  let div = document.getElementById("projects");
+
+  div.innerHTML = "";
+
+  projects.forEach(p=>{
+    div.innerHTML += `
+      <div style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
+        <p><b>${p.email}</b></p>
+        <p><b>Title:</b> ${p.title}</p>
+        <p>${p.description}</p>
+      </div>
+    `;
+  });
+}
+
+// ===============================
+// USER MESSAGES (2 WAY COMMUNICATION)
+// ===============================
+function renderMessages(){
+
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+  let div = document.getElementById("messages");
+
+  div.innerHTML = "";
+
+  messages.forEach((m,i)=>{
+    div.innerHTML += `
+      <div style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
+        <p><b>${m.from}</b> → ${m.to}</p>
+        <p>${m.text}</p>
+        ${m.to==="admin" ? `<button onclick="replyUser('${m.from}')">Reply</button>` : ""}
+      </div>
+    `;
+  });
+}
+
+function replyUser(email){
+
+  let text = prompt("Reply message:");
+  if(!text) return;
+
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+
+  messages.push({
+    from:"admin",
+    to:email,
+    text:text,
+    date:Date.now()
+  });
+
+  localStorage.setItem("messages", JSON.stringify(messages));
+  alert("Reply sent.");
+  location.reload();
+}
 
 </script>
 </body>
