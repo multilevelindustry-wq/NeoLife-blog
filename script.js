@@ -196,6 +196,63 @@ document.addEventListener("click", function(e){
 // ===============================
 // CART SYSTEM
 // ===============================
+
+const originalAddToCart = addToCart;
+
+addToCart = function(id){
+
+    originalAddToCart(id);
+
+    const product = services.find(s => s.id === id);
+    const referrerID = localStorage.getItem("referrerID");
+
+    if(!product) return;
+
+    let pvEarned = product.price;
+
+    // Give PV to buyer
+    if(currentUserData){
+        currentUserData.personalPV += pvEarned;
+        currentUserData.monthlyPV += pvEarned;
+        updateRank(currentUserData);
+
+        localStorage.setItem("currentUser", JSON.stringify(currentUserData));
+        localStorage.setItem("user_" + currentUserData.email, JSON.stringify(currentUserData));
+    }
+
+    if(referrerID){
+
+        for(let key in localStorage){
+
+            if(key.startsWith("user_")){
+
+                let user = JSON.parse(localStorage.getItem(key));
+
+                if(user.affiliateID === referrerID){
+
+                    user.teamPV += pvEarned;
+                    user.monthlyPV += pvEarned;
+
+                    updateRank(user);
+
+                    if(user.monthlyPV >= 20){  // must achieve 20pv
+                        let commission = (product.price * user.percentage)/100;
+                        user.earnings += commission;
+                    }
+
+                    if(currentUserData && !user.downlines.includes(currentUserData.email)){
+                        user.downlines.push(currentUserData.email);
+                    }
+
+                    localStorage.setItem(key, JSON.stringify(user));
+                }
+            }
+        }
+    }
+};
+
+
+
 function addToCart(id){
 
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -249,7 +306,44 @@ if(currentUserData){
     localStorage.setItem("user_" + currentUserData.email, JSON.stringify(currentUserData));
 }
 
+// ===============================
+// PV TO DOLLAR SYSTEM
+// ===============================
+function pvToDollar(pv){
+    return (pv * 0.20 / 0.3);
+}
 
+
+// ===============================
+// RANK SYSTEM (10 LEVELS)
+// ===============================
+const ranks = [
+  {name:"Starter", pv:0, percent:0},
+  {name:"Bronze", pv:20, percent:8},
+  {name:"Silver", pv:100, percent:8},
+  {name:"Gold", pv:150, percent:10},
+  {name:"Platinum", pv:300, percent:12},
+  {name:"Diamond", pv:500, percent:14},
+  {name:"Elite", pv:1000, percent:15},
+  {name:"Master", pv:5000, percent:17},
+  {name:"Global Leader", pv:15000, percent:18},
+  {name:"Crown Ambassador", pv:30000, percent:20}
+];
+
+
+function updateRank(user){
+
+    let eligibleRank = ranks[0];
+
+    for(let r of ranks){
+        if(user.monthlyPV >= r.pv){
+            eligibleRank = r;
+        }
+    }
+
+    user.rank = eligibleRank.name;
+    user.percentage = eligibleRank.percent;
+}
 
 // -------------------------------
 // CAPTURE REFERRAL FROM URL
