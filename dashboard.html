@@ -30,13 +30,9 @@
 // ===============================
 // PROTECTION
 // ===============================
-let lastOrderID = localStorage.getItem("lastOrderID");
-if(!lastOrderID){
-  alert("You must complete payment before submitting project.");
-  window.location.href = "cart.html";
-}
-
-if(!localStorage.getItem("loggedIn")){
+// ===============================
+  
+  if(!localStorage.getItem("loggedIn")){
   alert("Please login first");
   window.location.href = "login.html";
 }
