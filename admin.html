@@ -13,12 +13,6 @@
 
 <script>
 
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-if(!localStorage.getItem("loggedIn") || !currentUser || currentUser.email !== "admin@site.com"){
-  alert("Access Denied!");
-  window.location.href = "login.html";
-}
 
 let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
 let users = JSON.parse(localStorage.getItem("users")) || [];
