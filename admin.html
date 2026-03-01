@@ -14,10 +14,11 @@
       margin-bottom: 5px;
     }
     .content {
-      padding: 0 15px;
+      padding: 15px;
       display: none;
       border: 1px solid #ddd;
       margin-bottom: 10px;
+      background:#fff;
     }
   </style>
 </head>
@@ -25,6 +26,7 @@
 
 <div style="padding:40px;">
 
+  <!-- ADMIN LOGIN -->
   <div id="adminLogin">
     <h2>Admin Login</h2>
     <input type="text" id="adminPhone" placeholder="Phone Number"><br><br>
@@ -32,6 +34,7 @@
     <button onclick="adminLogin()">Login</button>
   </div>
 
+  <!-- ADMIN DASHBOARD -->
   <div id="adminDashboard" style="display:none;">
     <h2>Admin Dashboard</h2>
 
@@ -75,12 +78,16 @@ if(sessionStorage.getItem("adminLoggedIn")==="true"){
   setTimeout(renderAll,100);
 }
 
+/* ===============================
+   COLLAPSIBLE FUNCTION
+=============================== */
 function makeCollapsible(){
   let coll = document.getElementsByClassName("collapsible");
   for(let i=0;i<coll.length;i++){
     coll[i].addEventListener("click", function(){
       let content = this.nextElementSibling;
-      content.style.display = content.style.display === "block" ? "none" : "block";
+      content.style.display =
+        content.style.display === "block" ? "none" : "block";
     });
   }
 }
@@ -92,9 +99,9 @@ function renderAll(){
   renderMessages();
 }
 
-/* ===========================
-   WITHDRAWALS CONNECTED
-=========================== */
+/* ===============================
+   WITHDRAWALS (CONNECTED)
+=============================== */
 function renderWithdrawals(){
   let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
   let div = document.getElementById("withdrawals");
@@ -102,9 +109,12 @@ function renderWithdrawals(){
 
   withdrawals.forEach((w,i)=>{
     div.innerHTML += `
-      <button class="collapsible">${w.email} - $${w.amount}</button>
+      <button class="collapsible">
+        ${w.email} - $${w.amount}
+      </button>
       <div class="content">
         <p>Status: ${w.status}</p>
+        <p>Date: ${new Date(w.date).toLocaleString()}</p>
       </div>
     `;
   });
@@ -112,9 +122,9 @@ function renderWithdrawals(){
   makeCollapsible();
 }
 
-/* ===========================
-   PROJECTS CONNECTED
-=========================== */
+/* ===============================
+   PROJECTS (CONNECTED)
+=============================== */
 function renderProjects(){
   let projects = JSON.parse(localStorage.getItem("projects")) || [];
   let div = document.getElementById("projects");
@@ -122,11 +132,12 @@ function renderProjects(){
 
   projects.forEach(p=>{
     div.innerHTML += `
-      <button class="collapsible">${p.email} - ${p.title}</button>
+      <button class="collapsible">
+        ${p.email} - ${p.title}
+      </button>
       <div class="content">
-        <p><b>Description:</b></p>
         <p>${p.description}</p>
-        <p><b>Date:</b> ${new Date(p.date).toLocaleString()}</p>
+        <p>Date: ${new Date(p.date).toLocaleString()}</p>
       </div>
     `;
   });
@@ -134,37 +145,53 @@ function renderProjects(){
   makeCollapsible();
 }
 
-/* ===========================
-   USERS
-=========================== */
+/* ===============================
+   REGISTERED USERS (FULL DETAILS RESTORED)
+=============================== */
 function renderUsers(){
   let users = JSON.parse(localStorage.getItem("users")) || [];
   let div = document.getElementById("allUsers");
   div.innerHTML = "";
 
   users.forEach(u=>{
+
     let sponsorUser = users.find(s => s.id === u.sponsorID);
-    let sponsorDisplay = sponsorUser 
-      ? sponsorUser.name 
-      : (u.sponsorNameManual || "None");
+    let sponsorDisplay = sponsorUser ? sponsorUser.name : "None";
 
     div.innerHTML += `
-      <button class="collapsible">${u.name}</button>
+      <button class="collapsible">
+        ${u.name}
+      </button>
+
       <div class="content">
-        <p>Email: ${u.email}</p>
-        <p>Affiliate ID: ${u.affiliateID}</p>
-        <p>Sponsor: ${sponsorDisplay}</p>
-        <p>Rank: ${u.rank}</p>
-        <p>Personal PV: ${u.personalPV}</p>
-        <p>Team PV: ${u.teamPV}</p>
-        <p>Earnings: $${u.earnings}</p>
-        <p>Withdrawable: $${u.withdrawable}</p>
-        <p>Phone: ${u.phone || "Not Provided"}</p>
-        <p>Address: ${u.address || "Not Provided"}</p>
-        <p>Bank: ${u.bankName || "Not Provided"}</p>
-        <p>Account No: ${u.accountNumber || "Not Provided"}</p>
-        <p>Account Name: ${u.accountName || "Not Provided"}</p>
-        <p>Date Joined: ${u.dateJoined}</p>
+        <p><b>Email:</b> ${u.email}</p>
+        <p><b>Affiliate ID:</b> ${u.affiliateID}</p>
+        <p><b>Sponsor:</b> ${sponsorDisplay}</p>
+        <p><b>Rank:</b> ${u.rank}</p>
+
+        <hr>
+
+        <p><b>Personal PV:</b> ${u.personalPV}</p>
+        <p><b>Team PV:</b> ${u.teamPV || 0}</p>
+        <p><b>Monthly PV:</b> ${u.monthlyPV || 0}</p>
+
+        <hr>
+
+        <p><b>Total Earnings:</b> $${(u.earnings||0).toFixed(2)}</p>
+        <p><b>Withdrawable:</b> $${(u.withdrawable||0).toFixed(2)}</p>
+
+        <hr>
+
+        <p><b>Phone:</b> ${u.phone || "Not Provided"}</p>
+        <p><b>Address:</b> ${u.address || "Not Provided"}</p>
+        <p><b>Bank:</b> ${u.bankName || "Not Provided"}</p>
+        <p><b>Account No:</b> ${u.accountNumber || "Not Provided"}</p>
+        <p><b>Account Name:</b> ${u.accountName || "Not Provided"}</p>
+
+        <hr>
+
+        <p><b>Downlines:</b> ${u.downlines ? u.downlines.length : 0}</p>
+        <p><b>Date Joined:</b> ${u.dateJoined || "N/A"}</p>
       </div>
     `;
   });
@@ -172,9 +199,9 @@ function renderUsers(){
   makeCollapsible();
 }
 
-/* ===========================
-   MESSAGES CONNECTED
-=========================== */
+/* ===============================
+   MESSAGES (CONNECTED)
+=============================== */
 function renderMessages(){
   let messages = JSON.parse(localStorage.getItem("messages")) || [];
   let div = document.getElementById("messages");
@@ -183,12 +210,11 @@ function renderMessages(){
   messages.forEach(m=>{
     div.innerHTML += `
       <button class="collapsible">
-        From: ${m.from === "admin" ? "Admin" : m.from}
+        ${m.from} → ${m.to}
       </button>
       <div class="content">
-        <p><b>To:</b> ${m.to}</p>
         <p>${m.text}</p>
-        <p><small>${new Date(m.date).toLocaleString()}</small></p>
+        <p>Date: ${new Date(m.date).toLocaleString()}</p>
       </div>
     `;
   });
