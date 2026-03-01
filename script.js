@@ -2,12 +2,71 @@
 // AFFILIATE ID GENERATOR
 // ===============================
 function generateAffiliateID(){
-return "AFF" + Date.now() + Math.floor(Math.random() * 1000);
+  return "AFF" + Date.now() + Math.floor(Math.random() * 1000);
 }
 
-// Generate 70 services
+// ===============================
+// USER INIT
+// ===============================
+let currentUserData = JSON.parse(localStorage.getItem("currentUser")) || null;
+
+if(currentUserData){
+
+  currentUserData.affiliateID ||= generateAffiliateID();
+  currentUserData.earnings ||= 0;
+  currentUserData.personalPV ||= 0;
+  currentUserData.monthlyPV ||= 0;
+  currentUserData.teamPV ||= 0;
+  currentUserData.team ||= [];
+  currentUserData.downlines ||= [];
+  currentUserData.rank ||= "Starter";
+  currentUserData.percentage ||= 0;
+
+  localStorage.setItem("currentUser", JSON.stringify(currentUserData));
+  localStorage.setItem("user_" + currentUserData.email, JSON.stringify(currentUserData));
+}
+
+// ===============================
+// RANK SYSTEM
+// ===============================
+const ranks = [
+{name:"Starter", pv:0, percent:0},
+{name:"Bronze", pv:20, percent:8},
+{name:"Silver", pv:100, percent:8},
+{name:"Gold", pv:150, percent:10},
+{name:"Platinum", pv:300, percent:12},
+{name:"Diamond", pv:500, percent:14},
+{name:"Elite", pv:1000, percent:15},
+{name:"Master", pv:5000, percent:17},
+{name:"Global Leader", pv:15000, percent:18},
+{name:"Crown Ambassador", pv:30000, percent:20}
+];
+
+function updateRank(user){
+  let eligibleRank = ranks[0];
+  for(let r of ranks){
+    if(user.monthlyPV >= r.pv){
+      eligibleRank = r;
+    }
+  }
+  user.rank = eligibleRank.name;
+  user.percentage = eligibleRank.percent;
+}
+
+// ===============================
+// CAPTURE REFERRAL
+// ===============================
+const urlParams = new URLSearchParams(window.location.search);
+const refID = urlParams.get("ref");
+if(refID){
+  localStorage.setItem("referrerID", refID);
+}
+
+// ===============================
+// SERVICES (KEEP YOUR ARRAY HERE)
+// ===============================
 const services = [
-{id: 1, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 50x per Week N13,000 Cash Gift", price: 1.29, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
+  {id: 1, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 50x per Week N13,000 Cash Gift", price: 1.29, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
 
 {id: 2, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 65x per Month Get N25,000 Cash price", price: 2.40, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
 
@@ -46,471 +105,170 @@ const services = [
 {id: 19, title: "Professional Video Editing Service", description: "High-impact promotional videos designed to increase engagement and drive conversions.", price: 120.97, image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d" },
 
 {id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: "We generate urgent medical inquiries and orthodontic consultations ready to book appointments.", price: 80.85, image: "https://media.istockphoto.com/id/1293534212/photo/orthodontist-placing-rubber-bands-on-female-patient-braces.webp?a=1&b=1&s=612x612&w=0&k=20&c=9gQVBip8U-7QScwFJmO1_NwH4KgAQV0X_UHM-NFZeTU=" },
-
+  
 ];
+services.forEach((s,i)=> s.id = i+1);
 
 // ===============================
-// SERVICES AUTO-ID FIX
-// ===============================
-services.forEach((s, i) => s.id = i + 1);
-
-// ===============================
-// ULTRA FAST RENDER SERVICES
+// RENDER SERVICES
 // ===============================
 function renderServices(serviceList){
 
-const container = document.getElementById("services");
-if(!container) return;
+  const container = document.getElementById("services");
+  if(!container) return;
 
-container.innerHTML = "";
+  container.innerHTML = "";
 
-const fragment = document.createDocumentFragment();
-const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  const reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+  const reviewMap = {};
 
-// Fast review count map
-const reviewMap = {};
-for (let r of reviews) {
-reviewMap[r.serviceID] = (reviewMap[r.serviceID] || 0) + 1;
+  reviews.forEach(r=>{
+    reviewMap[r.serviceID] = (reviewMap[r.serviceID] || 0) + 1;
+  });
+
+  serviceList.forEach(service=>{
+
+    const card = document.createElement("div");
+    card.className="card";
+
+    card.innerHTML = `
+      <img src="${service.image}" 
+      style="width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:10px;">
+
+      <h3>${service.title}</h3>
+      <p>${service.description}</p>
+      <h4>$${service.price}</h4>
+
+      <button class="add-cart-btn" data-id="${service.id}">
+        Order Now
+      </button>
+
+      <hr>
+
+      <p>
+        <span class="review-count" data-id="${service.id}"
+        style="color:#ff7300;cursor:pointer;font-weight:bold;">
+        (${reviewMap[service.id] || 0} Reviews)
+        </span>
+      </p>
+
+      <select class="rating-select" data-id="${service.id}">
+        <option value="5">⭐⭐⭐⭐⭐</option>
+        <option value="4">⭐⭐⭐⭐</option>
+        <option value="3">⭐⭐⭐</option>
+        <option value="2">⭐⭐</option>
+        <option value="1">⭐</option>
+      </select>
+
+      <input type="text" class="review-input" 
+      data-id="${service.id}" placeholder="Write review">
+
+      <button class="submit-review-btn" data-id="${service.id}">
+        Submit Review
+      </button>
+    `;
+
+    container.appendChild(card);
+  });
 }
 
-serviceList.forEach(service => {
-
-const card = document.createElement("div");
-card.className = "card";
-
-card.innerHTML = `
-<img     
-src="${service.image || 'https://via.placeholder.com/300x160'}"    
-loading="lazy"    
-decoding="async"    
-style="width:100%; height:160px; object-fit:cover; border-radius:10px; margin-bottom:10px;">
-
-  <h3>${service.title}</h3>    
-  <p>${service.description}</p>    
-  <h4>$${service.price}</h4>      <button class="add-cart-btn" data-id="${service.id}">    
-    Oerder Now     
-  </button>      <hr>    
-  <p>    
-    <span class="review-count" data-id="${service.id}"    
-      style="color:#ff7300; cursor:pointer; font-weight:bold;">    
-      (${reviewMap[service.id] || 0} Reviews)    
-    </span>    
-  </p>      <select class="rating-select" data-id="${service.id}">    
-    <option value="5">⭐⭐⭐⭐⭐</option>    
-    <option value="4">⭐⭐⭐⭐</option>    
-    <option value="3">⭐⭐⭐</option>    
-    <option value="2">⭐⭐</option>    
-    <option value="1">⭐</option>    
-  </select>      <input type="text" class="review-input" data-id="${service.id}" placeholder="Write review">    
-  <button class="submit-review-btn" data-id="${service.id}">    
-    Submit Review    
-  </button>    
-`;    fragment.appendChild(card);
-
-});
-
-container.appendChild(fragment);
-}
-
-// ===============================
-// INITIAL RENDER
-// ===============================
 if(document.getElementById("services")){
-renderServices(services);
+  renderServices(services);
 }
 
 // ===============================
-// EVENT DELEGATION (FAST)
+// ADD TO CART (ONLY ONE VERSION)
 // ===============================
-document.addEventListener("click", function(e){
+function addToCart(id){
 
-// Add To Cart
-if(e.target.classList.contains("add-cart-btn")){
-const id = parseInt(e.target.dataset.id);
-addToCart(id);
-}
+  const product = services.find(s=>s.id===id);
+  if(!product) return;
 
-// Submit Review
-if(e.target.classList.contains("submit-review-btn")){
-const id = parseInt(e.target.dataset.id);
+  const referrerID = localStorage.getItem("referrerID");
 
-let currentUser = JSON.parse(localStorage.getItem("currentUser"));
-if(!currentUser){
-alert("Please login first.");
-return;
-}
+  if(currentUserData){
+    currentUserData.personalPV += product.price;
+    currentUserData.monthlyPV += product.price;
+    updateRank(currentUserData);
+    localStorage.setItem("currentUser", JSON.stringify(currentUserData));
+  }
 
-const input = document.querySelector(.review-input[data-id="${id}"]);
-const rating = document.querySelector(.rating-select[data-id="${id}"]).value;
+  if(referrerID){
+    for(let key in localStorage){
+      if(key.startsWith("user_")){
+        let user = JSON.parse(localStorage.getItem(key));
+        if(user.affiliateID === referrerID){
 
-if(!input.value){
-alert("Write a review first.");
-return;
-}
+          user.teamPV = (user.teamPV||0) + product.price;
+          user.monthlyPV = (user.monthlyPV||0) + product.price;
 
-let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+          updateRank(user);
 
-reviews.push({
-serviceID: id,
-userName: currentUser.name,
-userEmail: currentUser.email,
-rating: parseInt(rating),
-text: input.value,
-date: Date.now()
-});
+          if(user.monthlyPV >= 20){
+            let commission = (product.price * user.percentage)/100;
+            user.earnings = (user.earnings||0) + commission;
+          }
 
-localStorage.setItem("reviews", JSON.stringify(reviews));
+          if(currentUserData && !user.downlines.includes(currentUserData.email)){
+            user.downlines.push(currentUserData.email);
+          }
 
-input.value = "";
-renderServices(services);
+          localStorage.setItem(key, JSON.stringify(user));
+        }
+      }
+    }
+  }
 
-}
-
-// Open Review Modal
-if(e.target.classList.contains("review-count")){
-const id = parseInt(e.target.dataset.id);
-openReviewModal(id);
-}
-
-});
-
-// ===============================
-// CART SYSTEM
-// ===============================
-
-const originalAddToCart = addToCart;
-
-addToCart = function(id){
-
-originalAddToCart(id);
-
-const product = services.find(s => s.id === id);
-const referrerID = localStorage.getItem("referrerID");
-
-if(!product) return;
-
-let pvEarned = product.price;
-
-// Give PV to buyer
-if(currentUserData){
-currentUserData.personalPV += pvEarned;
-currentUserData.monthlyPV += pvEarned;
-updateRank(currentUserData);
-
-localStorage.setItem("currentUser", JSON.stringify(currentUserData));    
-localStorage.setItem("user_" + currentUserData.email, JSON.stringify(currentUserData));
-
-}
-
-if(referrerID){
-
-for(let key in localStorage){    
-
-    if(key.startsWith("user_")){    
-
-        let user = JSON.parse(localStorage.getItem(key));    
-
-        if(user.affiliateID === referrerID){    
-
-            user.teamPV += pvEarned;    
-            user.monthlyPV += pvEarned;    
-
-            updateRank(user);    
-
-            if(user.monthlyPV >= 20){  // must achieve 20pv    
-                let commission = (product.price * user.percentage)/100;    
-                user.earnings += commission;    
-            }    
-
-            if(currentUserData && !user.downlines.includes(currentUserData.email)){    
-                user.downlines.push(currentUserData.email);    
-            }    
-
-            localStorage.setItem(key, JSON.stringify(user));    
-        }    
-    }    
-}
-
-}
-
-};
-
-// ===============================
-// REFERRAL SYSTEM (FULL ENGINE)
-// ===============================
-
-// 8% Commission
-const REF_PERCENT = 0.08;
-
-// -------------------------------
-// ENSURE USER HAS AFFILIATE DATA
-// -------------------------------
-let currentUserData = JSON.parse(localStorage.getItem("currentUser"));
-
-if(currentUserData){
-
-if(!currentUserData.affiliateID){
-currentUserData.affiliateID = generateAffiliateID();
-currentUserData.earnings = 0;
-currentUserData.team = [];
-currentUserData.pv = 0;
-localStorage.setItem("currentUser", JSON.stringify(currentUserData));
-}
-
-// Save also as user_email key for admin panel
-localStorage.setItem("user_" + currentUserData.email, JSON.stringify(currentUserData));
-
+  alert("Added to cart successfully");
 }
 
 // ===============================
-// PV TO DOLLAR SYSTEM
+// EVENTS
 // ===============================
-function pvToDollar(pv){
-return (pv * 0.20 / 0.3);
-}
-
-// ===============================
-// RANK SYSTEM (10 LEVELS)
-// ===============================
-const ranks = [
-{name:"Starter", pv:0, percent:0},
-{name:"Bronze", pv:20, percent:8},
-{name:"Silver", pv:100, percent:8},
-{name:"Gold", pv:150, percent:10},
-{name:"Platinum", pv:300, percent:12},
-{name:"Diamond", pv:500, percent:14},
-{name:"Elite", pv:1000, percent:15},
-{name:"Master", pv:5000, percent:17},
-{name:"Global Leader", pv:15000, percent:18},
-{name:"Crown Ambassador", pv:30000, percent:20}
-];
-
-function updateRank(user){
-
-let eligibleRank = ranks[0];
-
-for(let r of ranks){
-if(user.monthlyPV >= r.pv){
-eligibleRank = r;
-}
-}
-
-user.rank = eligibleRank.name;
-user.percentage = eligibleRank.percent;
-
-}
-
-// -------------------------------
-// CAPTURE REFERRAL FROM URL
-// -------------------------------
-const urlParams = new URLSearchParams(window.location.search);
-const refID = urlParams.get("ref");
-
-if(refID){
-localStorage.setItem("referrerID", refID);
-}
-
-// -------------------------------
-// MODIFY ADD TO CART COMMISSION
-// -------------------------------
-const originalAddToCart = addToCart;
-
-addToCart = function(id){
-
-originalAddToCart(id);
-
-const product = services.find(s => s.id === id);
-const referrerID = localStorage.getItem("referrerID");
-
-if(referrerID && product){
-
-for(let key in localStorage){    
-
-    if(key.startsWith("user_")){    
-
-        let user = JSON.parse(localStorage.getItem(key));    
-
-        if(user.affiliateID === referrerID){    
-
-            let commission = product.price * REF_PERCENT;    
-
-            user.earnings = (user.earnings || 0) + commission;    
-            user.pv = (user.pv || 0) + product.price;    
-
-            // Add team member if new    
-            if(currentUserData && !user.team.includes(currentUserData.email)){    
-                user.team.push(currentUserData.email);    
-            }    
-
-            localStorage.setItem(key, JSON.stringify(user));    
-        }    
-    }    
-}
-
-}
-
-};
-
-// -------------------------------
-// GENERATE REFERRAL LINK
-// -------------------------------
-if(currentUserData){
-
-const refBox = document.createElement("div");
-refBox.style.background="#fff";
-refBox.style.padding="20px";
-refBox.style.margin="20px";
-refBox.style.borderRadius="10px";
-refBox.style.color="#000";
-
-refBox.innerHTML = `
-<h3>Your Affiliate Link</h3>
-<input type="text"     
-value="${window.location.origin + window.location.pathname}?ref=${currentUserData.affiliateID}"     
-style="width:100%;padding:8px;" readonly>
-
-<h4>Earnings: $${(currentUserData.earnings || 0).toFixed(2)}</h4>    
-<h4>Total PV: $${(currentUserData.pv || 0).toFixed(2)}</h4>    
-
-<button onclick="requestWithdrawal()">Request Withdrawal</button>
-
-`;
-
-document.body.prepend(refBox);
-
-}
-
-// -------------------------------
-// WITHDRAWAL SYSTEM
-// -------------------------------
-function requestWithdrawal(){
-
-let user = JSON.parse(localStorage.getItem("currentUser"));
-if(!user) return;
-
-if(user.earnings <= 0){
-alert("No earnings available.");
-return;
-}
-
-let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
-
-withdrawals.push({
-affiliateID: user.affiliateID,
-email: user.email,
-amount: user.earnings,
-status: "Pending",
-date: new Date().toLocaleString()
-});
-
-localStorage.setItem("withdrawals", JSON.stringify(withdrawals));
-alert("Withdrawal request sent to admin.");
-
-}
-
-// ===============================
-// REVIEW MODAL
-// ===============================
-function openReviewModal(serviceID){
-
-let allReviews = JSON.parse(localStorage.getItem("reviews")) || [];
-
-let modal = document.getElementById("reviewModal");
-let modalContent = document.getElementById("modalReviews");
-
-if(!modal || !modalContent) return;
-
-modalContent.innerHTML = "";
-
-let serviceReviews = allReviews.filter(r =>
-String(r.serviceID) == String(serviceID)
-);
-
-if(serviceReviews.length === 0){
-modalContent.innerHTML = "<p>No reviews for this product yet.</p>";
-} else {
-
-serviceReviews.forEach(function(r){
-
-let stars = "⭐".repeat(parseInt(r.rating) || 0);
-
-modalContent.innerHTML +=     <div style="border-bottom:1px solid #ddd; padding:10px 0;">     <strong>${r.userName || "Anonymous"}</strong>     (${r.userEmail || "No Email"})<br>     ${stars}<br>     ${r.text || ""}     </div>    ;
-});
-
-}
-
-modal.style.display = "flex";
-}
-
-function closeReviewModal(){
-const modal = document.getElementById("reviewModal");
-if(modal) modal.style.display = "none";
-}
-
-// ===============================
-// ROTATING HEADLINES
-// ===============================
-const headlines = [
-"We Deliver High-Quality Leads That Turn Into Paying Customers.",
-"Predictable Sales. Consistent Growth. Real Results.",
-"Stop Chasing Clients — Start Attracting Them.",
-"Turn Traffic Into Revenue Every Single Month.",
-"Your Business Deserves More Qualified Buyers.",
-"Scale Faster With Our Proven Lead System.",
-"More Bookings. More Calls. More Sales.",
-"We Build Systems That Bring Customers Daily.",
-"Ready-To-Buy Prospects Sent Directly To You.",
-"Grow Smarter With Data-Driven Advertising."
-];
-
-const textElement = document.getElementById("rotatingText");
-
-if (textElement) {
-
-let index = 0;
-
-function rotateText() {
-textElement.style.opacity = 0;
-
-setTimeout(() => {
-textElement.innerText = headlines[index];
-textElement.style.opacity = 1;
-index = (index + 1) % headlines.length;
-}, 400);
-
-}
-
-rotateText();
-setInterval(rotateText, 6000);
-}
-
-// ===============================
-// DEBOUNCED SEARCH (FAST)
-// ===============================
-const searchBox = document.getElementById("searchBox");
-
-if (searchBox) {
-
-let timeout;
-
-searchBox.addEventListener("input", function(){
-
-clearTimeout(timeout);
-
-timeout = setTimeout(() => {
-
-let query = this.value.toLowerCase();
-
-let filtered = services.filter(s =>
-s.title.toLowerCase().includes(query) ||
-s.description.toLowerCase().includes(query)
-);
-
-renderServices(filtered);
-
-}, 300);
+document.addEventListener("click",function(e){
+
+  if(e.target.classList.contains("add-cart-btn")){
+    addToCart(parseInt(e.target.dataset.id));
+  }
+
+  if(e.target.classList.contains("submit-review-btn")){
+
+    const id = parseInt(e.target.dataset.id);
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(!currentUser){
+      alert("Please login first.");
+      return;
+    }
+
+    const input = document.querySelector(
+      `.review-input[data-id="${id}"]`
+    );
+
+    const rating = document.querySelector(
+      `.rating-select[data-id="${id}"]`
+    ).value;
+
+    if(!input.value){
+      alert("Write a review first.");
+      return;
+    }
+
+    let reviews = JSON.parse(localStorage.getItem("reviews")) || [];
+
+    reviews.push({
+      serviceID:id,
+      userName:currentUser.name,
+      userEmail:currentUser.email,
+      rating:parseInt(rating),
+      text:input.value,
+      date:Date.now()
+    });
+
+    localStorage.setItem("reviews",JSON.stringify(reviews));
+    input.value="";
+    renderServices(services);
+  }
 
 });
-
-}
 
