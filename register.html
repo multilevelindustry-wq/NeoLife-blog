@@ -8,23 +8,29 @@
 
 <div style="padding:40px;">
   <h2>Please Create Account To Enjoy Our Services</h2>
+
   <input type="text" id="name" placeholder="Full Name">
   <input type="email" id="email" placeholder="Email">
   <input type="password" id="password" placeholder="Password">
+
   <button onclick="register()">Register</button><br><br>
+
   if already registered <br>
-   <a href="login.html"><button >Login</button></a>
+  <a href="login.html"><button>Login</button></a>
 </div>
 
-<input type="hidden" id="referrerId" name="referrerId">
-
 <script>
-    
-   // Generate Unique Affiliate ID
+
+// ===============================
+// GENERATE UNIQUE ID
+// ===============================
 function generateAffiliateID(){
-  return "AFF" + Date.now();
+  return "AFF" + Date.now() + Math.floor(Math.random()*1000);
 }
 
+// ===============================
+// REGISTER
+// ===============================
 function register(){
 
   let nameValue = document.getElementById("name").value.trim();
@@ -36,48 +42,51 @@ function register(){
     return;
   }
 
-  // Get existing users
   let users = JSON.parse(localStorage.getItem("users")) || [];
 
-  // Check if email already exists
-  let emailExists = users.find(u => u.email === emailValue);
-  if(emailExists){
+  if(users.find(u => u.email === emailValue)){
     alert("Email already registered!");
     return;
   }
 
-  // Get sponsor ID from URL
+  // Get sponsor from URL
   let sponsorID = new URLSearchParams(window.location.search).get("ref");
 
   let newUser = {
-  id: generateAffiliateID(),
-  name: nameValue,
-  email: emailValue,
-  password: passwordValue,
-  sponsorID: sponsorID || null,
+    id: generateAffiliateID(),
+    affiliateID: generateAffiliateID(),
 
-  affiliateID: generateAffiliateID(),
+    name: nameValue,
+    email: emailValue,
+    password: passwordValue,
 
-  personalPV: 0,
-  teamPV: 0,
-  monthlyPV: 0,
+    sponsorID: sponsorID || null,
 
-  earnings: 0,
-  withdrawable: 0,
+    personalPV: 0,
+    teamPV: 0,
+    monthlyPV: 0,
 
-  rank: "Starter",
-  percentage: 0,
+    earnings: 0,
+    withdrawable: 0,
 
-  downlines: [],
-  withdrawals: []
+    rank: "None",
+    percentage: 0,
+
+    downlines: [],
+
+    // PROFILE INFO (EMPTY UNTIL USER FILLS)
+    phone: "",
+    address: "",
+    bankName: "",
+    accountNumber: "",
+    accountName: "",
+
+    dateJoined: new Date().toLocaleString()
   };
 
-  // Add user to array
   users.push(newUser);
 
-  localStorage.setItem("user_" + newUser.email, JSON.stringify(newUser));
-
-  // Update sponsor downlines if sponsor exists
+  // Update sponsor downlines
   if(sponsorID){
     let sponsor = users.find(u => u.id === sponsorID);
     if(sponsor){
@@ -85,13 +94,11 @@ function register(){
     }
   }
 
-  // Save back to localStorage
   localStorage.setItem("users", JSON.stringify(users));
 
   alert("Registered Successfully!");
   window.location.href = "login.html";
 }
-
 
 </script>
 
