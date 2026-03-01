@@ -433,8 +433,9 @@ if(currentUserData){
 function requestWithdrawal(){
 
     let user = JSON.parse(localStorage.getItem("currentUser"));
+    if(!user) return;
 
-    if(!user || user.earnings <= 0){
+    if(user.earnings <= 0){
         alert("No earnings available.");
         return;
     }
@@ -445,14 +446,14 @@ function requestWithdrawal(){
         affiliateID: user.affiliateID,
         email: user.email,
         amount: user.earnings,
-        status: "pending",
+        status: "Pending",
         date: new Date().toLocaleString()
     });
 
     localStorage.setItem("withdrawals", JSON.stringify(withdrawals));
+    alert("Withdrawal request sent to admin.");
+}
 
-    alert("Withdrawal request submitted to admin.");
-      }
 
 
 // ===============================
