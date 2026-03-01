@@ -193,6 +193,26 @@ if(affiliateUser){
 
     document.body.appendChild(box);
 }
+  if(affiliateUser && affiliateUser.downlines){
+
+    let downlineBox=document.createElement("div");
+    downlineBox.innerHTML="<h3>Your Downlines</h3>";
+
+    affiliateUser.downlines.forEach(email=>{
+        let down=JSON.parse(localStorage.getItem("user_"+email));
+        if(down){
+            downlineBox.innerHTML+=`
+              <div class="card">
+                ${down.name}<br>
+                PV: ${down.monthlyPV}<br>
+                Rank: ${down.rank}
+              </div>
+            `;
+        }
+    });
+
+    document.body.appendChild(downlineBox);
+      }
 </script>
 
 </body>
