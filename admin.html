@@ -183,6 +183,65 @@ renderOrders();
 renderProjects();
 renderMessages();
 
+  // ================= USERS =================
+let usersData = JSON.parse(localStorage.getItem("users")) || [];
+let usersDiv = document.createElement("div");
+usersDiv.innerHTML="<h3>Registered Users</h3>";
+
+usersData.forEach(u=>{
+  usersDiv.innerHTML+=`
+    <div class="card">
+      <p>${u.name}</p>
+      <p>${u.email}</p>
+      <p>Rank: ${u.rank || "Starter"}</p>
+      <p>Monthly PV: ${u.monthlyPV || 0}</p>
+    </div>
+  `;
+});
+
+document.body.appendChild(usersDiv);
+
+  // ================= WITHDRAWALS =================
+let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
+
+function renderWithdrawals(){
+
+  let div = document.createElement("div");
+  div.innerHTML = "<h3>Withdrawal Requests</h3>";
+
+  withdrawals.forEach((w,i)=>{
+    div.innerHTML += `
+      <div class="card">
+        <p>${w.email}</p>
+        <p>Amount: $${w.amount}</p>
+        <p>Status: ${w.status}</p>
+        ${w.status==="Pending" ? `<button onclick="approveWithdrawal(${i})">Approve</button>` : ""}
+      </div>
+    `;
+  });
+
+  document.body.appendChild(div);
+}
+
+function approveWithdrawal(index){
+
+  withdrawals[index].status="Approved";
+
+  let userKey="user_"+withdrawals[index].email;
+  let user=JSON.parse(localStorage.getItem(userKey));
+
+  user.earnings -= withdrawals[index].amount;
+  user.withdrawable = 0;
+
+  localStorage.setItem(userKey, JSON.stringify(user));
+  localStorage.setItem("withdrawals", JSON.stringify(withdrawals));
+
+  alert("Withdrawal Approved.");
+  location.reload();
+}
+
+renderWithdrawals();
+
 </script>
 
 </body>
