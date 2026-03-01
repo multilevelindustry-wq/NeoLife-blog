@@ -233,26 +233,35 @@ function renderUsers(){
   let users = JSON.parse(localStorage.getItem("users")) || [];
   let div = document.getElementById("allUsers");
   div.innerHTML = "";
+
   users.forEach(u=>{
+    let sponsorUser = users.find(s => s.id === u.sponsorID);
+    let sponsorDisplay = sponsorUser 
+      ? sponsorUser.name 
+      : (u.sponsorNameManual || "None");
+
     div.innerHTML += `
-      <button class="collapsible">${u.name} - ${u.email}</button>
+      <button class="collapsible">${u.name}</button>
       <div class="content">
-        <p><b>Affiliate ID:</b> ${u.affiliateID}</p>
-        <p><b>Sponsor:</b> ${u.sponsorID || "None"}</p>
-        <p><b>Rank:</b> ${u.rank}</p>
-        <p><b>Personal PV:</b> ${u.personalPV}</p>
-        <p><b>Team PV:</b> ${u.teamPV}</p>
-        <p><b>Earnings:</b> $${(u.earnings||0).toFixed(2)}</p>
-        <p><b>Withdrawable:</b> $${(u.withdrawable||0).toFixed(2)}</p>
-        <p><b>Phone:</b> ${u.phone || "Not Provided"}</p>
-        <p><b>Bank:</b> ${u.bankName || "Not Provided"}</p>
-        <p><b>Account No:</b> ${u.accountNumber || "Not Provided"}</p>
-        <p><b>Date Joined:</b> ${u.dateJoined}</p>
+        <p>Email: ${u.email}</p>
+        <p>Affiliate ID: ${u.affiliateID}</p>
+        <p>Sponsor: ${sponsorDisplay}</p>
+        <p>Rank: ${u.rank}</p>
+        <p>Personal PV: ${u.personalPV}</p>
+        <p>Team PV: ${u.teamPV}</p>
+        <p>Earnings: $${u.earnings}</p>
+        <p>Withdrawable: $${u.withdrawable}</p>
+        <p>Phone: ${u.phone || "Not Provided"}</p>
+        <p>Address: ${u.address || "Not Provided"}</p>
+        <p>Bank: ${u.bankName || "Not Provided"}</p>
+        <p>Account No: ${u.accountNumber || "Not Provided"}</p>
+        <p>Account Name: ${u.accountName || "Not Provided"}</p>
+        <p>Date Joined: ${u.dateJoined}</p>
       </div>
     `;
   });
   makeCollapsible();
-}
+  }
 </script>
 </body>
 </html>
