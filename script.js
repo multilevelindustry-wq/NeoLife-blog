@@ -222,6 +222,144 @@ function updateCartCount(){
 
 updateCartCount();
 
+// ===============================
+// REFERRAL SYSTEM (FULL ENGINE)
+// ===============================
+
+// 8% Commission
+const REF_PERCENT = 0.08;
+
+
+// -------------------------------
+// ENSURE USER HAS AFFILIATE DATA
+// -------------------------------
+let currentUserData = JSON.parse(localStorage.getItem("currentUser"));
+
+if(currentUserData){
+
+    if(!currentUserData.affiliateID){
+        currentUserData.affiliateID = generateAffiliateID();
+        currentUserData.earnings = 0;
+        currentUserData.team = [];
+        currentUserData.pv = 0;
+        localStorage.setItem("currentUser", JSON.stringify(currentUserData));
+    }
+
+    // Save also as user_email key for admin panel
+    localStorage.setItem("user_" + currentUserData.email, JSON.stringify(currentUserData));
+}
+
+
+
+// -------------------------------
+// CAPTURE REFERRAL FROM URL
+// -------------------------------
+const urlParams = new URLSearchParams(window.location.search);
+const refID = urlParams.get("ref");
+
+if(refID){
+    localStorage.setItem("referrerID", refID);
+}
+
+
+
+// -------------------------------
+// MODIFY ADD TO CART COMMISSION
+// -------------------------------
+const originalAddToCart = addToCart;
+
+addToCart = function(id){
+
+    originalAddToCart(id);
+
+    const product = services.find(s => s.id === id);
+    const referrerID = localStorage.getItem("referrerID");
+
+    if(referrerID && product){
+
+        for(let key in localStorage){
+
+            if(key.startsWith("user_")){
+
+                let user = JSON.parse(localStorage.getItem(key));
+
+                if(user.affiliateID === referrerID){
+
+                    let commission = product.price * REF_PERCENT;
+
+                    user.earnings = (user.earnings || 0) + commission;
+                    user.pv = (user.pv || 0) + product.price;
+
+                    // Add team member if new
+                    if(currentUserData && !user.team.includes(currentUserData.email)){
+                        user.team.push(currentUserData.email);
+                    }
+
+                    localStorage.setItem(key, JSON.stringify(user));
+                }
+            }
+        }
+    }
+};
+
+
+
+// -------------------------------
+// GENERATE REFERRAL LINK
+// -------------------------------
+if(currentUserData){
+
+    const refBox = document.createElement("div");
+    refBox.style.background="#fff";
+    refBox.style.padding="20px";
+    refBox.style.margin="20px";
+    refBox.style.borderRadius="10px";
+    refBox.style.color="#000";
+
+    refBox.innerHTML = `
+        <h3>Your Affiliate Link</h3>
+        <input type="text" 
+        value="${window.location.origin + window.location.pathname}?ref=${currentUserData.affiliateID}" 
+        style="width:100%;padding:8px;" readonly>
+
+        <h4>Earnings: $${(currentUserData.earnings || 0).toFixed(2)}</h4>
+        <h4>Total PV: $${(currentUserData.pv || 0).toFixed(2)}</h4>
+
+        <button onclick="requestWithdrawal()">Request Withdrawal</button>
+    `;
+
+    document.body.prepend(refBox);
+}
+
+
+
+// -------------------------------
+// WITHDRAWAL SYSTEM
+// -------------------------------
+function requestWithdrawal(){
+
+    let user = JSON.parse(localStorage.getItem("currentUser"));
+
+    if(!user || user.earnings <= 0){
+        alert("No earnings available.");
+        return;
+    }
+
+    let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
+
+    withdrawals.push({
+        affiliateID: user.affiliateID,
+        email: user.email,
+        amount: user.earnings,
+        status: "pending",
+        date: new Date().toLocaleString()
+    });
+
+    localStorage.setItem("withdrawals", JSON.stringify(withdrawals));
+
+    alert("Withdrawal request submitted to admin.");
+      }
+
 
 // ===============================
 // REVIEW MODAL
