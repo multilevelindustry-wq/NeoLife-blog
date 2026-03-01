@@ -23,7 +23,6 @@
 
   <hr>
 
-  <!-- PROFILE UPDATE SECTION -->
   <h3>Update Profile Information</h3>
 
   <input type="text" id="phone" placeholder="Phone Number"><br><br>
@@ -36,7 +35,6 @@
 
   <hr>
 
-  <!-- AFFILIATE DASHBOARD -->
   <div id="affiliateSection"></div>
 
   <hr>
@@ -58,7 +56,20 @@ let affiliateUser = JSON.parse(localStorage.getItem("currentUser"));
 let users = JSON.parse(localStorage.getItem("users")) || [];
 
 /* ===============================
-   LOAD PROFILE INTO INPUTS
+   RANK PERCENTAGE SYSTEM
+=============================== */
+function getRankPercent(pv){
+  if(pv >= 100000) return 20;
+  if(pv >= 50000) return 18;
+  if(pv >= 20000) return 15;
+  if(pv >= 5000) return 12;
+  if(pv >= 500) return 10;
+  if(pv >= 30) return 8;
+  return 0;
+}
+
+/* ===============================
+   LOAD PROFILE
 =============================== */
 function loadProfile(){
   let user = users.find(u => u.email === affiliateUser.email);
@@ -92,7 +103,7 @@ function updateProfile(){
 }
 
 /* ===============================
-   FULL MLM DASHBOARD (RESTORED)
+   MLM DASHBOARD WITH 10% LOGIC
 =============================== */
 if(affiliateUser){
 
@@ -100,12 +111,26 @@ if(affiliateUser){
 
   if(dbUser){
 
+    // Calculate Downline Earnings Total
+    let downlines = users.filter(u => String(u.sponsorID) === String(dbUser.id));
+    let downlineEarningsTotal = downlines.reduce((sum,u)=> sum + (u.earnings || 0), 0);
+
+    // 10% from personal + downline earnings
+    let totalCommissionBase = (dbUser.earnings || 0) + downlineEarningsTotal;
+    let tenPercentCommission = totalCommissionBase * 0.10;
+
+    // Rank percentage adjustment
+    let rankPercent = getRankPercent(dbUser.personalPV || 0);
+    let withdrawableCalculated = (tenPercentCommission * rankPercent) / 100;
+
+    dbUser.withdrawable = withdrawableCalculated;
+
+    localStorage.setItem("users", JSON.stringify(users));
+
     let refLink = window.location.origin + "/register.html?ref=" + dbUser.affiliateID;
 
-    let downlineUsers = users.filter(u => String(u.sponsorID) === String(dbUser.id));
-
-    let downlineList = downlineUsers.length > 0
-      ? downlineUsers.map(u => u.name + " (" + u.email + ")").join("<br>")
+    let downlineList = downlines.length > 0
+      ? downlines.map(u => u.name + " (" + u.email + ")").join("<br>")
       : "No downlines yet";
 
     document.getElementById("affiliateSection").innerHTML = `
@@ -114,13 +139,13 @@ if(affiliateUser){
       <p><b>Name:</b> ${dbUser.name}</p>
       <p><b>Email:</b> ${dbUser.email}</p>
       <p><b>Affiliate ID:</b> ${dbUser.affiliateID}</p>
-      <p><b>Rank:</b> ${dbUser.rank}</p>
+      <p><b>Rank Percentage:</b> ${rankPercent}%</p>
 
-      <p><b>Total Earnings:</b> $${(dbUser.earnings||0).toFixed(2)}</p>
+      <p><b>Total Earnings (10% Rule):</b> $${tenPercentCommission.toFixed(2)}</p>
 
       <p><b>Withdrawable:</b> ${
         dbUser.personalPV >= 30 
-        ? "$" + (dbUser.withdrawable||0).toFixed(2)
+        ? "$" + withdrawableCalculated.toFixed(2)
         : "Locked (Complete 30 PV)"
       }</p>
 
@@ -136,10 +161,9 @@ if(affiliateUser){
 }
 
 /* ===============================
-   SUBMIT PROJECT (CONNECTED)
+   SUBMIT PROJECT
 =============================== */
 function submitProject(){
-
   let title = document.getElementById("projectTitle").value.trim();
   let description = document.getElementById("projectDescription").value.trim();
 
@@ -163,7 +187,7 @@ function submitProject(){
 }
 
 /* ===============================
-   SEND MESSAGE (CONNECTED)
+   SEND MESSAGE
 =============================== */
 function sendMessage(){
   let msg = document.getElementById("newMessage").value.trim();
@@ -184,14 +208,21 @@ function sendMessage(){
 }
 
 /* ===============================
-   WITHDRAWAL REQUEST (CONNECTED)
+   WITHDRAWAL REQUEST
 =============================== */
 function requestWithdrawal(){
 
   let amount = document.getElementById("withdrawAmount").value;
 
-  if(!amount || amount <= 0){
-    alert("Enter valid amount");
+  let dbUser = users.find(u => u.email === affiliateUser.email);
+
+  if(dbUser.personalPV < 30){
+    alert("You must complete at least 30 PV before withdrawal.");
+    return;
+  }
+
+  if(!amount || amount <= 0 || amount > dbUser.withdrawable){
+    alert("Invalid amount. Must not exceed withdrawable balance.");
     return;
   }
 
@@ -215,5 +246,4 @@ function downloadInvoice(){
 
 </script>
 </body>
-</html>
-
+  </html>
