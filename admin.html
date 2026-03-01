@@ -26,6 +26,9 @@
 
     <h3>User Submissions</h3>
     <div id="projects"></div>
+    <hr>
+<h3>Registered Users</h3>
+<div id="allUsers"></div>
 
     <hr>
 
@@ -202,6 +205,39 @@ function replyUser(email){
   location.reload();
 }
 
+
+  // ===============================
+// SHOW ALL REGISTERED USERS
+// ===============================
+function renderUsers(){
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  let div = document.getElementById("allUsers");
+  if(!div) return;
+
+  div.innerHTML = "";
+
+  users.forEach(u=>{
+
+    div.innerHTML += `
+      <div style="border:1px solid #ddd; padding:10px; margin-bottom:10px;">
+        <p><b>Name:</b> ${u.name}</p>
+        <p><b>Email:</b> ${u.email}</p>
+        <p><b>Affiliate ID:</b> ${u.affiliateID}</p>
+        <p><b>Sponsor:</b> ${u.sponsorID || "None"}</p>
+        <p><b>Rank:</b> ${u.rank}</p>
+        <p><b>Personal PV:</b> ${u.personalPV}</p>
+        <p><b>Team PV:</b> ${u.teamPV}</p>
+        <p><b>Earnings:</b> $${(u.earnings||0).toFixed(2)}</p>
+        <p><b>Withdrawable:</b> $${(u.withdrawable||0).toFixed(2)}</p>
+        <p><b>Phone:</b> ${u.phone || "Not Provided"}</p>
+        <p><b>Bank:</b> ${u.bankName || "Not Provided"}</p>
+        <p><b>Account No:</b> ${u.accountNumber || "Not Provided"}</p>
+        <p><b>Date Joined:</b> ${u.dateJoined}</p>
+      </div>
+    `;
+  });
+  }
 </script>
 </body>
 </html>
