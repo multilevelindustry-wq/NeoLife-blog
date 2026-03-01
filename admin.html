@@ -75,9 +75,6 @@ if(sessionStorage.getItem("adminLoggedIn")==="true"){
   setTimeout(renderAll,100);
 }
 
-// ===============================
-// COLLAPSIBLE
-// ===============================
 function makeCollapsible(){
   let coll = document.getElementsByClassName("collapsible");
   for(let i=0;i<coll.length;i++){
@@ -88,7 +85,6 @@ function makeCollapsible(){
   }
 }
 
-// ===============================
 function renderAll(){
   renderWithdrawals();
   renderProjects();
@@ -96,11 +92,14 @@ function renderAll(){
   renderMessages();
 }
 
-// ===============================
+/* ===========================
+   WITHDRAWALS CONNECTED
+=========================== */
 function renderWithdrawals(){
   let withdrawals = JSON.parse(localStorage.getItem("withdrawals")) || [];
   let div = document.getElementById("withdrawals");
   div.innerHTML = "";
+
   withdrawals.forEach((w,i)=>{
     div.innerHTML += `
       <button class="collapsible">${w.email} - $${w.amount}</button>
@@ -109,53 +108,35 @@ function renderWithdrawals(){
       </div>
     `;
   });
+
   makeCollapsible();
 }
 
-// ===============================
+/* ===========================
+   PROJECTS CONNECTED
+=========================== */
 function renderProjects(){
   let projects = JSON.parse(localStorage.getItem("projects")) || [];
   let div = document.getElementById("projects");
   div.innerHTML = "";
+
   projects.forEach(p=>{
     div.innerHTML += `
       <button class="collapsible">${p.email} - ${p.title}</button>
-      <div class="content">${p.description}</div>
-    `;
-  });
-  makeCollapsible();
-}
-
-// ===============================
-function renderUsers(){
-  let users = JSON.parse(localStorage.getItem("users")) || [];
-  let div = document.getElementById("allUsers");
-  div.innerHTML = "";
-
-  users.forEach(u=>{
-    let sponsorUser = users.find(s => s.id === u.sponsorID);
-    let sponsorDisplay = sponsorUser 
-      ? sponsorUser.name 
-      : (u.sponsorNameManual || "None");
-
-    div.innerHTML += `
-      <button class="collapsible">${u.name}</button>
       <div class="content">
-        <p>Email: ${u.email}</p>
-        <p>Affiliate ID: ${u.affiliateID}</p>
-        <p>Sponsor: ${sponsorDisplay}</p>
-        <p>Rank: ${u.rank}</p>
-        <p>Personal PV: ${u.personalPV}</p>
-        <p>Team PV: ${u.teamPV}</p>
-        <p>Earnings: $${u.earnings}</p>
-        <p>Withdrawable: $${u.withdrawable}</p>
+        <p><b>Description:</b></p>
+        <p>${p.description}</p>
+        <p><b>Date:</b> ${new Date(p.date).toLocaleString()}</p>
       </div>
     `;
   });
+
   makeCollapsible();
 }
 
-// ===============================
+/* ===========================
+   USERS
+=========================== */
 function renderUsers(){
   let users = JSON.parse(localStorage.getItem("users")) || [];
   let div = document.getElementById("allUsers");
@@ -187,9 +168,35 @@ function renderUsers(){
       </div>
     `;
   });
+
+  makeCollapsible();
+}
+
+/* ===========================
+   MESSAGES CONNECTED
+=========================== */
+function renderMessages(){
+  let messages = JSON.parse(localStorage.getItem("messages")) || [];
+  let div = document.getElementById("messages");
+  div.innerHTML = "";
+
+  messages.forEach(m=>{
+    div.innerHTML += `
+      <button class="collapsible">
+        From: ${m.from === "admin" ? "Admin" : m.from}
+      </button>
+      <div class="content">
+        <p><b>To:</b> ${m.to}</p>
+        <p>${m.text}</p>
+        <p><small>${new Date(m.date).toLocaleString()}</small></p>
+      </div>
+    `;
+  });
+
   makeCollapsible();
 }
 
 </script>
 </body>
 </html>
+
