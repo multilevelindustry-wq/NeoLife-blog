@@ -186,7 +186,8 @@ function renderUsers(){
         <p><b>Account Name:</b> ${u.accountName || "Not Provided"}</p>
         <p><b>Date Joined:</b> ${u.dateJoined}</p>
 
-        <button class="admin-btn" onclick="deleteUser(${index})">Delete User</button>
+        <button onclick="deleteUser('user@example.com')">Delete</button>
+
       </div>
     `;
   });
@@ -223,6 +224,32 @@ function renderMessages(){
   });
 }
 
+
+
+  /* ===============================
+   DELETE USER (SYNC WITH INDEX)
+=============================== */
+function deleteUser(userEmail) {
+  // Remove from users array
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  users = users.filter(u => u.email !== userEmail);
+  localStorage.setItem("users", JSON.stringify(users));
+
+  // If the deleted user is currently logged in, log them out
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if(currentUser && currentUser.email === userEmail) {
+    localStorage.removeItem("currentUser");
+    alert("Your account has been deleted. Reloading page...");
+    window.location.href = "index.html"; // redirect to index like new visitor
+    return;
+  }
+
+  alert("User deleted successfully!");
+  // Optionally, refresh the admin table/list after deletion
+  renderUsersTable(); // assuming you have a function that shows all users
+}
+
+  
 </script>
 </body>
 </html>
