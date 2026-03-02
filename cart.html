@@ -43,6 +43,7 @@
   </p>
 </footer>
 
+  <script type="module" src="supabase.js"></script>
 <script>
 let loggedIn = localStorage.getItem("loggedIn");
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
@@ -52,7 +53,6 @@ if(!currentUser || !loggedIn){
    window.location.href = "login.html";
 }
  
-<script type="module" src="supabase.js"></script>
 // ============================
 // LOGIN CHECK ONLY ON CHECKOUT
 // ============================
