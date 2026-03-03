@@ -10,9 +10,6 @@
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
   <style>
-/* ===============================
-   BACKGROUND
-================================ */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -33,12 +30,9 @@ body::before {
   z-index: -1;
 }
 
-/* ===============================
-   GLASS PANEL
-================================ */
 .wrap {
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 40px;
   width: 90%;
@@ -48,8 +42,13 @@ body::before {
   text-align: center;
 }
 
-h2, h3 {
-  margin: 10px 0;
+input {
+  width: 100%;
+  padding: 12px;
+  margin: 15px 0;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
 }
 
 button {
@@ -78,16 +77,17 @@ button:hover {
 <body>
 
 <div class="wrap">
-  <h2>Checkout Your Items ✅</h2><br><br>
-  <h3>Total: $<span id="totalAmount">0.00</span></h3>
-  <h3>Total PV: <span id="totalPV">0</span></h3><br><br>
+  <h2>Checkout</h2>
 
-  <h2>Nigerian Dollar $ Transfer Option 1</h2>
-  <div id="paypal-button-container"></div><br><br>
-  <h2>Nigerian Local Transfer Option 2</h2>
+  <h3>Total: $<span id="totalAmount">0.00</span></h3>
+  <h3>Total PV: <span id="totalPV">0</span></h3>
+
+  <!-- Phone Input -->
+  <input type="tel" id="creditPhone" placeholder="Enter Phone Number To Be Credited" required>
+
+  <div id="paypal-button-container"></div>
+
   <button onclick="payWithPaystack()">Pay With Paystack</button>
-<br>
-  <button><a href="cart.html">Back To Cart</a></button>
 </div>
 
 <script>
@@ -107,7 +107,7 @@ document.getElementById("totalAmount").innerText = order.total.toFixed(2);
 document.getElementById("totalPV").innerText = order.totalPV;
 
 // ===============================
-// PREPARE METADATA
+// PREPARE DATA
 // ===============================
 let productNames = [];
 let productIDs = [];
@@ -125,11 +125,18 @@ let sponsorID = currentUser.sponsorID || "NONE";
 let buyerUserID = currentUser.userID || "UNKNOWN";
 
 // ===============================
-// PAYSTACK (USD → NGN AUTO CONVERT)
+// PAYSTACK
 // ===============================
 function payWithPaystack(){
 
-  let exchangeRate = 1350; // Change anytime
+  let phoneToCredit = document.getElementById("creditPhone").value.trim();
+
+  if(phoneToCredit === ""){
+    alert("Please enter phone number to be credited.");
+    return;
+  }
+
+  let exchangeRate = 1350; 
   let totalUSD = order.total;
   let totalNGN = totalUSD * exchangeRate;
 
@@ -142,13 +149,14 @@ function payWithPaystack(){
 
     metadata: {
       custom_fields: [
-        { display_name:"Buyer User ID", variable_name:"buyer_user_id", value: buyerUserID },
-        { display_name:"Sponsor ID", variable_name:"sponsor_id", value: sponsorID },
-        { display_name:"Product Names", variable_name:"product_names", value: productNames.join(", ") },
-        { display_name:"Product IDs", variable_name:"product_ids", value: productIDs.join(", ") },
-        { display_name:"Product PVs", variable_name:"product_pvs", value: productPVs.join(", ") },
-        { display_name:"Quantities", variable_name:"quantities", value: quantities.join(", ") },
-        { display_name:"Total PV", variable_name:"total_pv", value: order.totalPV }
+        { display_name:"Buyer User ID", value: buyerUserID },
+        { display_name:"Sponsor ID", value: sponsorID },
+        { display_name:"Phone To Credit", value: phoneToCredit },
+        { display_name:"Product Names", value: productNames.join(", ") },
+        { display_name:"Product IDs", value: productIDs.join(", ") },
+        { display_name:"Product PVs", value: productPVs.join(", ") },
+        { display_name:"Quantities", value: quantities.join(", ") },
+        { display_name:"Total PV", value: order.totalPV }
       ]
     },
 
@@ -169,16 +177,26 @@ function payWithPaystack(){
 }
 
 // ===============================
-// PAYPAL PAYMENT
+// PAYPAL
 // ===============================
 paypal.Buttons({
+
   createOrder: function(data, actions) {
+
+    let phoneToCredit = document.getElementById("creditPhone").value.trim();
+
+    if(phoneToCredit === ""){
+      alert("Please enter phone number to be credited.");
+      return;
+    }
+
     return actions.order.create({
       purchase_units: [{
         amount: { value: order.total.toFixed(2) },
         description: `
 BuyerID:${buyerUserID}
 SponsorID:${sponsorID}
+PhoneToCredit:${phoneToCredit}
 Products:${productNames.join("|")}
 IDs:${productIDs.join("|")}
 PVs:${productPVs.join("|")}
