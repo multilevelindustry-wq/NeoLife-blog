@@ -131,6 +131,54 @@ let buyerUserID = currentUser.userID || "UNKNOWN";
 // ===============================
 // PAYSTACK PAYMENT
 // ===============================
+
+  // ===============================
+// PAYSTACK (AUTO CONVERT TO NGN)
+// ===============================
+function payWithPaystack(){
+
+  let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if(!currentUser){
+    alert("Please login first");
+    return;
+  }
+
+  // 🔥 Automatic Conversion Rate (You can adjust)
+  let exchangeRate = 1350; 
+  let totalNGN = totalUSD * exchangeRate;
+
+  let handler = PaystackPop.setup({
+    key: 'pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b',
+    email: currentUser.email,
+    amount: Math.round(totalNGN * 100), // kobo
+    currency: "NGN",
+    ref: 'PS-' + Date.now(),
+
+    callback: function(response){
+
+      saveOrder(response.reference, totalUSD, "NGN");
+
+      let totalPV = 0;
+cart.forEach(item=>{
+   totalPV += (item.pv || 0) * item.quantity;
+});
+
+processCommission(currentUser.email, totalAmount, totalPV);
+
+      alert("Paystack Payment Successful!");
+      window.location.href = "dashboard.html";
+    },
+
+    onClose: function(){
+      alert("Transaction cancelled.");
+    }
+
+  });
+
+  handler.openIframe();
+    }
+
+  
 function payWithPaystack(){
   var handler = PaystackPop.setup({
     key: "pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b",
