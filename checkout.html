@@ -5,37 +5,97 @@
   <link rel="stylesheet" href="style.css">
   <script src="https://www.paypal.com/sdk/js?client-id=Aey_vJzSIErk6JUHmkIU41JQ4W1vA2FlfBNf5Vtkg7j4YLaWHkFtw4WSPI0SWiCzhaNKqPt2oGuVIF1n&currency=USD"></script>
   <script src="https://js.paystack.co/v1/inline.js"></script>
+
   <style>
-    .wrap{
+/* ===============================
+   BACKGROUND & BODY
+================================ */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('https://images.unsplash.com/photo-1492724441997-5dc865305da7') no-repeat center center fixed;
+  background-size: cover;
+  min-height: 100vh;
   display: flex;
-  align-items: center;     /* Centers items vertically */
-  height: 300px;           /* Set a specific height for the container */
-  border: 1px solid black; /* Optional: for visualization */
+  justify-content: center;
+  align-items: center;
 }
 
-.centered-item {
-  /* Add styles for your inner item as needed */
-    }
-    
+/* Dark overlay */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
+}
+
+/* ===============================
+   WRAPPER / GLASS PANEL
+================================ */
+.wrap {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 90%;
+  max-width: 600px;
+  color: white;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  text-align: center;
+}
+
+/* ===============================
+   HEADINGS
+================================ */
+h2, h3 {
+  margin: 10px 0;
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+button {
+  padding: 12px 25px;
+  margin: 10px 5px;
+  border: none;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+#checkoutBtn, button {
+  background-color: #00c896;
+  color: white;
+  font-size: 16px;
+}
+
+/* ===============================
+   PAYPAL CONTAINER
+================================ */
+#paypal-button-container {
+  margin-top: 20px;
+}
   </style>
 </head>
 <body>
+
 <div class="wrap">
-  
+  <h2>Checkout</h2>
+  <h3>Total: $<span id="totalAmount">0.00</span></h3>
+  <h3>Total PV: <span id="totalPV">0</span></h3>
 
-<h2>Checkout</h2>
-
-<h3>Total: $<span id="totalAmount">0.00</span></h3>
-<h3>Total PV: <span id="totalPV">0</span></h3>
-
-
-<div id="paypal-button-container" style="margin-top:20px;"></div>
-<button onclick="payWithPaystack()">Pay With Paystack</button>
+  <div id="paypal-button-container"></div>
+  <button onclick="payWithPaystack()">Pay With Paystack</button>
 </div>
-  
-  
-  <script>
 
+<script>
 // ===============================
 // LOAD ORDER DATA
 // ===============================
@@ -72,13 +132,11 @@ let buyerUserID = currentUser.userID || "UNKNOWN";
 // PAYSTACK PAYMENT
 // ===============================
 function payWithPaystack(){
-
   var handler = PaystackPop.setup({
     key: "pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b",
     email: currentUser.email,
     amount: order.total * 100,
     currency: "USD",
-
     metadata: {
       custom_fields: [
         { display_name:"Buyer User ID", variable_name:"buyer_user_id", value: buyerUserID },
@@ -90,7 +148,6 @@ function payWithPaystack(){
         { display_name:"Total PV", variable_name:"total_pv", value: order.totalPV }
       ]
     },
-
     callback: function(response){
       alert("Payment Successful");
       localStorage.removeItem("cart");
@@ -109,9 +166,7 @@ paypal.Buttons({
   createOrder: function(data, actions) {
     return actions.order.create({
       purchase_units: [{
-        amount: {
-          value: order.total.toFixed(2)
-        },
+        amount: { value: order.total.toFixed(2) },
         description: `
 BuyerID:${buyerUserID}
 SponsorID:${sponsorID}
@@ -139,8 +194,6 @@ TotalPV:${order.totalPV}
 
 </body>
 </html>
-
-
 
 
 
