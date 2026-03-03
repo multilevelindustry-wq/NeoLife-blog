@@ -150,6 +150,59 @@ function saveCart(){
 // ============================
 renderCart();
 
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let container = document.getElementById("cart-items");
+let total = 0;
+let totalPV = 0;
+
+function renderCart(){
+
+  container.innerHTML = "";
+  total = 0;
+  totalPV = 0;
+
+  if(cart.length === 0){
+    container.innerHTML = "<h3>Your cart is empty.</h3>";
+    document.getElementById("total").innerText = "0.00";
+    return;
+  }
+
+  cart.forEach(function(item, index){
+
+    let itemTotal = item.price * item.quantity;
+    let itemPVTotal = item.pv * item.quantity;
+
+    total += itemTotal;
+    totalPV += itemPVTotal;
+
+    container.innerHTML += `
+      <div class="card">
+        <h3>${item.title}</h3>
+        <p><b>Product ID:</b> ${item.id}</p>
+        <p><b>PV:</b> ${item.pv}</p>
+        <p>Price: $${item.price}</p>
+        <p>Quantity: ${item.quantity}</p>
+        <p><strong>Subtotal: $${itemTotal.toFixed(2)}</strong></p>
+
+        <button onclick="increase(${index})">+</button>
+        <button onclick="decrease(${index})">-</button>
+        <button onclick="removeItem(${index})">Remove</button>
+      </div>
+    `;
+  });
+
+  document.getElementById("total").innerText = total.toFixed(2);
+
+  // SAVE ORDER SUMMARY FOR PAYMENT PAGE
+  localStorage.setItem("orderSummary", JSON.stringify({
+    cart,
+    total,
+    totalPV
+  }));
+}
+
+renderCart();
+
 </script>
 
 </body>
