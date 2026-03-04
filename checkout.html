@@ -9,7 +9,9 @@
   <!-- Paystack -->
   <script src="https://js.paystack.co/v1/inline.js"></script>
 
-  <style>
+<style>
+
+/* ================= BACKGROUND ================= */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -24,44 +26,78 @@ body {
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.6);
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.65);
   z-index: -1;
 }
 
+/* ================= GLASS CARD ================= */
 .wrap {
   background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(12px);
-  border-radius: 20px;
-  padding: 40px;
-  width: 90%;
-  max-width: 600px;
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  padding: 50px 40px;
+  width: 92%;
+  max-width: 650px;
   color: white;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   text-align: center;
+  position: relative;
 }
 
+/* ================= BACK BUTTON ================= */
+.back-btn {
+  position: absolute;
+  left: 30px;
+  top: 30px;
+  text-decoration: none;
+  background: rgba(255,255,255,0.2);
+  padding: 8px 15px;
+  border-radius: 10px;
+  color: white;
+  font-size: 14px;
+}
+
+.back-btn:hover {
+  background: rgba(255,255,255,0.35);
+}
+
+/* ================= HEADINGS ================= */
+h2 {
+  margin-bottom: 30px;
+  font-size: 28px;
+}
+
+.summary {
+  margin-bottom: 30px;
+  line-height: 1.8;
+  font-size: 18px;
+}
+
+/* ================= INPUT ================= */
 input {
   width: 100%;
-  padding: 12px;
-  margin: 15px 0;
-  border-radius: 10px;
+  padding: 14px;
+  margin: 25px 0 35px 0;
+  border-radius: 12px;
   border: none;
-  font-size: 15px;
+  font-size: 16px;
 }
 
+/* ================= BUTTONS ================= */
 button {
-  padding: 12px 25px;
-  margin: 15px 5px;
+  width: 100%;
+  padding: 14px;
+  margin-top: 20px;
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
   font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
-  background-color: #00c896;
-  color: white;
   font-size: 16px;
+  background: #00c896;
+  color: white;
+  transition: 0.3s;
 }
 
 button:hover {
@@ -69,40 +105,35 @@ button:hover {
 }
 
 #paypal-button-container {
-  margin-top: 20px;
+  margin-top: 10px;
 }
-a{
-  color: white;
-  font-size: 15px;
-}
-  </style>
+
+</style>
 </head>
 
 <body>
 
 <div class="wrap">
-  <h2>Checkout Your Items ✅</h2>
 
-  <h3>Total: $<span id="totalAmount">0.00</span></h3>
-  <h3>Total PV: <span id="totalPV">0</span></h3><br><br>
+  <a href="cart.html" class="back-btn">← Back To Cart</a>
 
-  <!-- Phone Input -->
-  <input type="tel" id="creditPhone" placeholder="Enter Phone Number To Be Credited" required><br>
+  <h2>Secure Checkout</h2>
 
-  <h2>Nigerian (Dollar) Checkout Option 1✅</h2>
-  <div id="paypal-button-container"></div><br><br>
+  <div class="summary">
+    <div>Total: <strong>$<span id="totalAmount"></span></strong></div>
+    <div>Total PV: <strong><span id="totalPV"></span></strong></div>
+  </div>
 
-  <h2>Nigerian (Naira) Checkout Option 2✅</h2>
+  <input type="tel" id="creditPhone" placeholder="Enter Phone Number To Be Credited">
+
+  <div id="paypal-button-container"></div>
+
   <button onclick="payWithPaystack()">Pay With Paystack</button>
-<br>
-  <button><a href="cart.html">Back To Cart</a></button>
+
 </div>
 
 <script>
 
-// ===============================
-// LOAD ORDER DATA
-// ===============================
 let order = JSON.parse(localStorage.getItem("orderSummary"));
 let currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -114,114 +145,83 @@ if(!order || !currentUser){
 document.getElementById("totalAmount").innerText = order.total.toFixed(2);
 document.getElementById("totalPV").innerText = order.totalPV;
 
-// ===============================
-// PREPARE DATA
-// ===============================
-let productNames = [];
-let productIDs = [];
-let productPVs = [];
-let quantities = [];
-
-order.cart.forEach(item=>{
-  productNames.push(item.title);
-  productIDs.push(item.id);
-  productPVs.push(item.pv || 0);
-  quantities.push(item.quantity);
-});
-
 let sponsorID = currentUser.sponsorID || "NONE";
 let buyerUserID = currentUser.userID || "UNKNOWN";
 
-// ===============================
-// PAYSTACK
-// ===============================
+/* ================= PAYSTACK ================= */
 function payWithPaystack(){
 
-  let phoneToCredit = document.getElementById("creditPhone").value.trim();
+let phone=document.getElementById("creditPhone").value.trim();
+if(phone===""){ alert("Enter phone number to be credited"); return; }
 
-  if(phoneToCredit === ""){
-    alert("Please enter phone number to be credited.");
-    return;
-  }
+let exchangeRate=1350;
+let totalNGN=order.total*exchangeRate;
 
-  let exchangeRate = 1350; 
-  let totalUSD = order.total;
-  let totalNGN = totalUSD * exchangeRate;
+PaystackPop.setup({
+key:"pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b",
+email:currentUser.email,
+amount:Math.round(totalNGN*100),
+currency:"NGN",
+ref:"PS-"+Date.now(),
+metadata:{
+buyer_user_id:buyerUserID,
+sponsor_id:sponsorID,
+phone_to_credit:phone,
+total_pv:order.totalPV,
+products:JSON.stringify(order.cart)
+},
+callback:function(){
+alert("Payment Successful!");
+localStorage.removeItem("cart");
+localStorage.removeItem("orderSummary");
+window.location.href="index.html";
+}
+}).openIframe();
 
-  var handler = PaystackPop.setup({
-    key: "pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b",
-    email: currentUser.email,
-    amount: Math.round(totalNGN * 100),
-    currency: "NGN",
-    ref: "PS-" + Date.now(),
-
-    metadata: {
-      custom_fields: [
-        { display_name:"Buyer User ID", value: buyerUserID },
-        { display_name:"Sponsor ID", value: sponsorID },
-        { display_name:"Phone To Credit", value: phoneToCredit },
-        { display_name:"Product Names", value: productNames.join(", ") },
-        { display_name:"Product IDs", value: productIDs.join(", ") },
-        { display_name:"Product PVs", value: productPVs.join(", ") },
-        { display_name:"Quantities", value: quantities.join(", ") },
-        { display_name:"Total PV", value: order.totalPV }
-      ]
-    },
-
-    callback: function(response){
-      alert("Paystack Payment Successful!");
-      localStorage.removeItem("cart");
-      localStorage.removeItem("orderSummary");
-      window.location.href = "index.html";
-    },
-
-    onClose: function(){
-      alert("Transaction cancelled.");
-    }
-
-  });
-
-  handler.openIframe();
 }
 
-// ===============================
-// PAYPAL
-// ===============================
+/* ================= PAYPAL ================= */
 paypal.Buttons({
 
-  createOrder: function(data, actions) {
+createOrder:function(data,actions){
 
-    let phoneToCredit = document.getElementById("creditPhone").value.trim();
+let phone=document.getElementById("creditPhone").value.trim();
+if(phone===""){ alert("Enter phone number to be credited"); return; }
 
-    if(phoneToCredit === ""){
-      alert("Please enter phone number to be credited.");
-      return;
-    }
+let items=[];
+order.cart.forEach(item=>{
+items.push({
+name:item.title+" (ID:"+item.id+" PV:"+item.pv+")",
+unit_amount:{currency_code:"USD",value:item.price.toFixed(2)},
+quantity:item.quantity.toString()
+});
+});
 
-    return actions.order.create({
-      purchase_units: [{
-        amount: { value: order.total.toFixed(2) },
-        description: `
-BuyerID:${buyerUserID}
-SponsorID:${sponsorID}
-PhoneToCredit:${phoneToCredit}
-Products:${productNames.join("|")}
-IDs:${productIDs.join("|")}
-PVs:${productPVs.join("|")}
-TotalPV:${order.totalPV}
-        `
-      }]
-    });
-  },
+return actions.order.create({
+purchase_units:[{
+amount:{
+currency_code:"USD",
+value:order.total.toFixed(2),
+breakdown:{
+item_total:{currency_code:"USD",value:order.total.toFixed(2)}
+}
+},
+items:items,
+custom_id:"USER:"+buyerUserID+" | SPONSOR:"+sponsorID,
+invoice_id:"INV-"+Date.now(),
+description:"Phone:"+phone+" | TotalPV:"+order.totalPV
+}]
+});
+},
 
-  onApprove: function(data, actions) {
-    return actions.order.capture().then(function(details) {
-      alert("PayPal Payment Completed!");
-      localStorage.removeItem("cart");
-      localStorage.removeItem("orderSummary");
-      window.location.href = "index.html";
-    });
-  }
+onApprove:function(data,actions){
+return actions.order.capture().then(function(){
+alert("PayPal Payment Completed!");
+localStorage.removeItem("cart");
+localStorage.removeItem("orderSummary");
+window.location.href="index.html";
+});
+}
 
 }).render('#paypal-button-container');
 
