@@ -11,7 +11,7 @@
 
 <style>
 
-/* ================= BACKGROUND ================= */
+/* BACKGROUND */
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
@@ -32,7 +32,7 @@ body::before {
   z-index: -1;
 }
 
-/* ================= GLASS CARD ================= */
+/* GLASS CARD */
 .wrap {
   background: rgba(255,255,255,0.08);
   backdrop-filter: blur(15px);
@@ -46,7 +46,7 @@ body::before {
   position: relative;
 }
 
-/* ================= BACK BUTTON ================= */
+/* BACK BUTTON */
 .back-btn {
   position: absolute;
   left: 30px;
@@ -63,7 +63,6 @@ body::before {
   background: rgba(255,255,255,0.35);
 }
 
-/* ================= HEADINGS ================= */
 h2 {
   margin-bottom: 30px;
   font-size: 28px;
@@ -75,7 +74,6 @@ h2 {
   font-size: 18px;
 }
 
-/* ================= INPUT ================= */
 input {
   width: 100%;
   padding: 14px;
@@ -85,7 +83,6 @@ input {
   font-size: 16px;
 }
 
-/* ================= BUTTONS ================= */
 button {
   width: 100%;
   padding: 14px;
@@ -97,7 +94,6 @@ button {
   font-size: 16px;
   background: #00c896;
   color: white;
-  transition: 0.3s;
 }
 
 button:hover {
@@ -148,7 +144,7 @@ document.getElementById("totalPV").innerText = order.totalPV;
 let sponsorID = currentUser.sponsorID || "NONE";
 let buyerUserID = currentUser.userID || "UNKNOWN";
 
-/* ================= PAYSTACK ================= */
+/* ================= PAYSTACK (FULLY FIXED) ================= */
 function payWithPaystack(){
 
 let phone=document.getElementById("creditPhone").value.trim();
@@ -157,30 +153,57 @@ if(phone===""){ alert("Enter phone number to be credited"); return; }
 let exchangeRate=1350;
 let totalNGN=order.total*exchangeRate;
 
+// PREPARE PRODUCT DETAILS
+let productNames=[];
+let productIDs=[];
+let productPVs=[];
+let quantities=[];
+
+order.cart.forEach(item=>{
+  productNames.push(item.title);
+  productIDs.push(item.id);
+  productPVs.push(item.pv || 0);
+  quantities.push(item.quantity);
+});
+
 PaystackPop.setup({
 key:"pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b",
 email:currentUser.email,
 amount:Math.round(totalNGN*100),
 currency:"NGN",
 ref:"PS-"+Date.now(),
+
 metadata:{
-buyer_user_id:buyerUserID,
-sponsor_id:sponsorID,
-phone_to_credit:phone,
-total_pv:order.totalPV,
-products:JSON.stringify(order.cart)
+  custom_fields:[
+
+    { display_name:"Buyer User ID", variable_name:"buyer_user_id", value:buyerUserID },
+    { display_name:"Sponsor ID", variable_name:"sponsor_id", value:sponsorID },
+    { display_name:"Phone To Credit", variable_name:"phone_to_credit", value:phone },
+    { display_name:"Product Names", variable_name:"product_names", value:productNames.join(", ") },
+    { display_name:"Product IDs", variable_name:"product_ids", value:productIDs.join(", ") },
+    { display_name:"Product PVs", variable_name:"product_pvs", value:productPVs.join(", ") },
+    { display_name:"Quantities", variable_name:"quantities", value:quantities.join(", ") },
+    { display_name:"Total PV", variable_name:"total_pv", value:order.totalPV }
+
+  ]
 },
+
 callback:function(){
 alert("Payment Successful!");
 localStorage.removeItem("cart");
 localStorage.removeItem("orderSummary");
 window.location.href="index.html";
+},
+
+onClose:function(){
+alert("Transaction cancelled.");
 }
+
 }).openIframe();
 
 }
 
-/* ================= PAYPAL ================= */
+/* ================= PAYPAL (UNCHANGED) ================= */
 paypal.Buttons({
 
 createOrder:function(data,actions){
