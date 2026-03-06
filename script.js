@@ -20,17 +20,15 @@ const services = [
 
 {id: 10, title: "1.5Gb For 7Days Social Plan Airtel Data Plan", description: "Get Exciting 7Days Social Data Plan, Buy 100x of 1.5Gb per month, Win N11,000 Cash Price", price: 0.91, pv: 0.39, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
 
-{id: 16, title: "High-Converting Landing Page Design", description: "Strategic landing page engineered to convert paid traffic into leads and sales at maximum efficiency.", price: 137.80, pv: 50, image: "https://images.unsplash.com/photo-1559028012-481c04fa702d" },
+{id: 16, title: "25G For 30Days Airtel Data Plan", description: "Get This Amazing Offer, Order 45x per month To Earn N30,000 Cash", price: 6.31, pv: 2.41, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
-{id: 17, title: "Painting & Fence Installation Lead Campaign", description: "Homeowners requesting painting and fence services delivered as exclusive, ready-to-book leads.", price: 132.49, pv: 48, image: "https://media.istockphoto.com/id/1215222296/photo/call-18-for-emergency-3d-rendering-illustration-on-white-background.jpg?s=612x612&w=0&k=20&c=G38zf0BwBzd36Z_YNLqzHVyKNB8I4wl_9pHNJ412BwE=" },
+{id: 17, title: "35G For 30Days Airtel Data Plan", description: "Great Sales, Order 60x per Month Get N40,000 Cash", price: 8.07, pv: 3.03, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
-{id: 18, title: "Eye Clinic & Hearing Center Patient Leads", description: "Qualified patients searching for eye care and hearing services delivered consistently every month.", price: 90.99, pv: 30, image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5" },
+{id: 18, title: "18Gb For 7Days Airtel Data Plan", description: " Perfect Size Offer, Order 90x per Month, Earn N30,000 Cash", price: 4.05, pv: 1.87, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
-{id: 19, title: "Professional Video Editing Service", description: "High-impact promotional videos designed to increase engagement and drive conversions.", price: 120.97, pv: 50, image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d" },
+{id: 19, title: "36Gb For 7Day Airtel Data Plan", description: "Limited Offer, Order 120x per Month Get N70,000", price: 8.12, pv: 3.13, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
-{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: "We generate urgent medical inquiries and orthodontic consultations ready to book appointments.", price: 80.85, pv: 22, image: "https://media.istockphoto.com/id/1293534212/photo/orthodontist-placing-rubber-bands-on-female-patient-braces.webp?a=1&b=1&s=612x612&w=0&k=20&c=9gQVBip8U-7QScwFJmO1_NwH4KgAQV0X_UHM-NFZeTU=" },
-
-
+{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: " Wonderful Pack, Order 100x per Month Get N20,000", price: 0.61, pv: 0.02, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
 ];
 
