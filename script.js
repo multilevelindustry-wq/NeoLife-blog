@@ -8,27 +8,27 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 1, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 50x per Week N13,000 Cash Gift", price: 1.29, pv: 0.52, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
+{id: 2001, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 50x per Week N13,000 Cash Gift", price: 1.29, pv: 0.52, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
 
-{id: 2, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 65x per Month Get N25,000 Cash price", price: 2.40, pv: 1.12, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
+{id: 2002, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 65x per Month Get N25,000 Cash price", price: 2.40, pv: 1.12, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
 
-{id: 3, title: "3Gb For 2Days Airtel Data Plan", description: "Quick 2Days Data Offer, Order 70x Per month Get N17,000 Cash Reward", price: 0.87, pv: 0.11, image: " https://media.istockphoto.com/id/1208250906/photo/3gb-3d.jpg?s=612x612&w=0&k=20&c=s-Z_wo7Q2BBfxwXNrju-QpG_73dTr9k3_ErQt53Itt0=" },
+{id: 2003, title: "3Gb For 2Days Airtel Data Plan", description: "Quick 2Days Data Offer, Order 70x Per month Get N17,000 Cash Reward", price: 0.87, pv: 0.11, image: " https://media.istockphoto.com/id/1208250906/photo/3gb-3d.jpg?s=612x612&w=0&k=20&c=s-Z_wo7Q2BBfxwXNrju-QpG_73dTr9k3_ErQt53Itt0=" },
 
-{id: 4, title: "2Gb For 30Days Airtel Data Plan", description: "Buy 2Gb Data Plan Today For 30Days, Purchase 100x Per month to Win N20,000 Cash Price", price: 1.21, pv: 0.49, image: "https://media.istockphoto.com/id/1208250910/photo/2gb-3d.jpg?s=612x612&w=0&k=20&c=hY6m2hmx5YGABRjg99Rd71qdR1Q_LZ7Z-lZWIyY8d3E=" },
+{id: 2004, title: "2Gb For 30Days Airtel Data Plan", description: "Buy 2Gb Data Plan Today For 30Days, Purchase 100x Per month to Win N20,000 Cash Price", price: 1.21, pv: 0.49, image: "https://media.istockphoto.com/id/1208250910/photo/2gb-3d.jpg?s=612x612&w=0&k=20&c=hY6m2hmx5YGABRjg99Rd71qdR1Q_LZ7Z-lZWIyY8d3E=" },
 
-{id: 5, title: "600Mb For 2Days Airtel Data Plan", description: "Fast And Reliable Data Plan Order 100x Per month Get N7000 Cash Price", price: 0.21, pv: 0.05, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
+{id: 2005, title: "600Mb For 2Days Airtel Data Plan", description: "Fast And Reliable Data Plan Order 100x Per month Get N7000 Cash Price", price: 0.21, pv: 0.05, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
 
-{id: 10, title: "1.5Gb For 7Days Social Plan Airtel Data Plan", description: "Get Exciting 7Days Social Data Plan, Buy 100x of 1.5Gb per month, Win N11,000 Cash Price", price: 0.91, pv: 0.39, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
+{id: 2006, title: "1.5Gb For 7Days Social Plan Airtel Data Plan", description: "Get Exciting 7Days Social Data Plan, Buy 100x of 1.5Gb per month, Win N11,000 Cash Price", price: 0.91, pv: 0.39, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
 
-{id: 16, title: "25G For 30Days Airtel Data Plan", description: "Get This Amazing Offer, Order 45x per month To Earn N30,000 Cash", price: 6.31, pv: 2.41, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
+{id: 2007, title: "25G For 30Days Airtel Data Plan", description: "Get This Amazing Offer, Order 45x per month To Earn N30,000 Cash", price: 6.31, pv: 2.41, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
-{id: 17, title: "35G For 30Days Airtel Data Plan", description: "Great Sales, Order 60x per Month Get N40,000 Cash", price: 8.07, pv: 3.03, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
+{id: 2008, title: "35G For 30Days Airtel Data Plan", description: "Great Sales, Order 60x per Month Get N40,000 Cash", price: 8.07, pv: 3.03, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
-{id: 18, title: "18Gb For 7Days Airtel Data Plan", description: " Perfect Size Offer, Order 90x per Month, Earn N30,000 Cash", price: 4.05, pv: 1.87, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
+{id: 2009, title: "18Gb For 7Days Airtel Data Plan", description: " Perfect Size Offer, Order 90x per Month, Earn N30,000 Cash", price: 4.05, pv: 1.87, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
-{id: 19, title: "36Gb For 7Day Airtel Data Plan", description: "Limited Offer, Order 120x per Month Get N70,000", price: 8.12, pv: 3.13, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
+{id: 2010, title: "36Gb For 7Day Airtel Data Plan", description: "Limited Offer, Order 120x per Month Get N70,000", price: 8.12, pv: 3.13, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
-{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: " Wonderful Pack, Order 100x per Month Get N20,000", price: 0.61, pv: 0.02, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
+{id: 2011, title: "Urgent Care & Orthodontist Patient Ads", description: " Wonderful Pack, Order 100x per Month Get N20,000", price: 0.61, pv: 0.02, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRApxb1oshhnKLjCAW27bXmDa51-RsrU9fBF-oMzkCa7g&s=10" },
 
 ];
 
