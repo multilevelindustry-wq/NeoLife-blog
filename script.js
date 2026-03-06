@@ -36,11 +36,6 @@ const services = [
 
 
 
-// ===============================
-// SERVICES AUTO-ID FIX
-// ===============================
-services.forEach((s, i) => s.id = i + 1);
-
 
 // ===============================
 // ULTRA FAST RENDER SERVICES
