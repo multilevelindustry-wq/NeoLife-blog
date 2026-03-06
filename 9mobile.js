@@ -8,47 +8,27 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 1, title: "5Gb For 7Days Airtel Data Plan", description: "Order 5Gb For 7 Days 50x per Week N13,000 Cash Gift", price: 1.29, image: "https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA=" },
+{id: 101, title: "4.5Gb For 30Days 9mobile Data Plan", description: "Order 4.5Gb For 30Days 175x per Week N23,000 Cash Gift", price: 1.88, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 2, title: "10Gb For 30Days Airtel Data Plan", description: "Get started with 10Gb monthly, Order 65x per Month Get N25,000 Cash price", price: 2.40, image: "https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ=" },
+{id: 102, title: "7.5Gb For 30Days 9mobile Data Plan", description: "Get started with 7.5Gb monthly, Order 100x per Month Get N22,000 Cash price", price: 2.95, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 3, title: "3Gb For 2Days Airtel Data Plan", description: "Quick 2Days Data Offer, Order 70x Per month Get N17,000 Cash Reward", price: 0.87, image: " https://media.istockphoto.com/id/1208250906/photo/3gb-3d.jpg?s=612x612&w=0&k=20&c=s-Z_wo7Q2BBfxwXNrju-QpG_73dTr9k3_ErQt53Itt0=" },
+{id: 103, title: "11Gb For 30Days 9mobile Data Plan", description: "Quick 30Days Data Offer, Order 100x Per month Get N17,000 Cash Reward", price: 4.28, image: " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 4, title: "2Gb For 30Days Airtel Data Plan", description: "Buy 2Gb Data Plan Today For 30Days, Purchase 100x Per month to Win N20,000 Cash Price", price: 1.21, image: "https://media.istockphoto.com/id/1208250910/photo/2gb-3d.jpg?s=612x612&w=0&k=20&c=hY6m2hmx5YGABRjg99Rd71qdR1Q_LZ7Z-lZWIyY8d3E=" },
+{id: 104, title: "10Gb For 30Days 9mobile Data Plan", description: "Buy 10Gb Data Plan Today For 30Days, Purchase 100x Per month to Win N20,000 Cash Price", price: 3.83, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 5, title: "600Mb For 2Days Airtel Data Plan", description: "Fast And Reliable Data Plan Order 100x Per month Get N7000 Cash Price", price: 0.21, image: " https://media.istockphoto.com/id/1182685030/photo/600-mbps-3d.jpg?s=612x612&w=0&k=20&c=-yG7lOcUjYPSRWFx1Ffe8RY0jrAkQ3d8WNqNs58E_5I=" },
+{id: 105, title: "3Gb For 30Days 9mobile Data Plan", description: "Fast And Reliable Data Plan Order 190x Per month Get N29,000 Cash Price", price: 1.17, image: " https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 6, title: "60Gb For 30Days Mtn Data Plan", description: "Enjoy Exclusive Data Offer For A Month, Order 60x per month Earn N60,000 Cash ", price: 12.11, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 106, title: "20Gb For 30Days 9mobile Data Plan", description: "Enjoy Exclusive Data Offer For A Month, Order 120x per month Earn N30,000 Cash ", price: 4.63, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 7, title: "7Gb For 2Days Mtn Data Plan", description: "Order 85x 7Gb per Month Earn N18,000 Cash", price: 1.55, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 107, title: "15Gb For 30Days 9mobile Data Plan", description: "Order 130x 15Gb per Month Earn N25,000 Cash", price: 3.76, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 8, title: "3.2Gb For 2Days Mtn Data Plan", description: "Enjoy 3.2Gb 2Days Offer, Order 100x per Month Earn N26,000 Cash Out", price: 1.02, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 108, title: "22Gb For 30Days 9mobile Data Plan", description: "Enjoy 22Gb 30Days Offer, Order 100x per Month Earn N18,000 Cash Out", price: 8.59, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 9, title: "30Gb For 30Days Mtb Data Plan", description: "Get started with 30Days Monthly Offer, Order 40x per month N52,000 Cash Token", price: 8.59, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 109, title: "1.5Gb For 30Days 9mobile Data Plan", description: "Get started with 30Days Monthly Offer, Order 162x per Month Get N20,000 Cash Token", price: 0.88, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 10, title: "1.5Gb For 7Days Social Plan Airtel Data Plan", description: "Get Exciting 7Days Social Data Plan, Buy 100x of 1.5Gb per month, Win N11,000 Cash Price", price: 0.91, image: "https://media.istockphoto.com/id/1255584061/photo/1-5-gigabytes-3d.jpg?s=612x612&w=0&k=20&c=u7g5ShDGYY4NyUs5CSoDt1jj8slaqNoyYzFZHG7CByw=" },
+{id: 110, title: "1Gb For 30Days 9mobile Data Plan", description: "Get Exciting 30Days Data Plan, Buy 190x of 1Gb per Month, Win N18,000 Cash Price", price: 0.49, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 11, title: "4Gb For 2Days Mtn Data Plan", description: "Quick Offer Of the Day, Order 75x Per Month For N17,000 Cash Price", price: 1.23, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
-
-{id: 12, title: "5.5Gb For 2Days Mtn Data Plan", description: "Best Choice Offer, Order 80x Earn N18,000 Cash Price", price: 1.39, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
-
-{id: 13, title: "120Gb For 30Days Mtn Data Plan", description: "Amazon Offer, Order 100x in 3 Months to Receive N280,000 Cash Price", price: 21.62, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
-
-{id: 14, title: "2.5Gb For A Day Mtn Data Plan", description: "Best Daily Offer, Order 65x monthly to get N15,000 Cash Price ", price: 0.80, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
-
-{id: 15, title: "2.5Gb For 2Days Mtn Data Plan", description: "Great Product Offer, Order 100x Monthly to Receive N20,000 Cash Price ", price: 0.96, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
-
-{id: 16, title: "High-Converting Landing Page Design", description: "Strategic landing page engineered to convert paid traffic into leads and sales at maximum efficiency.", price: 137.80, image: "https://images.unsplash.com/photo-1559028012-481c04fa702d" },
-
-{id: 17, title: "Painting & Fence Installation Lead Campaign", description: "Homeowners requesting painting and fence services delivered as exclusive, ready-to-book leads.", price: 132.49, image: "https://media.istockphoto.com/id/1215222296/photo/call-18-for-emergency-3d-rendering-illustration-on-white-background.jpg?s=612x612&w=0&k=20&c=G38zf0BwBzd36Z_YNLqzHVyKNB8I4wl_9pHNJ412BwE=" },
-
-{id: 18, title: "Eye Clinic & Hearing Center Patient Leads", description: "Qualified patients searching for eye care and hearing services delivered consistently every month.", price: 90.99, image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5" },
-
-{id: 19, title: "Professional Video Editing Service", description: "High-impact promotional videos designed to increase engagement and drive conversions.", price: 120.97, image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d" },
-
-{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: "We generate urgent medical inquiries and orthodontic consultations ready to book appointments.", price: 80.85, image: "https://media.istockphoto.com/id/1293534212/photo/orthodontist-placing-rubber-bands-on-female-patient-braces.webp?a=1&b=1&s=612x612&w=0&k=20&c=9gQVBip8U-7QScwFJmO1_NwH4KgAQV0X_UHM-NFZeTU=" },
-
-
+{id: 111, title: "2Gb For 30Days 9mobile Data Plan", description: "Quick Offer Of the Day, Order 160x Per Month For N25,000 Cash Price", price: 0.64, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
 ];
 
