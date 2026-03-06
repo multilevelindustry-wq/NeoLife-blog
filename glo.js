@@ -382,5 +382,3 @@ function processCommission(buyerEmail, orderTotal, orderPV){
 
 
 
-];
-
