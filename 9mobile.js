@@ -4,8 +4,6 @@
 function generateAffiliateID(){
   return "AFF" + Date.now() + Math.floor(Math.random() * 1000);
 }
-
-
 // Generate 70 services
 const services = [
 {id: 101, title: "4.5Gb For 30Days 9mobile Data Plan", description: "Order 4.5Gb For 30Days 175x per Week N23,000 Cash Gift", price: 1.88, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
@@ -31,9 +29,6 @@ const services = [
 {id: 111, title: "2Gb For 30Days 9mobile Data Plan", description: "Quick Offer Of the Day, Order 160x Per Month For N25,000 Cash Price", price: 0.64, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
 ];
-
-
-
 
 
 // ===============================
@@ -320,4 +315,72 @@ if (searchBox) {
 
 
 
-  
+
+
+
+
+
+
+
+// ===============================
+// ADD PV TO SERVICES
+// ===============================
+services.forEach(s=>{
+  if(!s.pv){
+    s.pv = 20;
+  }
+});
+
+// ===============================
+// COMMISSION PROCESS
+// ===============================
+function processCommission(buyerEmail, orderTotal, orderPV){
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  let buyer = users.find(u => u.email === buyerEmail);
+  if(!buyer) return;
+
+  // ADD PERSONAL PV
+  buyer.personalPV = (buyer.personalPV || 0) + orderPV;
+
+  if(!buyer.sponsor){
+    localStorage.setItem("users", JSON.stringify(users));
+    return;
+  }
+
+  let sponsorEmail = buyer.sponsor;
+
+  while(sponsorEmail){
+
+    let sponsor = users.find(u => u.email === sponsorEmail);
+    if(!sponsor) break;
+
+    sponsor.totalPV = (sponsor.totalPV || 0) + orderPV;
+
+    let percent = 0;
+    if(sponsor.totalPV >= 100000) percent = 20;
+    else if(sponsor.totalPV >= 50000) percent = 18;
+    else if(sponsor.totalPV >= 20000) percent = 15;
+    else if(sponsor.totalPV >= 5000) percent = 12;
+    else if(sponsor.totalPV >= 500) percent = 10;
+    else if(sponsor.totalPV >= 30) percent = 8;
+
+    let commission = (orderTotal * percent) / 100;
+
+    sponsor.earnings = (sponsor.earnings || 0) + commission;
+
+    // ONLY UNLOCK IF PERSONAL PV >= 30
+    if((sponsor.personalPV || 0) >= 30){
+      sponsor.withdrawable = (sponsor.withdrawable || 0) + commission;
+    }
+
+    sponsorEmail = sponsor.sponsor;
+  }
+
+  localStorage.setItem("users", JSON.stringify(users));
+}
+
+
+
+
+
