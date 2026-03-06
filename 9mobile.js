@@ -36,10 +36,6 @@ const services = [
 ];
 
 
-// ===============================
-// SERVICES AUTO-ID FIX
-// ===============================
-services.forEach((s, i) => s.id = i + 1);
 
 
 // ===============================
@@ -385,32 +381,6 @@ function processCommission(buyerEmail, orderTotal, orderPV){
   localStorage.setItem("users", JSON.stringify(users));
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// ===============================
-// AFFILIATE ID GENERATOR
-// ===============================
-function generateAffiliateID(){
-  return "AFF" + Date.now() + Math.floor(Math.random() * 1000);
-}
-
-
-
-// ===============================
-// SERVICES AUTO-ID FIX
-// ===============================
-services.forEach((s, i) => s.id = i + 1);
 
 
 // ===============================
