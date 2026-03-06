@@ -78,7 +78,7 @@ function renderServices(serviceList){
       <h4>$${service.price}</h4>
 
       <button class="add-cart-btn" data-id="${service.id}">
-        Oerder Now 
+        Order Now 
       </button>
 
       <hr>
