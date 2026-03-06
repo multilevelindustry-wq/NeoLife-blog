@@ -13,7 +13,7 @@ const services = [
 
 {id: 101, title: "4.5Gb For 30Days 9mobile Data Plan", description: "Order 4.5Gb For 30Days 175x per Week N23,000 Cash Gift", price: 1.88, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
-{id: 102, title: "7.5Gb For 30Days 9mobile Data Plan", description: "Get started with 7.5Gb monthly, Order 100x per Month Get N22,000 Cash price", price: 2.95, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
+{id: 25, title: "7.5Gb For 30Days 9mobile Data Plan", description: "Get started with 7.5Gb monthly, Order 100x per Month Get N22,000 Cash price", price: 2.95, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
 {id: 103, title: "11Gb For 30Days 9mobile Data Plan", description: "Quick 30Days Data Offer, Order 100x Per month Get N17,000 Cash Reward", price: 4.28, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRY9erChYdnTiPa3T6G5c3E1W3FhKKl-uNWPVgGczN_w&s=10" },
 
