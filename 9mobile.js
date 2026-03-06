@@ -488,5 +488,3 @@ function renderServices(serviceList){
   container.appendChild(fragment);
 }
 
-
-/
