@@ -28,7 +28,7 @@ const services = [
 
 {id: 2010, title: "36Gb For 7Day Airtel Data Plan", description: "Limited Offer, Order 120x per Month Get N70,000", price: 8.12, pv: 3.13, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbWVLCVO8nk8pPy-fI1WQX7L0POp3pe4WMXfrMM0ymg&s=10" },
 
-{id: 2011, title: "Urgent Care & Orthodontist Patient Ads", description: " Wonderful Pack, Order 100x per Month Get N20,000", price: 0.61, pv: 0.02, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbWVLCVO8nk8pPy-fI1WQX7L0POp3pe4WMXfrMM0ymg&s=10" },
+{id: 2011, title: "2Gb For 2Days Airtel Data Plan", description: " Wonderful Pack, Order 100x per Month Get N20,000", price: 0.61, pv: 0.02, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRPbWVLCVO8nk8pPy-fI1WQX7L0POp3pe4WMXfrMM0ymg&s=10" },
 
 ];
 
