@@ -8,46 +8,41 @@ function generateAffiliateID(){
 
 // Generate 70 services
 const services = [
-{id: 6, title: "60Gb For 30Days Mtn Data Plan", description: "Enjoy Exclusive Data Offer For A Month, Order 60x per month Earn N60,000 Cash ", price: 12.11, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 4001, title: "60Gb For 30Days Mtn Data Plan", description: "Enjoy Exclusive Data Offer For A Month, Order 60x per month Earn N60,000 Cash ", price: 12.11, pv: 4.2, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 7, title: "7Gb For 2Days Mtn Data Plan", description: "Order 85x 7Gb per Month Earn N18,000 Cash", price: 1.55, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 4002, title: "7Gb For 2Days Mtn Data Plan", description: "Order 85x 7Gb per Month Earn N18,000 Cash", price: 1.55, pv: 0.51, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 8, title: "3.2Gb For 2Days Mtn Data Plan", description: "Enjoy 3.2Gb 2Days Offer, Order 100x per Month Earn N26,000 Cash Out", price: 1.02, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 4003, title: "3.2Gb For 2Days Mtn Data Plan", description: "Enjoy 3.2Gb 2Days Offer, Order 100x per Month Earn N26,000 Cash Out", price: 1.02, pv: 0.21, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 9, title: "30Gb For 30Days Mtb Data Plan", description: "Get started with 30Days Monthly Offer, Order 40x per month N52,000 Cash Token", price: 8.59, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10"},
+{id: 4004, title: "30Gb For 30Days Mtb Data Plan", description: "Get started with 30Days Monthly Offer, Order 40x per month N52,000 Cash Token", price: 8.59, pv: 2.65, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10"},
 
-{id: 11, title: "4Gb For 2Days Mtn Data Plan", description: "Quick Offer Of the Day, Order 75x Per Month For N17,000 Cash Price", price: 1.23, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 4005, title: "4Gb For 2Days Mtn Data Plan", description: "Quick Offer Of the Day, Order 75x Per Month For N17,000 Cash Price", price: 1.23, pv: 0.32, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 12, title: "5.5Gb For 2Days Mtn Data Plan", description: "Best Choice Offer, Order 80x Earn N18,000 Cash Price", price: 1.39, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 4006, title: "5.5Gb For 2Days Mtn Data Plan", description: "Best Choice Offer, Order 80x Earn N18,000 Cash Price", price: 1.39, pv: 0.33, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 13, title: "120Gb For 30Days Mtn Data Plan", description: "Amazon Offer, Order 100x in 3 Months to Receive N280,000 Cash Price", price: 21.62, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 4007, title: "120Gb For 30Days Mtn Data Plan", description: "Amazon Offer, Order 100x in 3 Months to Receive N280,000 Cash Price", price: 21.62, pv: 8.97, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 14, title: "2.5Gb For A Day Mtn Data Plan", description: "Best Daily Offer, Order 65x monthly to get N15,000 Cash Price ", price: 0.80, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 4008, title: "2.5Gb For A Day Mtn Data Plan", description: "Best Daily Offer, Order 65x monthly to get N15,000 Cash Price ", price: 0.80, pv: 0.11, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 15, title: "2.5Gb For 2Days Mtn Data Plan", description: "Great Product Offer, Order 100x Monthly to Receive N20,000 Cash Price ", price: 0.96, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+{id: 4009, title: "2.5Gb For 2Days Mtn Data Plan", description: "Great Product Offer, Order 100x Monthly to Receive N20,000 Cash Price ", price: 0.96, pv: 0.13, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 16, title: "High-Converting Landing Page Design", description: "Strategic landing page engineered to convert paid traffic into leads and sales at maximum efficiency.", price: 137.80, image: "https://images.unsplash.com/photo-1559028012-481c04fa702d" },
+{id: 4010, title: "11Gb For 2Days Mtn Data Plan", description: "Smart Data Plan, Order 100x Monthly N24,000 Cash", price: 2.78, pv: 0.98, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 17, title: "Painting & Fence Installation Lead Campaign", description: "Homeowners requesting painting and fence services delivered as exclusive, ready-to-book leads.", price: 132.49, image: "https://media.istockphoto.com/id/1215222296/photo/call-18-for-emergency-3d-rendering-illustration-on-white-background.jpg?s=612x612&w=0&k=20&c=G38zf0BwBzd36Z_YNLqzHVyKNB8I4wl_9pHNJ412BwE=" },
+{id: 4011, title: "5Gb For 2Days Mtn Data Plan", description: "Fast Data Plan, Order 120x Monthly, For N26,000 Cash", price: 1.92, pv: 0.87, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 18, title: "Eye Clinic & Hearing Center Patient Leads", description: "Qualified patients searching for eye care and hearing services delivered consistently every month.", price: 90.99, image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5" },
+{id: 4012, title: "5Gb For A Day Mtn Data Plan", description: "Just Getting Better, Order 120x Monthly To win N25,000 Cash Transfer.", price: 1.61, pv: 0.43, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 19, title: "Professional Video Editing Service", description: "High-impact promotional videos designed to increase engagement and drive conversions.", price: 120.97, image: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d" },
+{id: 4013, title: "7Gb For A Day Mtn Data Plan", description: "Double Offer, Order 110x Monthly For N23,000 Cash Prize", price: 1.94, pv: 0.72, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
-{id: 20, title: "Urgent Care & Orthodontist Patient Ads", description: "We generate urgent medical inquiries and orthodontic consultations ready to book appointments.", price: 80.85, image: "https://media.istockphoto.com/id/1293534212/photo/orthodontist-placing-rubber-bands-on-female-patient-braces.webp?a=1&b=1&s=612x612&w=0&k=20&c=9gQVBip8U-7QScwFJmO1_NwH4KgAQV0X_UHM-NFZeTU=" },
+{id: 4014, title: "3Gb For 2Days Mtn Data Plan", description: "Combo Offer, Order 130x Monthly For N26,000 Cash ", price: 1.27, pv: 0.62, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
 
+{id: 4015, title: "3.5Gb For A Days Mtn Data Plan", description: "Cool Data Offer, Order 190x Monthly Win N30,000 Cash Transfer ", price: 0.98, pv: 0.21, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+
+{id: 4016, title: "1.5Gb For 2Days Mtn Data Plan", description: "Quick Plan Offer, Order 250x Monthly For N24,000", price: 0.62, pv: 0.06, image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10" },
+  
 
 
 ];
-
-
-
-
-
-// ===============================
-// SERVICES AUTO-ID FIX
-// ===============================
-services.forEach((s, i) => s.id = i + 1);
 
 
 // ===============================
@@ -326,6 +321,64 @@ if (searchBox) {
 }
 
 
+// ===============================
+// ADD PV TO SERVICES
+// ===============================
+services.forEach(s=>{
+  if(!s.pv){
+    s.pv = 20;
+  }
+});
+
+// ===============================
+// COMMISSION PROCESS
+// ===============================
+function processCommission(buyerEmail, orderTotal, orderPV){
+
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  let buyer = users.find(u => u.email === buyerEmail);
+  if(!buyer) return;
+
+  // ADD PERSONAL PV
+  buyer.personalPV = (buyer.personalPV || 0) + orderPV;
+
+  if(!buyer.sponsor){
+    localStorage.setItem("users", JSON.stringify(users));
+    return;
+  }
+
+  let sponsorEmail = buyer.sponsor;
+
+  while(sponsorEmail){
+
+    let sponsor = users.find(u => u.email === sponsorEmail);
+    if(!sponsor) break;
+
+    sponsor.totalPV = (sponsor.totalPV || 0) + orderPV;
+
+    let percent = 0;
+    if(sponsor.totalPV >= 100000) percent = 20;
+    else if(sponsor.totalPV >= 50000) percent = 18;
+    else if(sponsor.totalPV >= 20000) percent = 15;
+    else if(sponsor.totalPV >= 5000) percent = 12;
+    else if(sponsor.totalPV >= 500) percent = 10;
+    else if(sponsor.totalPV >= 30) percent = 8;
+
+    let commission = (orderTotal * percent) / 100;
+
+    sponsor.earnings = (sponsor.earnings || 0) + commission;
+
+    // ONLY UNLOCK IF PERSONAL PV >= 30
+    if((sponsor.personalPV || 0) >= 30){
+      sponsor.withdrawable = (sponsor.withdrawable || 0) + commission;
+    }
+
+    sponsorEmail = sponsor.sponsor;
+  }
+
+  localStorage.setItem("users", JSON.stringify(users));
+        }
 
 
-  
+
+
