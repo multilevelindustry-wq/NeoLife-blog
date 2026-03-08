@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width= 800px">
+<title>Cheapest Data Store</title>
+
+   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9884706884825746"
+     crossorigin="anonymous"></script>
+   
+<style>
+
+/* ===============================
+   YOUR BACKGROUND DESIGN
+================================ */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: url('https://images.unsplash.com/photo-1492724441997-5dc865305da7') no-repeat center center fixed;
+  background-size: cover;
+  color: white;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.65);
+  z-index: -1;
+}
+
+/* ================= HEADER ================= */
+/* ================= HEADER LAYOUT FIX ================= */
+header{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:15px;
+  padding:20px;
+}
+
+/* Keep nav horizontal */
+nav{
+  display:flex;
+  gap:20px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+   nav a {
+  color: #fff;
+  margin-left: 20px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+nav a:hover {
+  color: #ff9800;
+}
+
+/* Search Box */
+.search-container{
+  width:100%;
+  display:flex;
+  justify-content:center;
+}
+
+#searchBox{
+  width:50%;
+  max-width:500px;
+  padding:10px;
+  border-radius:6px;
+  border:1px solid #ccc;
+  font-size:16px;
+}
+
+/* Mobile Fix */
+@media(max-width:768px){
+  #searchBox{
+    width:90%;
+  }
+}
+
+
+  
+/* ================= BANNER ADS ================= */
+.banner{
+  height:320px;
+  display:flex;
+  gap:15px;
+  padding:15px;
+  background:linear-gradient(45deg,#ff7300,#ff9800);
+  overflow:hidden;
+}
+
+.banner-ad{
+  flex:1;
+  position:relative;
+  border-radius:15px;
+  overflow:hidden;
+}
+
+.banner-ad img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:0.4s;
+}
+
+.banner-ad:hover img{
+  transform:scale(1.05);
+}
+
+.banner-overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:15px;
+  color:white;
+}
+
+.banner-overlay h3{
+  margin:5px 0;
+}
+
+.banner-overlay button{
+  margin-top:8px;
+  padding:8px 14px;
+  font-size:14px;
+}
+/* ================= CATEGORY SLIDER ================= */
+.category-wrapper{
+  overflow:hidden;
+  margin:20px;
+}
+
+.category-track{
+  display:flex;
+  gap:10px;
+  animation:scrollLeft 25s linear infinite;
+}
+
+.category-card{
+  min-width:180px;
+  background:white;
+  color:#111;
+  padding:5px;
+  border-radius:5px;
+  text-align:center;
+  font-weight:bold;
+}
+
+@keyframes scrollLeft{
+  0%{transform:translateX(0)}
+  100%{transform:translateX(-50%)}
+}
+
+/* ================= PRODUCT GRID ================= */
+.products{
+  display:grid;
+  gap:15px;
+  padding:15px;
+}
+
+/* Mobile → 2 per row (like your picture) */
+@media(max-width:767px){
+  .products{
+    grid-template-columns:repeat(2,1fr);
+  }
+}
+
+/* Desktop → 3 per row */
+@media(min-width:768px){
+  .products{
+    grid-template-columns:repeat(3,1fr);
+  }
+}
+
+.card{
+  background:white;
+  color:#111;
+  padding:5px;
+  border-radius:5px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.4);
+  transition:0.3s;
+}
+
+.card:hover{
+  transform:translateY(-10px);
+}
+
+.card img{
+  width:100%;
+  height:160px;
+  object-fit:cover;
+  border-radius:10px;
+}
+
+button{
+  padding:10px;
+  border:none;
+  background:linear-gradient(45deg,#ff7300,#ff9800);
+  color:white;
+  border-radius:8px;
+  cursor:pointer;
+  margin-top:10px;
+  font-weight:bold;
+}
+
+/* ================= FEATURED ================= */
+.featured{
+  margin:40px;
+  padding:30px;
+  background:white;
+  color:#111;
+  border-radius:20px;
+  text-align:center;
+}
+
+/* ================= COUNTDOWN ================= */
+.countdown{
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px;
+  color:#ff9800;
+}
+
+/* ================= FLIP ADS ================= */
+.flip-container{
+  display:grid;
+  gap:30px;
+  padding:40px;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+}
+
+.card-wrapper{
+  perspective:700px;
+}
+
+.card-inner{
+  position:relative;
+  width:100%;
+  height:200px;
+  transition:transform 0.8s;
+  transform-style:preserve-3d;
+}
+
+.card-inner{
+  animation:autoFlip 6s infinite;
+}
+
+@keyframes autoFlip{
+  0%{transform:rotateY(0)}
+  40%{transform:rotateY(0)}
+  50%{transform:rotateY(180deg)}
+  90%{transform:rotateY(180deg)}
+  100%{transform:rotateY(0)}
+}
+
+.card-front{background:white;color:#111;}
+.card-back{
+  transform:rotateY(180deg);
+  background:linear-gradient(45deg,#ff7300,#ff9800);
+}
+
+ a{
+    color: black;
+ }
+ .card-front {
+  backface-visibility:hidden;
+  border-radius:15px;
+  position:absolute;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;     /* Centers vertically */
+  height: 200px;           /* Example height - adjust as needed */
+  border: 1px solid black; /* Optional: adds a visible border to the div */
+}
+
+.card-front img {
+  /* Optional: ensure the image fits within the container without overflowing */
+  max-width: 100%;
+  max-height: 100%;
+  border-radius:15px;
+}
+   
+
+.card-back {
+  backface-visibility:hidden;
+  border-radius:15px;
+  position:absolute;
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center;     /* Centers vertically */
+  height: 200px;           /* Example height - adjust as needed */
+  border: 1px solid black; /* Optional: adds a visible border to the div */
+}
+
+.card-back img {
+  /* Optional: ensure the image fits within the container without overflowing */
+  max-width: 100%;
+  max-height: 100%;
+  border-radius:15px;
+   }
+   
+</style>
+</head>
+<body>
+  <!-- All your website content here -->
+<header>
+  <h2>Cheapest Data Store</h2>
+
+  <nav>
+    <a href="login.html" id="loginLink"><a href="dashboard.html">My dashboard</a>
+    </a>
+    <a href="register.html" id="registerLink">Register</a>
+    <a href="#" id="cartLink">
+      Cart (<span id="cart-count">0</span>)
+    </a>
+  </nav>
+
+  <div class="search-container">
+    <input type="text" id="searchBox" placeholder="Search for products...">
+  </div>
+</header>
+
+<div class="banner" id="bannerText">
+Big Sales Are Happening Now 🔥
+</div>
+
+<div class="category-wrapper">
+<div class="category-track" id="categoriesTop"></div>
+</div>
+
+<div class="countdown" id="countdown"></div>
+
+<div class="products" id="productSection1"></div>
+
+<div class="featured" id="featuredProduct"></div>
+
+<div class="products" id="productSection2"></div>
+
+<div class="flip-container">
+<div class="card-wrapper">
+<div class="card-inner">
+<div class="card-front"><a href="https://omg10.com/4/7901762"><img src="https://monetag.com/wp-content/uploads/2025/03/Monetag-smartlink-facebook-twitter-traffic.jpg" alt=""></a></div>
+<div class="card-back"><a href="https://omg10.com/4/7897686"><img src="file_000000000d6c720a8ce06360a0df4ebd.jpg" alt="Nigeria Top Cheapest Data Store"></a></div>
+</div>
+</div>
+<div class="card-wrapper">
+<div class="card-inner">
+<div class="card-front"><a href="https://omg10.com/4/7901758"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqnQjHPMufQ5CLZ6jUPHNrrvuWBjYQ7src6PDevtwByA&s=10" alt=""></a></div>
+<div class="card-back"><a href="https://omg10.com/4/7897845"><img src="https://monetag.com/wp-content/uploads/2025/07/monetag-case-study-traffic-asia-1000-per-month.png" alt=""></a></div>
+</div>
+</div>
+</div>
+
+<div class="category-wrapper">
+<div class="category-track" id="categoriesBottom"></div>
+                                          </div>
+  <!-- =======================
+     FOOTER
+======================= -->
+
+<footer style="background:#111; color:white; padding:40px 20px; margin-top:40px;">
+  <div style="display:flex; flex-wrap:wrap; justify-content:space-around; max-width:1200px; margin:auto;">
+    
+    <div><a href="privacy.html" style="color:white; text-decoration:none;">Privacy Policy</a></div>
+    <div><a href="terms.html" style="color:white; text-decoration:none;">Terms & Conditions</a></div>
+    <div><a href="Blog.html" style="color:white; text-decoration:none;">Blog</a></div>
+    <div><a href="support.html" style="color:white; text-decoration:none;">Customer Service</a></div>
+    <div><a href="refund.html" style="color:white; text-decoration:none;">Refund Policy</a></div>
+    <div><a href="faqs.html" style="color:white; text-decoration:none;">FAQs</a></div>
+    <div><a href="about.html" style="color:white; text-decoration:none;">About Us</a></div>
+    <div><a href="contact.html" style="color:white; text-decoration:none;">Contact Us</a></div>
+
+  </div>
+
+  <p style="text-align:center; margin-top:25px; font-size:14px;">
+    © 2026 NEO-LIFE-STORE. All Rights Reserved.
+  </p>
+  </footer>
+
+<script type="module" src="supabase.js"></script>
+<script>
+
+/* ===============================
+   SAMPLE PRODUCTS (REAL DATA)
+================================ */
+const services = [
+{
+  id:1,
+  title:"10Gb For 30Days Airtel Data Plan",
+  description:"Get started with 10Gb monthly, Order 65x per Month Get N25,000 Cash price each",
+  price:2.41,
+  image:"https://media.istockphoto.com/id/514221206/photo/cloud-storage-10gb-concept.jpg?s=612x612&w=0&k=20&c=zEhvwNiEOCrCZ2yfq95MLEi4NWuZVMFq6K1NfaI09WQ="
+},
+{
+  id:2,
+  title:"7Gb For 2Days Mtn Data Plan",
+  description:"Order 85x 7Gb per Month Earn N18,000 Cash",
+  price:1.55,
+  image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10"
+},
+{
+  id:3,
+  title:"5Gb For 7Days Airtel Data Plan",
+  description:"Order 5Gb For 7 Days 85x per Month, Earn N19,000 Cash Gift",
+  price:1.29,
+  image:"https://media.istockphoto.com/id/1225346066/photo/5-gb-3d.jpg?s=612x612&w=0&k=20&c=2rN-wLWIsGq-MnaGk5sRY207YbELm-ZoXfkY8zH8CmA="
+},
+{
+  id:4,
+  title:"5.5Gb For 2Days Airtel Data Plan",
+  description:"Best Choice Offer, Order 80x Earn N18,000 Cash Price",
+  price:1.39,
+  image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10"
+},
+{
+  id:5,
+  title:"10Gb For 7Days Airtel Data Plan",
+  description:"Get started with 10Gb monthly, Order 85x per Month Get N26,000 Cash price each",
+  price:2.39,
+  image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5fJW_rXZTZV-G7r2yuKfhvyXxMnqez93km0zWkw8I1A&s"
+},
+{
+  id:6,
+  title:"18Gb For 7Days Airtel Data Plan",
+  description:"Amazing Data Offer, Order 60x per Month Win N28,000 Cash each ",
+  price:3.98,
+  image:"https://media.istockphoto.com/id/1215222296/photo/call-18-for-emergency-3d-rendering-illustration-on-white-background.jpg?s=612x612&w=0&k=20&c=G38zf0BwBzd36Z_YNLqzHVyKNB8I4wl_9pHNJ412BwE="
+},
+ {
+  id:7,
+  title:"30Gb For 30Days Mtn Data Plan",
+  description:" Great 😃 Offer Of The Month, Order 48x per Month, To Receive N35,000 Cash each",
+  price:7.59,
+  image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10"
+},
+{
+  id:8,
+  title:"10Gb For 7Days Glo Data Plan",
+  description:"A Wonderful Data Offer, Order 80x Per Month, Receive N40,000 Cash each",
+  price:2.35,
+  image:"https://media.istockphoto.com/id/627003816/photo/3d-rendering-cloud-data-upload-download-illustration-10-gb.jpg?s=612x612&w=0&k=20&c=heHBOFGhvF2vDhqxPwDYvMAyODtUPdlgnceP6EZJCVE="
+},
+{
+  id:9,
+  title:"5Gb For 7Days Glo Data Plan",
+  description:"Top Ranking Data Offer, Order 100x Per Month Win N34,000 Cash Price each",
+  price:1.69,
+  image:"https://media.istockphoto.com/id/1366110119/vector/modern-number-nine-9-logo-concept-design.jpg?s=612x612&w=0&k=20&c=IhDcMjeG9BGae6wM1IsO34ppWuILVololHVSjbTc2Hs="
+},
+{
+  id:10,
+  title:" 3.2Gb For 2Days Mtn Data Plan",
+  description:"Jungle Data Offer, Order 90x Per Month, You Earn N19,000 Cash each",
+  price:1.02,
+  image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10"
+},
+{
+  id:11,
+  title:"3Gb For 30Days 9mobile Data Plan",
+  description:"Best Data Offed, Order 95x Per Month Win N25,000 Cash out each ",
+  price:1.49,
+  image:"https://media.istockphoto.com/id/1366110119/vector/modern-number-nine-9-logo-concept-design.jpg?s=612x612&w=0&k=20&c=IhDcMjeG9BGae6wM1IsO34ppWuILVololHVSjbTc2Hs="
+},
+{
+  id:12,
+  title:"60Gb For 30Days Mtn Data Plan",
+  description:"Get Amazing Offer, Order 38x Per Month, Earn N32,000 Cash each",
+  price:11.88,
+  image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2nem03Gk-GDVdWa6tJ4ggWw5t5efnT4S7wUv10yNxyg&s=10"
+},
+{
+  id:13,
+  title:"4Gb For 30Days 9mobile Data Plan",
+  description:"Modern Offer, Order 100x Per Month Get N35,000",
+  price:1.85,
+  image:"https://media.istockphoto.com/id/1366110119/vector/modern-number-nine-9-logo-concept-design.jpg?s=612x612&w=0&k=20&c=IhDcMjeG9BGae6wM1IsO34ppWuILVololHVSjbTc2Hs="
+   }
+];
+
+
+/* ===============================
+   CART SYSTEM
+================================ */
+function updateCartCount(){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  document.getElementById("cart-count").innerText =
+    cart.reduce((sum,item)=> sum + (item.quantity || 1),0);
+}
+updateCartCount();
+
+function addToCart(id){
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  let product = services.find(p => p.id === id);
+
+  let existing = cart.find(i => i.id === id);
+  if(existing){
+    existing.quantity += 1;
+  }else{
+    cart.push({...product, quantity:1});
+  }
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+  updateCartCount();
+}
+/* ===============================
+   LOGIN / LOGOUT DISPLAY
+================================ */
+let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+const loginLink = document.getElementById("loginLink");
+const registerLink = document.getElementById("registerLink");
+const cartLink = document.getElementById("cartLink");
+
+if(currentUser){
+
+  loginLink.innerText = currentUser.name;
+  loginLink.href = "#";
+
+  registerLink.innerText = "Logout";
+  registerLink.href = "#";
+
+  registerLink.onclick = function(){
+    localStorage.removeItem("currentUser");
+    alert("Logged Out Successfully");
+    window.location.reload();
+  };
+
+  cartLink.href = "cart.html";
+
+}else{
+
+  loginLink.innerText = "Login";
+  loginLink.href = "login.html";
+
+  registerLink.innerText = "Register";
+  registerLink.href = "register.html";
+
+  cartLink.onclick = function(e){
+    e.preventDefault();
+    alert("Please login first to access cart.");
+    window.location.href = "login.html";
+  };
+
+   }
+
+
+/* ===============================
+   CATEGORY WITH IMAGES
+================================ */
+const categories = [
+ {name:"9Mobile Data Store Dream Come True", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLjSsyEXbwVabCtGZPfyXIQVRus3JzmB3EbN6DY_GTnw&s=10", link:"9mobile.html"},
+ {name:"Airtel Data Store Home of Cash", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR2BXEOyog7GP-3LptONTWwDYjbpTrr4xN6qHRfpaxXg&s=10", link:"airtime.html"},
+ {name:"Shop Mtn Data Store Now", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpjo4dJ5vteZmZuYChfErStGG1b2K1VxcHIiWiV62uA&s=10", link:"mtn.html"},
+ {name:"Cheap Glo Data Store Services", image:"https://cdn.legit.ng/images/1200x675/49c150353a893ee2.jpeg?v=1", link:"glo.html"},
+ {name:"9Mobile Data Store Dream Come True", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLjSsyEXbwVabCtGZPfyXIQVRus3JzmB3EbN6DY_GTnw&s=10", link:"9mobile.html"},
+ {name:"Airtel Data Store Home of Cash", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR2BXEOyog7GP-3LptONTWwDYjbpTrr4xN6qHRfpaxXg&s=10", link:"airtime.html"},
+ {name:"Shop Mtn Data Store Now", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpjo4dJ5vteZmZuYChfErStGG1b2K1VxcHIiWiV62uA&s=10", link:"mtn.html"},
+ {name:"Cheap Glo Data Store Services", image:"https://cdn.legit.ng/images/1200x675/49c150353a893ee2.jpeg?v=1", link:"glo.html"},
+ {name:"9Mobile Data Store Dream Come True", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLjSsyEXbwVabCtGZPfyXIQVRus3JzmB3EbN6DY_GTnw&s=10", link:"9mobile.html"},
+ {name:"Airtel Data Store Home of Cash", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR2BXEOyog7GP-3LptONTWwDYjbpTrr4xN6qHRfpaxXg&s=10", link:"airtime.html"},
+ {name:"Shop Mtn Data Store Now", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpjo4dJ5vteZmZuYChfErStGG1b2K1VxcHIiWiV62uA&s=10", link:"mtn.html"},
+ {name:"Cheap Glo Data Store Services", image:"https://cdn.legit.ng/images/1200x675/49c150353a893ee2.jpeg?v=1", link:"glo.html"},
+ {name:"9Mobile Data Store Dream Come True", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLjSsyEXbwVabCtGZPfyXIQVRus3JzmB3EbN6DY_GTnw&s=10", link:"9mobile.html"},
+ {name:"Airtel Data Store Home of Cash", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRR2BXEOyog7GP-3LptONTWwDYjbpTrr4xN6qHRfpaxXg&s=10", link:"airtime.html"},
+ {name:"Shop Mtn Data Store Now", image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZpjo4dJ5vteZmZuYChfErStGG1b2K1VxcHIiWiV62uA&s=10", link:"mtn.html"},
+ {name:"Cheap Glo Data Store Services", image:"https://cdn.legit.ng/images/1200x675/49c150353a893ee2.jpeg?v=1", link:"glo.html"}
+   
+];
+
+function renderCategories(id){
+  const container = document.getElementById(id);
+  container.innerHTML = "";
+
+  [...categories,...categories].forEach(cat=>{
+    container.innerHTML += `
+      <a href="${cat.link}" style="text-decoration:none;">
+        <div class="category-card">
+          <img src="${cat.image}" style="width:100%;height:100px;object-fit:cover;border-radius:10px;">
+          <p>${cat.name}</p>
+        </div>
+      </a>
+    `;
+  });
+}
+
+renderCategories("categoriesTop");
+renderCategories("categoriesBottom");
+
+
+/* ===============================
+   PRODUCTS WITH IMAGES
+================================ */
+function renderProducts(section,start,end){
+  const container = document.getElementById(section);
+  container.innerHTML = "";
+
+  services.slice(start,end).forEach(p=>{
+    container.innerHTML += `
+      <div class="card">
+        <img src="${p.image}">
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <strong>$${p.price}</strong>
+        <button onclick="addToCart(${p.id})">
+          Order Now 
+        </button>
+      </div>
+    `;
+  });
+}
+
+renderProducts("productSection1",0,6);
+renderProducts("productSection2",7,13);
+
+
+/* ===============================
+   BANNER SLIDER (7 PRODUCTS)
+================================ */
+let bannerIndex = 0;
+
+function rotateBanner(){
+
+  const p1 = services[bannerIndex];
+  const p2 = services[(bannerIndex + 1) % services.length];
+
+  document.getElementById("bannerText").innerHTML = `
+
+    <div class="banner-ad">
+      <img src="${p1.image}">
+      <div class="banner-overlay">
+        <h3>${p1.title}</h3>
+        <p style="font-size:13px;">$${p1.price}</p>
+        <button onclick="addToCart(${p1.id})">
+          Fast Selling Now 
+        </button>
+      </div>
+    </div>
+
+    <div class="banner-ad">
+      <img src="${p2.image}">
+      <div class="banner-overlay">
+        <h3>${p2.title}</h3>
+        <p style="font-size:13px;">$${p2.price}</p>
+        <button onclick="addToCart(${p2.id})">
+          Fast Selling Now 
+        </button>
+      </div>
+    </div>
+
+  `;
+
+  bannerIndex = (bannerIndex + 2) % services.length;
+}
+
+rotateBanner();
+setInterval(rotateBanner,4000);
+  
+
+/* ===============================
+   FEATURED ROTATOR
+================================ */
+let featuredIndex = 0;
+
+function rotateFeatured(){
+  let p = services[featuredIndex];
+
+  document.getElementById("featuredProduct").innerHTML = `
+    <img src="${p.image}" style="width:100%;max-height:300px;object-fit:cover;border-radius:15px;">
+    <h2>${p.title}</h2>
+    <p>${p.description}</p>
+    <h3>$${p.price}</h3>
+    <button onclick="addToCart(${p.id})">
+      BUY NOW
+    </button>
+  `;
+
+  featuredIndex = (featuredIndex + 1) % services.length;
+}
+
+rotateFeatured();
+setInterval(rotateFeatured,5000);
+
+
+/* ===============================
+   FLASH SALE COUNTDOWN
+=============================== */
+let end = new Date().getTime() + 86400000;
+
+setInterval(()=>{
+  let now = new Date().getTime();
+  let distance = end - now;
+
+  let h = Math.floor((distance%(1000*60*60*24))/(1000*60*60));
+  let m = Math.floor((distance%(1000*60*60))/(1000*60));
+  let s = Math.floor((distance%(1000*60))/1000);
+
+  document.getElementById("countdown").innerText =
+   "Flash Sale Ends In: " + h+"h "+m+"m "+s+"s";
+
+},1000);
+
+
+// ===============================
+// SEARCH SYSTEM (PRODUCT + CATEGORY)
+// ===============================
+
+const searchBox = document.getElementById("searchBox");
+
+function renderSearchResults(filtered){
+
+  const section1 = document.getElementById("productSection1");
+  const section2 = document.getElementById("productSection2");
+
+  section1.innerHTML = "";
+  section2.innerHTML = "";
+
+  if(filtered.length === 0){
+    section1.innerHTML = "<h3 style='grid-column:1/-1;text-align:center;'>No products found</h3>";
+    return;
+  }
+
+  filtered.forEach((p,index)=>{
+
+    const card = `
+      <div class="card">
+        <img src="${p.image}">
+        <h3>${p.title}</h3>
+        <p>${p.description}</p>
+        <strong>$${p.price}</strong>
+        <button onclick="addToCart(${p.id})">
+          Add To Cart
+        </button>
+      </div>
+    `;
+
+    if(index < 6){
+      section1.innerHTML += card;
+    }else{
+      section2.innerHTML += card;
+    }
+
+  });
+}
+
+// ===============================
+// CATEGORY MATCH
+// ===============================
+function getMatchingCategories(query){
+  return categories.filter(cat => 
+    cat.name.toLowerCase().includes(query)
+  );
+}
+
+function renderCategorySearchResults(matched){
+
+  if(matched.length === 0) return;
+
+  const section1 = document.getElementById("productSection1");
+
+  let html = `
+    <div style="grid-column:1/-1;">
+      <h3 style="text-align:center;">Related Categories</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:15px;justify-content:center;margin-bottom:20px;">
+  `;
+
+  matched.forEach(cat=>{
+    html += `
+      <a href="${cat.link}" style="text-decoration:none;">
+        <div class="category-card" style="width:180px;">
+          <img src="${cat.image}" 
+               style="width:100%;height:100px;object-fit:cover;border-radius:10px;">
+          <p>${cat.name}</p>
+        </div>
+      </a>
+    `;
+  });
+
+  html += `</div></div>`;
+
+  section1.innerHTML = html + section1.innerHTML;
+}
+
+// ===============================
+// SEARCH INPUT LISTENER
+// ===============================
+if(searchBox){
+
+  let timeout;
+
+  searchBox.addEventListener("input", function(){
+  
+clearTimeout(timeout);
+
+    timeout = setTimeout(() => {
+
+      let query = this.value.toLowerCase().trim();
+
+      // If empty → restore original products
+      if(query === ""){
+        renderProducts("productSection1",0,6);
+        renderProducts("productSection2",1,7);
+        return;
+      }
+
+      // Filter products
+      let filtered = services.filter(s => 
+        s.title.toLowerCase().includes(query) || 
+        s.description.toLowerCase().includes(query)
+      );
+
+      // Render products
+      renderSearchResults(filtered);
+
+      // Render matching categories on top
+      let matchedCategories = getMatchingCategories(query);
+      renderCategorySearchResults(matchedCategories);
+
+    }, 300);
+
+  });
+
+}
+
+</script>
+
+</body>
+  </html>
