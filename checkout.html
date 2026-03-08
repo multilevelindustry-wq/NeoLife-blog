@@ -128,7 +128,7 @@ button:hover {
   <h2>Pay With Dollar Currency 1✅</h2>
   <div id="paypal-button-container"></div><br><br>
     
-<h2>Secure Nigerian Checkout Option 2✅</h2>
+  <h2>Secure Nigerian Checkout Option 2✅</h2>
   <button onclick="payWithPaystack()"><strong>Pay With Paystack</strong></button>
 
 </div>
@@ -149,107 +149,169 @@ document.getElementById("totalPV").innerText = order.totalPV;
 let sponsorID = currentUser.sponsorID || "NONE";
 let buyerUserID = currentUser.userID || "UNKNOWN";
 
-/* ================= PAYSTACK (FULLY FIXED) ================= */
+// ==================== SMART VTU DELIVERY WITH FALLBACK ====================
+async function sendVTU(phone, product) {
+  const gbMatch = product.title.match(/([\d.]+)Gb/i);
+  if (!gbMatch) { console.log("Cannot extract GB from product:", product.title); return; }
+  const gbValue = parseFloat(gbMatch[1]);
+
+  const vtuAPIs = [
+    { url:"https://vtuapi1.com/send", key:"YOUR_API_KEY_1", price:0 },
+    { url:"https://vtuapi2.com/send", key:"YOUR_API_KEY_2", price:0 },
+    { url:"https://vtuapi3.com/send", key:"YOUR_API_KEY_3", price:0 },
+    { url:"https://vtuapi4.com/send", key:"YOUR_API_KEY_4", price:0 }
+  ];
+
+  async function fetchPrice(api) {
+    try {
+      let res = await fetch(`${api.url}/price?network=9mobile&gb=${gbValue}`, {
+        headers:{ "Authorization": `Bearer ${api.key}` }
+      });
+      let data = await res.json();
+      api.price = data.price || 999999;
+    } catch(err) {
+      console.log("Error fetching price from API:", api.url, err);
+      api.price = 999999;
+    }
+  }
+
+  await Promise.all(vtuAPIs.map(api => fetchPrice(api)));
+  vtuAPIs.sort((a,b)=>a.price - b.price);
+
+  for (let i = 0; i < vtuAPIs.length; i++) {
+    let api = vtuAPIs[i];
+    console.log(`Attempting VTU API ${i+1}: ${api.url}, price: ${api.price}`);
+    try {
+      let res = await fetch(`${api.url}/send`, {
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json",
+          "Authorization": `Bearer ${api.key}`
+        },
+        body: JSON.stringify({
+          network:"9mobile",
+          mobile:phone,
+          gb:gbValue,
+          productID:product.id
+        })
+      });
+      let data = await res.json();
+      console.log("VTU Response:", data);
+      if(data.success) { 
+        console.log("Delivery successful via", api.url); 
+        break; 
+      }
+    } catch(err) {
+      console.log("VTU delivery error:", err);
+    }
+  }
+}
+
+// ================= PAYSTACK ====================
 function payWithPaystack(){
 
-let phone=document.getElementById("creditPhone").value.trim();
-if(phone===""){ alert("Enter phone number to be credited"); return; }
+  let phone=document.getElementById("creditPhone").value.trim();
+  if(phone===""){ alert("Enter phone number to be credited"); return; }
 
-let exchangeRate=1350;
-let totalNGN=order.total*exchangeRate;
+  let exchangeRate=1350;
+  let totalNGN=order.total*exchangeRate;
 
-// PREPARE PRODUCT DETAILS
-let productNames=[];
-let productIDs=[];
-let productPVs=[];
-let quantities=[];
+  let productNames=[];
+  let productIDs=[];
+  let productPVs=[];
+  let quantities=[];
 
-order.cart.forEach(item=>{
-  productNames.push(item.title);
-  productIDs.push(item.id);
-  productPVs.push(item.pv || 0);
-  quantities.push(item.quantity);
-});
+  order.cart.forEach(item=>{
+    productNames.push(item.title);
+    productIDs.push(item.id);
+    productPVs.push(item.pv || 0);
+    quantities.push(item.quantity);
+  });
 
-PaystackPop.setup({
-key:"pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b",
-email:currentUser.email,
-amount:Math.round(totalNGN*100),
-currency:"NGN",
-ref:"PS-"+Date.now(),
+  PaystackPop.setup({
+    key:"pk_live_ae2ef39d24e2f001cbc716def10d3ede5148af5b",
+    email:currentUser.email,
+    amount:Math.round(totalNGN*100),
+    currency:"NGN",
+    ref:"PS-"+Date.now(),
 
-metadata:{
-  custom_fields:[
+    metadata:{
+      custom_fields:[
+        { display_name:"Buyer User ID", variable_name:"buyer_user_id", value:buyerUserID },
+        { display_name:"Sponsor ID", variable_name:"sponsor_id", value:sponsorID },
+        { display_name:"Phone To Credit", variable_name:"phone_to_credit", value:phone },
+        { display_name:"Product Names", variable_name:"product_names", value:productNames.join(", ") },
+        { display_name:"Product IDs", variable_name:"product_ids", value:productIDs.join(", ") },
+        { display_name:"Product PVs", variable_name:"product_pvs", value:productPVs.join(", ") },
+        { display_name:"Quantities", variable_name:"quantities", value:quantities.join(", ") },
+        { display_name:"Total PV", variable_name:"total_pv", value:order.totalPV }
+      ]
+    },
 
-    { display_name:"Buyer User ID", variable_name:"buyer_user_id", value:buyerUserID },
-    { display_name:"Sponsor ID", variable_name:"sponsor_id", value:sponsorID },
-    { display_name:"Phone To Credit", variable_name:"phone_to_credit", value:phone },
-    { display_name:"Product Names", variable_name:"product_names", value:productNames.join(", ") },
-    { display_name:"Product IDs", variable_name:"product_ids", value:productIDs.join(", ") },
-    { display_name:"Product PVs", variable_name:"product_pvs", value:productPVs.join(", ") },
-    { display_name:"Quantities", variable_name:"quantities", value:quantities.join(", ") },
-    { display_name:"Total PV", variable_name:"total_pv", value:order.totalPV }
+    callback:function(){
+      alert("Payment Successful!");
 
-  ]
-},
+      // Automatically deliver each item via VTU with fallback
+      order.cart.forEach(item => sendVTU(phone, item));
 
-callback:function(){
-alert("Payment Successful!");
-localStorage.removeItem("cart");
-localStorage.removeItem("orderSummary");
-window.location.href="index.html";
-},
+      localStorage.removeItem("cart");
+      localStorage.removeItem("orderSummary");
+      window.location.href="index.html";
+    },
 
-onClose:function(){
-alert("Transaction cancelled.");
+    onClose:function(){
+      alert("Transaction cancelled.");
+    }
+
+  }).openIframe();
+
 }
 
-}).openIframe();
-
-}
-
-/* ================= PAYPAL (UNCHANGED) ================= */
+// ================= PAYPAL ====================
 paypal.Buttons({
 
-createOrder:function(data,actions){
+  createOrder:function(data,actions){
 
-let phone=document.getElementById("creditPhone").value.trim();
-if(phone===""){ alert("Enter phone number to be credited"); return; }
+    let phone=document.getElementById("creditPhone").value.trim();
+    if(phone===""){ alert("Enter phone number to be credited"); return; }
 
-let items=[];
-order.cart.forEach(item=>{
-items.push({
-name:item.title+" (ID:"+item.id+" PV:"+item.pv+")",
-unit_amount:{currency_code:"USD",value:item.price.toFixed(2)},
-quantity:item.quantity.toString()
-});
-});
+    let items=[];
+    order.cart.forEach(item=>{
+      items.push({
+        name:item.title+" (ID:"+item.id+" PV:"+item.pv+")",
+        unit_amount:{currency_code:"USD",value:item.price.toFixed(2)},
+        quantity:item.quantity.toString()
+      });
+    });
 
-return actions.order.create({
-purchase_units:[{
-amount:{
-currency_code:"USD",
-value:order.total.toFixed(2),
-breakdown:{
-item_total:{currency_code:"USD",value:order.total.toFixed(2)}
-}
-},
-items:items,
-custom_id:"USER:"+buyerUserID+" | SPONSOR:"+sponsorID,
-invoice_id:"INV-"+Date.now(),
-description:"Phone:"+phone+" | TotalPV:"+order.totalPV
-}]
-});
-},
+    return actions.order.create({
+      purchase_units:[{
+        amount:{
+          currency_code:"USD",
+          value:order.total.toFixed(2),
+          breakdown:{ item_total:{currency_code:"USD",value:order.total.toFixed(2)} }
+        },
+        items:items,
+        custom_id:"USER:"+buyerUserID+" | SPONSOR:"+sponsorID,
+        invoice_id:"INV-"+Date.now(),
+        description:"Phone:"+phone+" | TotalPV:"+order.totalPV
+      }]
+    });
+  },
 
-onApprove:function(data,actions){
-return actions.order.capture().then(function(){
-alert("PayPal Payment Completed!");
-localStorage.removeItem("cart");
-localStorage.removeItem("orderSummary");
-window.location.href="index.html";
-});
-}
+  onApprove:function(data,actions){
+    return actions.order.capture().then(function(){
+      alert("PayPal Payment Completed!");
+
+      // Automatically deliver each item via VTU with fallback
+      let phone=document.getElementById("creditPhone").value.trim();
+      order.cart.forEach(item => sendVTU(phone, item));
+
+      localStorage.removeItem("cart");
+      localStorage.removeItem("orderSummary");
+      window.location.href="index.html";
+    });
+  }
 
 }).render('#paypal-button-container');
 
@@ -257,3 +319,7 @@ window.location.href="index.html";
 
 </body>
 </html>
+
+
+
+
