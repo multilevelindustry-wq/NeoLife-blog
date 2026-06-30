@@ -1,122 +1,266 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Register</title>
-  <link rel="stylesheet" href="style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9884706884825746"
-     crossorigin="anonymous"></script>
-  
+
+<title>Register</title>
+
 </head>
+
+
 <body>
 
-<div style="padding:40px;">
-  <h2>Please Create Account To Enjoy Our Services</h2>
 
-  <input type="text" id="name" placeholder="Full Name">
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <input type="text" id="manualSponsor" placeholder="Sponsor Name (If no referral link)">
+<div style="padding:40px">
 
-  <button onclick="register()">Register</button><br><br>
 
-  if already registered <br>
-  <a href="login.html"><button>Login</button></a>
+<h2>Create Account</h2>
+
+
+<input id="name" placeholder="Full Name">
+
+
+<input id="email" placeholder="Email">
+
+
+<input id="password" 
+type="password"
+placeholder="Password">
+
+
+<input id="manualSponsor"
+placeholder="Sponsor Name">
+
+
+<button onclick="register()">
+Register
+</button>
+
+
+<br><br>
+
+<a href="login.html">
+<button>
+Login
+</button>
+</a>
+
+
 </div>
 
-<script>
 
-// ===============================
-// GENERATE UNIQUE ID
-// ===============================
-function generateAffiliateID(){
-  return "AFF" + Date.now() + Math.floor(Math.random()*1000);
+
+<script type="module">
+
+
+import {initializeApp}
+
+from 
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+
+import {
+
+getAuth,
+
+createUserWithEmailAndPassword
+
 }
 
-// ===============================
-// REGISTER
-// ===============================
-function register(){
+from
 
-  let nameValue = document.getElementById("name").value.trim();
-  let emailValue = document.getElementById("email").value.trim();
-  let passwordValue = document.getElementById("password").value.trim();
-  let manualSponsor = document.getElementById("manualSponsor").value.trim();
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-  if(!nameValue || !emailValue || !passwordValue){
-    alert("All fields are required!");
-    return;
-  }
 
-  let users = JSON.parse(localStorage.getItem("users")) || [];
 
-  if(users.find(u => u.email === emailValue)){
-    alert("Email already registered!");
-    return;
-  }
+import {
 
-  // ===============================
-  // GET SPONSOR FROM REF LINK
-  // ===============================
-  let sponsorRef = new URLSearchParams(window.location.search).get("ref");
-  let sponsorID = null;
+getFirestore,
 
-  if(sponsorRef){
-    let sponsorUser = users.find(u => u.affiliateID === sponsorRef);
-    if(sponsorUser){
-      sponsorID = sponsorUser.id;
-    }
-  }
+doc,
 
-  let newUser = {
-    id: generateAffiliateID(),
-    affiliateID: generateAffiliateID(),
+setDoc
 
-    name: nameValue,
-    email: emailValue,
-    password: passwordValue,
-
-    sponsorID: sponsorID,
-    sponsorNameManual: sponsorID ? "" : manualSponsor,
-
-    personalPV: 0,
-    teamPV: 0,
-    monthlyPV: 0,
-    totalPV: 0,
-
-    earnings: 0,
-    withdrawable: 0,
-
-    rank: "None",
-    percentage: 0,
-
-    downlines: [],
-
-    phone: "",
-    address: "",
-    bankName: "",
-    accountNumber: "",
-    accountName: "",
-
-    dateJoined: new Date().toLocaleString()
-  };
-
-  users.push(newUser);
-
-  // Update sponsor downlines
-  if(sponsorID){
-    let sponsor = users.find(u => u.id === sponsorID);
-    if(sponsor){
-      sponsor.downlines.push(newUser.id);
-    }
-  }
-
-  localStorage.setItem("users", JSON.stringify(users));
-
-  alert("Registered Successfully!");
-  window.location.href = "login.html";
 }
+
+from
+
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+
+
+
+const firebaseConfig={
+
+
+apiKey:"YOUR_API_KEY",
+
+authDomain:"YOUR_PROJECT.firebaseapp.com",
+
+projectId:"YOUR_PROJECT_ID",
+
+storageBucket:"YOUR_PROJECT.appspot.com",
+
+messagingSenderId:"YOUR_SENDER_ID",
+
+appId:"YOUR_APP_ID"
+
+
+};
+
+
+
+const app=initializeApp(firebaseConfig);
+
+
+const auth=getAuth(app);
+
+
+const db=getFirestore(app);
+
+
+
+
+
+function generateID(){
+
+return "AFF"+Date.now();
+
+}
+
+
+
+
+
+window.register=function(){
+
+
+let name =
+document.getElementById("name").value;
+
+
+let email =
+document.getElementById("email").value;
+
+
+let password =
+document.getElementById("password").value;
+
+
+let sponsor =
+document.getElementById("manualSponsor").value;
+
+
+
+if(!name || !email || !password){
+
+alert("Fill all fields");
+
+return;
+
+}
+
+
+
+
+createUserWithEmailAndPassword(
+auth,
+email,
+password
+
+)
+
+.then(async(result)=>{
+
+
+
+let uid=result.user.uid;
+
+
+
+await setDoc(
+
+doc(db,"users",uid),
+
+{
+
+
+id:uid,
+
+
+affiliateID:generateID(),
+
+
+name:name,
+
+
+email:email,
+
+
+sponsor:sponsor,
+
+
+personalPV:0,
+
+
+teamPV:0,
+
+
+monthlyPV:0,
+
+
+totalPV:0,
+
+
+earnings:0,
+
+
+withdrawable:0,
+
+
+rank:"None",
+
+
+downlines:[],
+
+
+dateJoined:
+new Date()
+
+
+}
+
+
+);
+
+
+
+alert("Registration successful");
+
+
+window.location.href="login.html";
+
+
+
+})
+
+.catch(error=>{
+
+
+alert(error.message);
+
+
+});
+
+
+}
+
+
 
 </script>
-</body>
-</html>
 
+
+</body>
+
+</html>
