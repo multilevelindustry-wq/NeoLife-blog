@@ -1,68 +1,117 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" href="style.css">
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9884706884825746"
-     crossorigin="anonymous"></script>
+<title>Login</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
 <div style="padding:40px;">
-  <h2>Login</h2>
-  <input type="email" id="email" placeholder="Email">
-  <input type="password" id="password" placeholder="Password">
-  <button onclick="login()">Login</button><br><br>
-  if not registered<br>
-   <a href="register.html"><button >Register</button></a>
+
+<h2>Login</h2>
+
+<input type="email" id="email" placeholder="Email">
+
+<input type="password" id="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+
+<br><br>
+
+<a href="register.html">
+<button>Register</button>
+</a>
+
 </div>
 
-<script>
 
-function login(){
+<script type="module">
 
-  let emailValue = document.getElementById("email").value.trim();
-  let passwordValue = document.getElementById("password").value.trim();
+import { initializeApp } from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 
-  if(!emailValue || !passwordValue){
-    alert("Enter email and password.");
-    return;
-  }
+import { 
+getAuth,
+signInWithEmailAndPassword 
+} from 
+"https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
-  // Get all registered users (MLM system uses "users")
-  let users = JSON.parse(localStorage.getItem("users")) || [];
 
-  if(users.length === 0){
-    alert("No registered account found.");
-    window.location.href = "register.html";
-    return;
-  }
+const firebaseConfig = {
 
-  // Find matching user
-  let foundUser = users.find(u => 
-    u.email === emailValue && u.password === passwordValue
-  );
+apiKey:"YOUR_API_KEY",
 
-  if(foundUser){
+authDomain:"YOUR_PROJECT.firebaseapp.com",
 
-    localStorage.setItem("loggedIn", "true");
-    localStorage.setItem("currentUser", JSON.stringify(foundUser));
+projectId:"YOUR_PROJECT_ID",
 
-    alert("Login Successful!");
+storageBucket:"YOUR_PROJECT.appspot.com",
 
-    // Admin detection
-    if(foundUser.email === "admin@site.com"){
-      window.location.href = "admin.html";
-    } else {
-      window.location.href = "index.html";
-    }
+messagingSenderId:"YOUR_SENDER_ID",
 
-  } else {
-    alert("Invalid email or password.");
-  }
+appId:"YOUR_APP_ID"
+
+};
+
+
+const app = initializeApp(firebaseConfig);
+
+const auth = getAuth(app);
+
+
+
+window.login=function(){
+
+let email =
+document.getElementById("email").value;
+
+let password =
+document.getElementById("password").value;
+
+
+
+signInWithEmailAndPassword(auth,email,password)
+
+.then((userCredential)=>{
+
+
+localStorage.setItem(
+"loggedIn",
+"true"
+);
+
+
+localStorage.setItem(
+"userUID",
+userCredential.user.uid
+);
+
+
+alert("Login Successful");
+
+
+window.location.href="index.html";
+
+
+})
+
+
+.catch((error)=>{
+
+alert(error.message);
+
+});
+
+
 }
 
+
+
 </script>
+
 
 </body>
 </html>
